@@ -1,0 +1,24 @@
+
+
+.container {
+    background-color: white;
+    padding: 20px 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 600px;
+    max-width: 100%;
+}
+
+button.cadastrar {
+    background-color: #6b49c8;
+    color: white;
+}
+
+button.descartar {
+    background-color: #e74c3c;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.9;
+}
