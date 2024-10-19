@@ -2,6 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    display: flex; /* Permite que a sidebar e o conteúdo se alinhem horizontalmente */
 }
 
 .navbar {
@@ -11,6 +12,8 @@ body {
     align-items: center;
     padding: 10px;
     position: relative; /* Importante para o dropdown */
+    width: 100%; /* Garante que a navbar ocupe a largura total */
+    z-index: 1; /* Mantém a navbar acima da sidebar */
 }
 
 .navbar a {
@@ -90,4 +93,34 @@ body {
 /* Exibir dropdown ao passar o mouse */
 .user-dropdown:hover .user-dropdown-content {
     display: block; /* Exibir o dropdown ao passar o mouse sobre o ícone */
+}
+
+/* Menu lateral */
+.sidebar {
+    background-color: #5b087c;
+    width: 250px; /* Largura do menu lateral */
+    padding: 15px;
+    position: fixed; /* Fixa o menu lateral na tela */
+    height: 100%; /* Ocupa a altura total */
+    top: 0; /* Fixa o menu no topo */
+    left: 0; /* Fixa à esquerda */
+    z-index: 1; /* Mantém a sidebar atrás da navbar */
+}
+
+.sidebar a {
+    color: #f2f2f2;
+    display: block; /* Faz os links ocuparem toda a largura */
+    padding: 10px 15px;
+    text-decoration: none;
+    margin: 5px 0;
+}
+
+.sidebar a:hover {
+    background-color: #575757; /* Fundo no hover */
+}
+
+.content {
+    margin-left: 260px; /* Deixa espaço para o menu lateral */
+    padding: 20px;
+    flex-grow: 1; /* Faz o conteúdo ocupar o espaço restante */
 }
