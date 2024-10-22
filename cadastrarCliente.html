@@ -7,7 +7,7 @@
         <!-- ===== CSS ===== -->
         <link rel="stylesheet" href="assets/css/styles.css">
         
-        <title>Home</title>
+        <title>Cadastro de Cliente</title>
     </head>
     <body id="body-pd">
         <div class="l-navbar" id="navbar">
@@ -70,11 +70,58 @@
             </nav>
         </div>
 
-        <h1>Componentes</h1>
+        <h1>Cadastro de Clientes</h1>
+
+        <div class="container">
+            <h1 class="subtitulo">Cliente</h1>
+            <form class="cadastro-form" method="post">
+                <div class="forme">
+                    <label for="name">Nome:</label>
+                    <input type="text" id="name" name="Nome" placeholder="Nome" required>
+                    <label for="cpf">CPF:</label>
+                    <input type="text" id="cpf" name="CPF" placeholder="CPF" required>
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" name=" Email" placeholder="E-mail" required>
+                    <label for="celular">Celular:</label>
+                    <input type="text" id="celular" name="Celular" placeholder="Celular">
+                    <label for="telefone">Telefone:</label>
+                    <input type="text" id="telefone" name="Telefone" placeholder="Telefone">
+                    <label for="sexo">Sexo:</label>
+                    <select id="sexo" required>
+                        <option selected>Selecione</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Feminino</option>
+                        <option value="N">Não Declarado</option>
+                    </select>
+                </div>
+                <div class="formd">
+                    <label for="pais">País:</label>
+                    <select id="pais" name="Pais">
+                        <option selected>Selecione</option>
+                    </select>
+                    <label for="estado">Estado:</label>
+                    <input type="text" id="estado" name="Estado" placeholder="Estado">
+                    <label for="cidade">Cidade:</label>
+                    <input type="text" id="cidade" name="Cidade" placeholder="Cidade">
+                    <label for="cep">CEP:</label>
+                    <input type="text" id="cep" name="CEP" placeholder="CEP">
+                    <label for="bairro">Bairro:</label>
+                    <input type="text" id="bairro" name="Bairro" placeholder="Bairro">
+                    <label for="endereco">Endereço:</label>
+                    <input type="text" id="endereco" name="Endereço" placeholder="Endereço">
+                </div>
+                <div class="Botões">
+                    <button type="submit" class="Btncad">Cadastrar</button>
+                    <button type="reset" class="Btnexc">Descartar</button>
+                </div>
+            </form>
+        </div>
+
         <!-- ===== IONICONS ===== -->
         <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
         
         <!-- ===== MAIN JS ===== -->
         <script src="assets/js/main.js"></script>
+        <script src="assets/js/scripts.js"></script>
     </body>
 </html>
