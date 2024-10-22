@@ -151,3 +151,45 @@ input[type="text"], input[type="email"], select {
     background-color: #8324a8;
     color: white;
 }
+
+/* Estilos para a tela de login */
+.card {
+    border-radius: 10px; /* Cantos arredondados para a card de login */
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.1); /* Sombra para a card */
+    margin-top: 20px; /* Espaço acima da card */
+}
+
+.card-body {
+    padding: 20px; /* Espaçamento interno da card */
+}
+
+input[type="password"] {
+    padding: 10px; /* Adiciona preenchimento ao campo de senha */
+    border: 2px solid #5b087c; /* Borda colorida */
+    border-radius: 5px; /* Cantos arredondados */
+    margin-top: 5px; /* Espaço acima do campo */
+}
+
+.btn {
+    border-radius: 5px; /* Botões com cantos arredondados */
+    transition: background-color 0.3s ease; /* Transição suave */
+}
+
+.btn:hover {
+    background-color: #8324a8; /* Cor ao passar o mouse */
+    color: white; /* Cor do texto ao passar o mouse */
+}
+
+.text-center {
+    margin-bottom: 20px; /* Espaço abaixo do título */
+}
+
+/* Estilos para o formulário */
+.form-control {
+    transition: border-color 0.3s ease; /* Transição suave para a borda */
+}
+
+.form-control:focus {
+    border-color: #8324a8; /* Cor da borda ao focar no campo */
+    box-shadow: 0 0 5px rgba(131, 36, 168, 0.5); /* Sombra ao focar */
+}
