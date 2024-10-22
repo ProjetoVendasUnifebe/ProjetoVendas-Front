@@ -1,5 +1,6 @@
 body {
     font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
     margin: 0;
     padding: 0;
 }
@@ -90,4 +91,63 @@ body {
 /* Exibir dropdown ao passar o mouse */
 .user-dropdown:hover .user-dropdown-content {
     display: block; /* Exibir o dropdown ao passar o mouse sobre o ícone */
+}
+
+.container {
+    width: 60%;
+    margin: auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 25px rgba(0.1, 0.1, 0.1, 0.1);
+}
+
+h1 {
+    color: #5b087c;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.forme, .formd {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #5b087c;
+}
+
+input[type="text"], input[type="email"], select {
+    padding: 10px;
+    border: 2px solid #5b087c;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.Botões {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.Btncad, .Btnexc {
+    background-color: #5b087c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+.Btncad:hover, .Btnexc:hover {
+    background-color: #8324a8;
+    color: white;
 }
