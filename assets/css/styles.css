@@ -1,31 +1,31 @@
 /*===== GOOGLE FONTS =====*/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
-/*===== VARIABLES CSS =====*/
+/*===== Início do CSS =====*/
 :root{
   --nav-width: 92px;
 
-  /*===== Colores =====*/
+  /*===== Cores =====*/
   --first-color: #711e92;
   --bg-color: #5b087c;
   --sub-color: #bab1be;
   --white-color: #FFF;
   
-  /*===== Fuente y tipografia =====*/
+  /*===== Fontes =====*/
   --body-font: 'Poppins', sans-serif;
   --normal-font-size: 1rem;
   --small-font-size: .875rem;
   
-  /*===== z index =====*/
+  /*===== index =====*/
   --z-fixed: 100;
 }
 
 
-/*===== BASE =====*/
+/*===== Base =====*/
 *,::before,::after{
   box-sizing: border-box;
 }
-body{
+.body-telas{
   position: relative;
   margin: 0;
   padding: 2rem 0 0 6.75rem;
@@ -45,7 +45,7 @@ a{
   text-decoration: none;
 }
 
-/*===== l NAV =====*/
+/*===== Nav Esquerda =====*/
 .l-navbar{
   position: fixed;
   top: 0;
@@ -59,7 +59,7 @@ a{
   z-index: var(--z-fixed);
 }
 
-/*===== NAV =====*/
+/*===== Menu Lateral =====*/
 .nav{
   height: 100%;
   display: flex;
@@ -106,22 +106,16 @@ a{
   font-size: var(--small-font-size);
 }
 
-/*Expander menu*/
+/*===== Menu Expansivo =====*/
 .expander{
   width: calc(var(--nav-width) + 9.25rem);
 }
-
-/*Add padding body*/
 .body-pd{
   padding: 2rem 0 0 16rem;
 }
-
-/*Active links menu*/
 .active{
   background-color: var(--first-color);
 }
-
-/*===== COLLAPSE =====*/
 .collapse{
   grid-template-columns: 20px max-content 1fr;
 }
@@ -140,17 +134,14 @@ a{
 .collapse__sublink:hover{
   color: var(--white-color);
 }
-
-/*Show collapse*/
 .showCollapse{
   display: block;
 }
-
-/*Rotate icon*/
 .rotate{
   transform: rotate(180deg);
 }
 
+/*===== Telas de Cadastro =====*/
 .container {
   width: 60%;
   margin: auto;
@@ -208,4 +199,153 @@ input[type="text"], input[type="email"], select {
 .Btncad:hover, .Btnexc:hover {
   background-color: #8324a8;
   color: white;
+}
+
+/*===== Tela de Login =====*/
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.body-login {
+  margin: 0;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.body-login * {
+  box-sizing: border-box;
+}
+
+.main-login {
+  width: 100vw;
+  height: 100vh;
+  background: #5b087c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.left-login {
+  width: 50vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.left-login-img {
+  width: 35vw;
+}
+
+.right-login {
+  width: 50vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-login {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px 35px;
+  background: #2f2841;
+  border-radius: 20px;
+  box-shadow: 0px 10px 40px #000;
+}
+
+.card-login h1 {
+  color: #fff;
+  font-weight: 800;
+  margin: 0;
+}
+
+.textfield {
+  width: 100%; 
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 10px 0px; 
+}
+
+.textfield input {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  background: #8a849b;
+  color: #ffff;
+  font-size: 12pt;
+  box-shadow: 0px 10px 40px #111010;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.textfield label {
+  color: #fff;
+  margin-bottom: 10px;
+}
+  
+.textfield input::placeholder {
+  color: #ffff;
+}
+
+.btn-login {
+  width: 100%;
+  padding: 16px 0px;
+  margin: 25px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: #fff;
+  background: #5b087c;
+  cursor: pointer;
+  box-shadow: 0px 10px 40px -12px #000000;
+}
+
+.btn-login:hover{
+  background: #ffffff;
+  color: #5b087c;
+  
+}
+
+@media (max-width: 950px) {
+  .card-login {
+      width: 85%;
+  }
+}
+
+@media (max-width: 600px) {
+  .main-login {
+      flex-direction: column;
+  }
+
+  .left-login  h1 {
+      display: none;
+  }
+
+  .left-login {
+      width: 100%;
+      height: auto;
+  }
+
+  .right-login {
+      width: 100%;
+      height: auto;
+  }
+
+  .left-login-img {
+      width: 50vw;
+  }
+
+  .card-login {
+      width: 90%;
+  }
 }
