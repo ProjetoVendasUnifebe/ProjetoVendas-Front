@@ -173,11 +173,18 @@ label {
   color: #5b087c;
 }
 
-input[type="text"], input[type="email"], select {
+input[type="text"], input[type="email"], input[type="password"],input[type="number"], select, textarea {
   padding: 10px;
   border: 2px solid #5b087c;
   border-radius: 5px;
   margin-top: 5px;
+}
+
+textarea {
+  width: 100%;
+  min-height: 115px;
+  resize: vertical;
+  box-sizing: border-box;
 }
 
 .Botões {

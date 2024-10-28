@@ -6,6 +6,7 @@
 
         <!-- ===== CSS ===== -->
         <link rel="stylesheet" href="assets/css/styles.css">
+        <link rel="icon" type="image/x-icon" href="assets/img/file.ico">
         
         <title>Cadastro de Produto</title>
     </head>
@@ -70,7 +71,28 @@
             </nav>
         </div>
 
-        <h1>Componentes</h1>
+        <h1>Cadastro de Produto</h1>
+
+        <div class="container">
+            <h1 class="subtitulo">Produto</h1>
+            <form class="cadastro-form" method="post">
+                <div class="forme">
+                    <label for="nomeProduto">Produto:</label>
+                    <input type="text" id="nomeProduto" name="nomeProduto" placeholder="Produto" required>
+                    <label for="qtdProduto">Quantidade:</label>
+                    <input type="number" id="qtdProduto" name="qtdProduto" placeholder="Quantidade" required>
+                </div>
+                <div class="formd">
+                    <label for="descricaoProduto">Descrição:</label>
+                    <textarea name="descricaoProduto" id="descricaoProduto" placeholder="Descrição" required></textarea>
+                </div>
+                <div class="Botões">
+                    <button type="submit" class="Btncad" onclick="validaSenhaUsuario()">Cadastrar</button>
+                    <button type="reset" class="Btnexc">Descartar</button>
+                </div>
+            </form>
+        </div>
+
         <!-- ===== IONICONS ===== -->
         <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
         

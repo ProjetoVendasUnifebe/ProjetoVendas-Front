@@ -71,3 +71,16 @@ fetch('https://restcountries.com/v3.1/all?lang=pt')
     });
 })
 .catch(error => console.log('Erro ao carregar os países:', error));
+
+function validaSenhaUsuario(){
+    let senhaUsuario = document.getElementById("senhaUsuario").value;
+    let confSenhaUsuario = document.getElementById("confSenhaUsuario").value;
+
+    if(senhaUsuario !== confSenhaUsuario) {
+        alert("As senhas não conferem!");
+        console.log("As senhas não conferem");
+    } else {
+        console.log("As senhas conferem");
+    }
+}
+
