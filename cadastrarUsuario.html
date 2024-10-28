@@ -70,12 +70,40 @@
             </nav>
         </div>
 
-        <h1>Componentes</h1>
+        <h1>Cadastro de Usuário</h1>
         
+        <div class="container">
+            <h1 class="subtitulo">Usuário</h1>
+            <form class="cadastro-form" method="post">
+                <div class="forme">
+                    <label for="nomeUsuario">Nome de Usuário:</label>
+                    <input type="text" id="nomeUsuario" name="nomeUsuario" placeholder="Nome de Usuário" required>
+                    <label for="login">Login:</label>
+                    <input type="text" id="login" name="login" placeholder="Login" required>
+                    <label for="ehAdm">É Administrador:</label>
+                    <select id="ehAdm" required>
+                        <option selected value="0">Não</option>
+                        <option value="1">Sim</option>
+                    </select>
+                </div>
+                <div class="formd">
+                    <label for="senhaUsuario">Senha:</label>
+                    <input type="password" id="senhaUsuario" name="senhaUsuario" placeholder="Senha" required>
+                    <label for="confSenhaUsuario">Confirmação de Senha:</label>
+                    <input type="password" id="confSenhaUsuario" name="confSenhaUsuario" placeholder="Confirmação de Senha" required>
+                </div>
+                <div class="Botões">
+                    <button type="submit" class="Btncad" onclick="validaSenhaUsuario()">Cadastrar</button>
+                    <button type="reset" class="Btnexc">Descartar</button>
+                </div>
+            </form>
+        </div>
+
         <!-- ===== IONICONS ===== -->
         <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
         
         <!-- ===== MAIN JS ===== -->
         <script src="assets/js/main.js"></script>
+        <script src="/assets/js/scripts.js"></script>
     </body>
 </html>

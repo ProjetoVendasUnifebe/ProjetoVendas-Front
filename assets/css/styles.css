@@ -173,7 +173,7 @@ label {
   color: #5b087c;
 }
 
-input[type="text"], input[type="email"], select {
+input[type="text"], input[type="email"], input[type="password"], select {
   padding: 10px;
   border: 2px solid #5b087c;
   border-radius: 5px;
