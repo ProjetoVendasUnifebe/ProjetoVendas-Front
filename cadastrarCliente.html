@@ -76,7 +76,7 @@
 
         <div class="container">
             <h1 class="subtitulo">Cliente</h1>
-            <form class="cadastro-form" method="post">
+            <form class="cadastro-form" onsubmit="return validarFormulario();">
                 <div class="forme">
                     <label for="name">Nome:</label>
                     <input type="text" id="name" name="Nome" placeholder="Nome" required>
@@ -134,5 +134,26 @@
         <!-- ===== MAIN JS ===== -->
         <script src="assets/js/main.js"></script>
         <script src="assets/js/scripts.js"></script>
+        <script>
+            function validarFormulario() {
+                const cep = document.getElementById("cep").value;
+        
+                // Exemplo de validação simples para CEP (considerando apenas números e tamanho 8)
+                const cepValido = /^[0-9]{8}$/.test(cep);
+                
+                if (!cepValido) {
+                    document.getElementById("popup").style.display = "block"; // Exibe o pop-up
+                    return false; // Impede o envio do formulário
+                }
+        
+                // Se o CEP for válido, você pode prosseguir com o envio do formulário
+                return true;
+            }
+        
+            // Fechar o popup
+            document.getElementById("ok-btn").addEventListener("click", function() {
+                document.getElementById("popup").style.display = "none";
+            });
+        </script>
     </body>
 </html>

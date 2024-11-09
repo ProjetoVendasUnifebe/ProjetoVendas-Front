@@ -76,7 +76,7 @@
         
         <div class="container">
             <h1 class="subtitulo">Usuário</h1>
-            <form class="cadastro-form" method="post">
+            <form class="cadastro-form" onsubmit="event.preventDefault(); cadastrarUsuario();">
                 <div class="forme">
                     <label for="nomeUsuario">Nome de Usuário:</label>
                     <input type="text" id="nomeUsuario" name="nomeUsuario" placeholder="Nome de Usuário" required>
@@ -117,4 +117,61 @@
         <script src="assets/js/main.js"></script>
         <script src="assets/js/scripts.js" type="module"></script>
     </body>
+
+<script>
+    function cadastrarUsuario() {
+        const url = 'https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Usuario/cadastrar-usuario';
+        
+        // Captura os valores dos campos do formulário
+        const nomeUsuario = document.getElementById("nomeUsuario").value;
+        const senha = document.getElementById("senhaUsuario").value;
+        const confSenha = document.getElementById("confSenhaUsuario").value;
+        const ehAdm = parseInt(document.getElementById("ehAdm").value);
+        const login = document.getElementById("login").value;
+
+        // Verifica se as senhas coincidem
+        if (senha !== confSenha) {
+            document.getElementById("popup").style.display = "block";
+            return;
+        }
+
+        // Cria o objeto de dados a ser enviado na requisição
+        const dadosUsuario = {
+            nomeUsuario: nomeUsuario,
+            senha: senha,
+            ehAdm: ehAdm,
+            login: login
+        };
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Accept': '*/*',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dadosUsuario)
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json(); // Converte a resposta em JSON se for bem-sucedida
+            } else {
+                throw new Error('Erro ao cadastrar usuário');
+            }
+        })
+        .then(data => {
+            console.log('Usuário cadastrado com sucesso:', data);
+            alert("Usuário cadastrado com sucesso!");
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert("Ocorreu um erro ao tentar cadastrar o usuário.");
+        });
+    }
+
+    // Fecha o popup de aviso
+    document.getElementById("ok-btn").addEventListener("click", function() {
+        document.getElementById("popup").style.display = "none";
+    });
+</script>
+
 </html>

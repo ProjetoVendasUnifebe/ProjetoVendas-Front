@@ -22,7 +22,7 @@ export class APIs {
 
     fetchCEP() {
         const cep = this.cepInput.value.replace(/\D/g, '');
-
+    
         if (cep.length === 8) {
             fetch(`https://viacep.com.br/ws/${cep}/json/`)
                 .then(response => response.json())
@@ -34,12 +34,9 @@ export class APIs {
                         document.getElementById('bairro').value = data.bairro;
                         document.getElementById('endereco').value = data.logradouro;
                     } else {
+                        console.error('CEP não encontrado!', error);
                         this.popupInstance.showPopup('CEP não encontrado!');
-                        document.getElementById('cidade').value = '';
-                        document.getElementById('estado').value = '';
-                        document.getElementById('bairro').value = '';
-                        document.getElementById('endereco').value = '';
-                        document.getElementById('cep').value = '';
+                        this.clearAddressFields();
                     }
                 })
                 .catch(error => {
@@ -47,9 +44,19 @@ export class APIs {
                     this.popupInstance.showPopup('Erro ao buscar o CEP. Tente novamente!');
                 });
         } else {
+            console.error('CEP Inválido!', error);
             this.popupInstance.showPopup('CEP inválido!');
         }
     }
+    
+    clearAddressFields() {
+        document.getElementById('cidade').value = '';
+        document.getElementById('estado').value = '';
+        document.getElementById('bairro').value = '';
+        document.getElementById('endereco').value = '';
+        document.getElementById('cep').value = '';
+    }
+    
 
     fetchCountries() {
         fetch('https://restcountries.com/v3.1/all?lang=pt')
