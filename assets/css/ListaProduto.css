@@ -1,0 +1,35 @@
+.subtituloProduto {
+    color: #5b087c;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.inputPesquisa{
+    width: 70%;
+}
+.containerProduto {
+    width: 90%;
+    margin: 5%;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 25px rgba(0.1, 0.1, 0.1, 0.1);
+    margin-top: auto;
+  }
+
+hr{
+    margin: 20px;
+}
+
+.Btnovo, .Btnexc {
+    background-color: #5b087c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+
+.cabecalho{
+    margin-left: 10%;
+}

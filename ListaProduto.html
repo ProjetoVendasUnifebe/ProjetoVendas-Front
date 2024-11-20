@@ -6,9 +6,10 @@
 
         <!-- ===== CSS ===== -->
         <link rel="stylesheet" href="assets/css/styles.css">
+        <link rel="stylesheet" href="assets/css/ListaProduto.css">
         <link rel="icon" type="image/x-icon" href="assets/img/file.ico">
         
-        <title>Cadastro de Cliente</title>
+        <title>Produtos</title>
     </head>
     <body class="body-telas" id="body-pd">
         <div class="l-navbar" id="navbar">
@@ -71,56 +72,39 @@
             </nav>
         </div>
 
-        <h1>Cadastro de Clientes</h1>
+        <!-- <h1>Produtos disponíveis</h1> -->
 
-        <div class="container">
-            <h1 class="subtitulo">Cliente</h1>
-            <form class="cadastro-form" method="post">
-                <div class="forme">
-                    <label for="name">Nome:</label>
-                    <input type="text" id="name" name="Nome" placeholder="Nome" required>
-                    <label for="cpf">CPF:</label>
-                    <input type="text" id="cpf" name="CPF" placeholder="CPF" required>
-                    <label for="email">E-mail:</label>
-                    <input type="email" id="email" name=" Email" placeholder="E-mail" required>
-                    <label for="celular">Celular:</label>
-                    <input type="text" id="celular" name="Celular" placeholder="Celular">
-                    <label for="telefone">Telefone:</label>
-                    <input type="text" id="telefone" name="Telefone" placeholder="Telefone">
-                    <label for="sexo">Sexo:</label>
-                    <select id="sexo" required>
-                        <option selected>Selecione</option>
-                        <option value="M">Masculino</option>
-                        <option value="F">Feminino</option>
-                        <option value="N">Não Declarado</option>
-                    </select>
-                </div>
-                <div class="formd">
-                    <label for="pais">País:</label>
-                    <select id="pais" name="Pais">
-                        <option selected>Selecione</option>
-                    </select>
-                    <label for="estado">Estado:</label>
-                    <input type="text" id="estado" name="Estado" placeholder="Estado">
-                    <label for="cidade">Cidade:</label>
-                    <input type="text" id="cidade" name="Cidade" placeholder="Cidade">
-                    <label for="cep">CEP:</label>
-                    <input type="text" id="cep" name="CEP" placeholder="CEP">
-                    <label for="bairro">Bairro:</label>
-                    <input type="text" id="bairro" name="Bairro" placeholder="Bairro">
-                    <label for="endereco">Endereço:</label>
-                    <input type="text" id="endereco" name="Endereço" placeholder="Endereço">
-                </div>
-                <div class="Botões">
-                    <button type="submit" class="Btncad">Cadastrar</button>
-                    <button type="reset" class="Btnexc">Descartar</button>
-                </div>
-            </form>
+        <div>
+            <!-- <input type="text" id="Pesquisa" name="Pesquisa" placeholder="Pesquise o produto aqui">
+            <a href="cadastrarProduto.html"><input type="button" value="Novo" class="Btncad"></a> -->
+        </div>
+        <div class="containerProduto">
+            <h1 class="subtituloProduto">Produtos</h1>
+
+            <label for="" id="label1">Procurar por produto:</label>
+
+            <ul><input type="text" id="Pesquisa" name="Pesquisa" placeholder="Pesquise o produto aqui" class="inputPesquisa">
+            <input type="button" value="Buscar" class="Btncad"></ul>
+
+            <ul><a href="cadastrarProduto.html"><input type="button" value="Novo Produto" class="Btnovo"></a></ul>
+            
+            <hr>
+        <div>
+            <input type="checkbox" name="Selecionar" id="SelecionarProduto" class="cabecalho">
+            <label for="" class="cabecalho">Id</label>
+            <label for="" class="cabecalho">Nome</label>
+            <label for="" class="cabecalho">Quantidade</label>
+            <label for="" class="cabecalho">Descrição</label>
         </div>
 
+        <hr>
+
+    </div>
+
+       
         <!-- ===== IONICONS ===== -->
         <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
-        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         
         <!-- ===== MAIN JS ===== -->
         <script src="assets/js/main.js"></script>
