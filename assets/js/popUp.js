@@ -15,7 +15,7 @@ export class popUp {
         if (this.popup) {
             const popupMessage = this.popup.querySelector("p");
             if (popupMessage) {
-                popupMessage.textContent = message; // Altera a mensagem do pop-up
+                popupMessage.textContent = message; // Define a mensagem do pop-up
                 this.popup.classList.add("show");
                 this.popup.style.display = "block";
             } else {

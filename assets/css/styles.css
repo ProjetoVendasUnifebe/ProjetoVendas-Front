@@ -356,6 +356,7 @@ textarea {
       width: 90%;
   }
 }
+
 /* Fundo do pop-up */
 .popup {
   display: none; /* Inicialmente oculto */
@@ -380,52 +381,4 @@ textarea {
   margin: 10% auto;
   text-align: center;
   position: relative;
-  box-shadow: 0 4px 15px rgba(91, 8, 124, 0.3); /* Sombra personalizada */
-  transform: translateY(-50px);
-  opacity: 0;
-  transition: all 0.3s ease; /* Transição suave */
-}
-
-/* Estilo do cabeçalho */
-.popup-content h2 {
-  color: #5b087c;
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-/* Botão de fechar */
-.close-btn {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  font-size: 24px;
-  cursor: pointer;
-  color: #5b087c;
-  transition: color 0.2s;
-}
-
-.close-btn:hover {
-  color: #333;
-}
-
-/* Estilo do botão */
-.popup-content button {
-  background-color: #5b087c;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 20px;
-  transition: background-color 0.3s ease;
-}
-
-.popup-content button:hover {
-  background-color: #44035f;
-}
-
-/* Exibir o pop-up com animação */
-.popup.show .popup-content {
-  transform: translateY(0);
-  opacity: 1;
 }
