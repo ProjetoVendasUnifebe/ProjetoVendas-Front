@@ -5,10 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!-- ===== CSS ===== -->
-        <link rel="stylesheet" href="assets/css/styles.css">
+        <link rel="stylesheet" href="../assets/css/styles.css">
         <link rel="icon" type="image/x-icon" href="assets/img/file.ico">
         
-        <title>Cadastro de Produto</title>
+        <title>Cadastro de Estoque</title>
     </head>
     <body class="body-telas" id="body-pd">
         <div class="l-navbar" id="navbar">
@@ -35,9 +35,24 @@
                             <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
 
                             <ul class="collapse__menu">
-                                <a href="cadastrarCliente.html" class="collapse__sublink">Cliente</a>
-                                <a href="cadastrarProduto.html" class="collapse__sublink">Produto</a>
-                                <a href="cadastrarUsuario.html" class="collapse__sublink">Usuário</a>
+                                <a href="../Cadastros/cadastrarCliente.html" class="collapse__sublink">Cliente</a>
+                                <a href="../Cadastros/cadastrarProduto.html" class="collapse__sublink">Produto</a>
+                                <a href="../Cadastros/cadastrarUsuario.html" class="collapse__sublink">Usuário</a>
+                                <a href="../Cadastros/cadastrarEstoque.html" class="collapse__sublink">Estoque</a>
+                            </ul>
+                        </div>
+
+                        <div  class="nav__link collapse collapse__link">
+                            <ion-icon name="folder-outline" class="nav__icon"></ion-icon>
+                            <span class="nav__name">Listagens</span>
+
+                            <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
+
+                            <ul class="collapse__menu">
+                                <a href="listagemCliente.html" class="collapse__sublink">Cliente</a>
+                                <a href="listagemProduto.html" class="collapse__sublink">Produto</a>
+                                <a href="listagemUsuario.html" class="collapse__sublink">Usuário</a>
+                                <a href="listagemEstoque.html" class="collapse__sublink">Estoque</a>
                             </ul>
                         </div>
 
@@ -45,7 +60,7 @@
                             <ion-icon name="pie-chart-outline" class="nav__icon"></ion-icon>
                             <span class="nav__name">Analytics</span>
                         </a>
-                        <div class="nav__link collapse">
+                        <div class="nav__link collapse collapse__link">
                             <ion-icon name="people-outline" class="nav__icon"></ion-icon>
                             <span class="nav__name">Team</span>
 
@@ -71,23 +86,21 @@
             </nav>
         </div>
 
-        <h1>Cadastro de Produto</h1>
+        <h1>Cadastro de Estoque</h1>
 
         <div class="container">
-            <h1 class="subtitulo">Produto</h1>
-            <form class="cadastro-form" method="post" id="formP" onsubmit="event.preventDefault(); cadastrarProduto(); ">
+            <h1 class="subtitulo">Estoque</h1>
+            <form class="cadastro-form" method="post">
                 <div class="forme">
-                    <label for="nomeProduto">Produto:</label>
-                    <input type="text" id="nomeProduto" name="nomeProduto" placeholder="Produto" required>
-                    <label for="qtdProduto">Quantidade:</label>
-                    <input type="number" id="qtdProduto" name="qtdProduto" placeholder="Quantidade" required>
+                    <label for="nome">Nome do Estoque:</label>
+                    <input type="text" id="nome" name="nome" placeholder="Nome do Estoque" required>
                 </div>
                 <div class="formd">
-                    <label for="descricaoProduto">Descrição:</label>
-                    <textarea name="descricaoProduto" id="descricaoProduto" placeholder="Descrição" required></textarea>
+                    <label for="capacidade">Capacidade:</label>
+                    <input type="number" id="capacidade" name="capacidade" placeholder="Capacidade" required>
                 </div>
                 <div class="Botões">
-                    <button type="submit" class="Btncad">Cadastrar</button>
+                    <button type="submit" class="Btncad" onclick="cadastrarEstoque()">Cadastrar</button>
                     <button type="reset" class="Btnexc">Descartar</button>
                 </div>
             </form>
@@ -97,55 +110,7 @@
         <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
         
         <!-- ===== MAIN JS ===== -->
-        <script src="assets/js/main.js"></script>
+        <script src="../assets/js/main.js"></script>
+        <script src="assets/js/requisicoes/cadastrarEstoque.js"></script>
     </body>
-
-    <script>
-
-        function cadastrarProduto() {
-            const url = 'https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Produto/adicionar-produto';
-            
-            // Captura os valores dos campos do formulário
-            const nomeProduto = document.getElementById("nomeProduto").value;
-            const valor = document.getElementById("qtdProduto").value;
-            const descricao = document.getElementById("descricaoProduto").value;
-    
-            // Cria o objeto de dados a ser enviado na requisição
-            const dadosProduto = {
-                nomeProduto: nomeProduto,
-                valor: valor,
-                descricao: descricao
-            };
-    
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Accept': '*/*',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(dadosProduto)
-            })
-            .then(response => {
-                if (response.ok) {
-                    return response.json(); // Converte a resposta em JSON se for bem-sucedida
-                } else {
-                    throw new Error('Erro ao cadastrar produto');
-                }
-            })
-            .then(data => {
-                console.log('produto cadastrado com sucesso:', data);
-                alert("produto cadastrado com sucesso!");
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-                alert("Ocorreu um erro ao tentar cadastrar o produto.");
-            });
-        }
-    
-        // // Fecha o popup de aviso
-        // document.getElementById("ok-btn").addEventListener("click", function() {
-        //     document.getElementById("popup").style.display = "none";
-        // });
-    </script>
-    
 </html>
