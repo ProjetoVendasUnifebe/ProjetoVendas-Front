@@ -7,9 +7,8 @@
         <!-- ===== CSS ===== -->
         <link rel="stylesheet" href="assets/css/styles.css">
         <link rel="icon" type="image/x-icon" href="assets/img/file.ico">
-        <script type="module" src="assets/js/scripts.js"></script>
         
-        <title>Cadastro de Cliente</title>
+        <title>Cadastro de Estoque</title>
     </head>
     <body class="body-telas" id="body-pd">
         <div class="l-navbar" id="navbar">
@@ -29,7 +28,7 @@
                             <span class="nav__name">Messenger</span>
                         </a>
 
-                        <div  class="nav__link collapse">
+                        <div  class="nav__link collapse collapse__link">
                             <ion-icon name="folder-outline" class="nav__icon"></ion-icon>
                             <span class="nav__name">Cadastros</span>
 
@@ -39,6 +38,21 @@
                                 <a href="cadastrarCliente.html" class="collapse__sublink">Cliente</a>
                                 <a href="cadastrarProduto.html" class="collapse__sublink">Produto</a>
                                 <a href="cadastrarUsuario.html" class="collapse__sublink">Usuário</a>
+                                <a href="cadastrarEstoque.html" class="collapse__sublink">Estoque</a>
+                            </ul>
+                        </div>
+
+                        <div  class="nav__link collapse collapse__link">
+                            <ion-icon name="folder-outline" class="nav__icon"></ion-icon>
+                            <span class="nav__name">Listagens</span>
+
+                            <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
+
+                            <ul class="collapse__menu">
+                                <a href="listagemCliente.html" class="collapse__sublink">Cliente</a>
+                                <a href="listagemProduto.html" class="collapse__sublink">Produto</a>
+                                <a href="listagemUsuario.html" class="collapse__sublink">Usuário</a>
+                                <a href="listagemEstoque.html" class="collapse__sublink">Estoque</a>
                             </ul>
                         </div>
 
@@ -46,7 +60,7 @@
                             <ion-icon name="pie-chart-outline" class="nav__icon"></ion-icon>
                             <span class="nav__name">Analytics</span>
                         </a>
-                        <div class="nav__link collapse">
+                        <div class="nav__link collapse collapse__link">
                             <ion-icon name="people-outline" class="nav__icon"></ion-icon>
                             <span class="nav__name">Team</span>
 
@@ -72,89 +86,31 @@
             </nav>
         </div>
 
-        <h1>Cadastro de Clientes</h1>
+        <h1>Cadastro de Estoque</h1>
 
         <div class="container">
-            <h1 class="subtitulo">Cliente</h1>
-            <form class="cadastro-form" onsubmit="return validarFormulario();">
+            <h1 class="subtitulo">Estoque</h1>
+            <form class="cadastro-form" method="post">
                 <div class="forme">
-                    <label for="name">Nome:</label>
-                    <input type="text" id="name" name="Nome" placeholder="Nome" required>
-                    <label for="cpf">CPF:</label>
-                    <input type="text" id="cpf" name="CPF" placeholder="CPF" required>
-                    <label for="email">E-mail:</label>
-                    <input type="email" id="email" name=" Email" placeholder="E-mail" required>
-                    <label for="celular">Celular:</label>
-                    <input type="text" id="celular" name="Celular" placeholder="Celular">
-                    <label for="telefone">Telefone:</label>
-                    <input type="text" id="telefone" name="Telefone" placeholder="Telefone">
-                    <label for="sexo">Sexo:</label>
-                    <select id="sexo" required>
-                        <option selected>Selecione</option>
-                        <option value="M">Masculino</option>
-                        <option value="F">Feminino</option>
-                        <option value="N">Não Declarado</option>
-                    </select>
+                    <label for="nome">Nome do Estoque:</label>
+                    <input type="text" id="nome" name="nome" placeholder="Nome do Estoque" required>
                 </div>
                 <div class="formd">
-                    <label for="pais">País:</label>
-                    <select id="pais" name="Pais">
-                        <option selected>Selecione</option>
-                    </select>
-                    <label for="estado">Estado:</label>
-                    <input type="text" id="estado" name="Estado" placeholder="Estado">
-                    <label for="cidade">Cidade:</label>
-                    <input type="text" id="cidade" name="Cidade" placeholder="Cidade">
-                    <label for="cep">CEP:</label>
-                    <input type="text" id="cep" name="CEP" placeholder="CEP">
-                    <label for="bairro">Bairro:</label>
-                    <input type="text" id="bairro" name="Bairro" placeholder="Bairro">
-                    <label for="endereco">Endereço:</label>
-                    <input type="text" id="endereco" name="Endereço" placeholder="Endereço">
+                    <label for="capacidade">Capacidade:</label>
+                    <input type="number" id="capacidade" name="capacidade" placeholder="Capacidade" required>
                 </div>
                 <div class="Botões">
-                    <button type="submit" class="Btncad">Cadastrar</button>
+                    <button type="submit" class="Btncad" onclick="cadastrarEstoque()">Cadastrar</button>
                     <button type="reset" class="Btnexc">Descartar</button>
                 </div>
             </form>
         </div>
 
-        <div id="popup" class="popup" style="display: none;">
-            <div class="popup-content">
-                <span class="close-btn">&times;</span>
-                <h2>Aviso</h2>
-                <p>CEP inválido!</p>
-                <button id="ok-btn">OK</button>
-            </div>
-        </div>
-
         <!-- ===== IONICONS ===== -->
         <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
         
-        
         <!-- ===== MAIN JS ===== -->
         <script src="assets/js/main.js"></script>
-        <script src="assets/js/scripts.js"></script>
-        <script>
-            function validarFormulario() {
-                const cep = document.getElementById("cep").value;
-        
-                // Exemplo de validação simples para CEP (considerando apenas números e tamanho 8)
-                const cepValido = /^[0-9]{8}$/.test(cep);
-                
-                if (!cepValido) {
-                    document.getElementById("popup").style.display = "block"; // Exibe o pop-up
-                    return false; // Impede o envio do formulário
-                }
-        
-                // Se o CEP for válido, você pode prosseguir com o envio do formulário
-                return true;
-            }
-        // teste getElementById
-            // Fechar o popup
-            document.getElementById("ok-btn").addEventListener("click", function() {
-                document.getElementById("popup").style.display = "none";
-            });
-        </script>
+        <script src="assets/js/requisicoes/cadastrarEstoque.js"></script>
     </body>
 </html>

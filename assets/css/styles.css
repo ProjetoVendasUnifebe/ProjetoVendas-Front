@@ -120,7 +120,7 @@ a{
   grid-template-columns: 20px max-content 1fr;
 }
 .collapse__link{
-  justify-self: flex-end;
+  /* justify-self: flex-end; */
   transition: .5s;
 }
 .collapse__menu{
@@ -356,6 +356,7 @@ textarea {
       width: 90%;
   }
 }
+
 /* Fundo do pop-up */
 .popup {
   display: none; /* Inicialmente oculto */
@@ -380,52 +381,65 @@ textarea {
   margin: 10% auto;
   text-align: center;
   position: relative;
-  box-shadow: 0 4px 15px rgba(91, 8, 124, 0.3); /* Sombra personalizada */
-  transform: translateY(-50px);
-  opacity: 0;
-  transition: all 0.3s ease; /* Transição suave */
+}
+
+/* Tables */
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+}
+
+.table th, 
+.table td {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
 }
 
 /* Estilo do cabeçalho */
-.popup-content h2 {
-  color: #5b087c;
-  font-size: 24px;
-  margin-bottom: 10px;
+.table th {
+  background-color: #5b087c; /* Cor de fundo do cabeçalho */
+  color: white; /* Cor do texto */
+  text-align: center;
 }
 
-/* Botão de fechar */
-.close-btn {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  font-size: 24px;
+/* Estilo das células */
+.table td {
+  text-align: center; /* Centraliza o conteúdo das células */
+}
+
+/* Alterna as cores das linhas */
+.table tr:nth-child(even) {
+  background-color: #f2f2f2;
   cursor: pointer;
-  color: #5b087c;
-  transition: color 0.2s;
 }
 
-.close-btn:hover {
-  color: #333;
+.table tr:hover {
+  background-color: #d7c1df; /* Cor de destaque ao passar o mouse */
+  cursor: pointer;
 }
 
-/* Estilo do botão */
-.popup-content button {
-  background-color: #5b087c;
-  color: #fff;
+.action_buttons {
+  padding: 5px 10px;
+  margin: 0 5px; /* Espaçamento horizontal entre os botões */
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
-  margin-top: 20px;
-  transition: background-color 0.3s ease;
+  font-size: 14px;
+  display: inline-block; /* Garante alinhamento lado a lado */
 }
 
-.popup-content button:hover {
-  background-color: #44035f;
+.button-edit {
+  color: #4CAF50;
+  font-size: 20px;
+  /* color: white; */
 }
 
-/* Exibir o pop-up com animação */
-.popup.show .popup-content {
-  transform: translateY(0);
-  opacity: 1;
+.button-delete {
+  color: #f44336;
+  font-size: 20px;
+  /* color: white; */
 }
