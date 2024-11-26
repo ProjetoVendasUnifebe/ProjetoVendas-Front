@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/file.ico">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body class="body-login">
+    
+    <div class="main-login">
+        <div class="left-login">
+            <img src="./assets/img/logo.png" class="left-login-img" alt="Animação em 2D de uma astronauta em um traje verde flutuando entre estrelas e luas">
+        </div>
+        <div class="right-login">
+            <div class="card-login">
+                <h1>Bem-Vindo</h1>
+                <div class="textfield">
+                    <label for="usuario">Usuário</label>
+                    <input type="text" name="usuario" id="usuario" placeholder="Digite seu usuário">
+                </div>
+                <div class="textfield"> 
+                    <label for="senha">Senha</label>
+                    <input type="password" name="senha" id="senha" placeholder="Digite a sua senha">
+                </div>
+                <button class="btn-login" onclick="validaLogin()">LOGIN</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        // Função de validação do login
+        function validaLogin() {
+            const usuarioInput = document.getElementById("usuario");
+            const senhaInput = document.getElementById("senha");
+            const usuario = usuarioInput.value;
+            const senha = senhaInput.value;
+            const loginUrl = `https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Usuario/realizar-login/${usuario}/${senha}`;
+
+            fetch(loginUrl, {
+                method: 'GET' // Altere para POST se necessário
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = "index.html"; // Redireciona para index.html
+                } else {
+                    alert("Usuário ou senha inválidos.");
+                    usuarioInput.value = ""; // Limpa o campo de usuário
+                    senhaInput.value = ""; // Limpa o campo de senha
+                    usuarioInput.focus(); // Foca no campo de usuário
+                }
+            })
+            .catch(error => {
+                console.error("Erro:", error);
+                alert("Ocorreu um erro ao tentar realizar o login.");
+            });
+        }
+
+        // Adiciona o evento de pressionar "Enter" ao campo de senha
+        document.addEventListener("DOMContentLoaded", function () {
+            const senhaInput = document.getElementById("senha");
+            senhaInput.addEventListener("keydown", function (event) {
+                if (event.key === "Enter") {
+                    validaLogin(); // Chama a função validaLogin ao pressionar Enter
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
