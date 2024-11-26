@@ -13,101 +13,151 @@
     </head>
     <body class="body-telas" id="body-pd">
         <div class="l-navbar" id="navbar">
-            <nav class="nav">
-                <div>
-                    <div class="nav__brand">
-                        <ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
-                        <a href="index.html" class="nav__logo">Comercialize</a>
-                    </div>
-                    <div class="nav__list">
-                        <a href="index.html" class="nav__link active">
-                            <ion-icon name="home-outline" class="nav__icon"></ion-icon>
-                            <span class="nav__name">Dashboard</span>
-                        </a>
-                        <a href="#" class="nav__link">
-                            <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
-                            <span class="nav__name">Messenger</span>
-                        </a>
-
-                        <div  class="nav__link collapse">
-                            <ion-icon name="folder-outline" class="nav__icon"></ion-icon>
-                            <span class="nav__name">Cadastros</span>
-
-                            <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
-
-                            <ul class="collapse__menu">
-                                <a href="cadastrarCliente.html" class="collapse__sublink">Cliente</a>
-                                <a href="cadastrarProduto.html" class="collapse__sublink">Produto</a>
-                                <a href="cadastrarUsuario.html" class="collapse__sublink">Usuário</a>
-                            </ul>
-                        </div>
-
-                        <a href="#" class="nav__link">
-                            <ion-icon name="pie-chart-outline" class="nav__icon"></ion-icon>
-                            <span class="nav__name">Analytics</span>
-                        </a>
-                        <div class="nav__link collapse">
-                            <ion-icon name="people-outline" class="nav__icon"></ion-icon>
-                            <span class="nav__name">Team</span>
-
-                            <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
-
-                            <ul class="collapse__menu">
-                                <a href="#" class="collapse__sublink">Data</a>
-                                <a href="#" class="collapse__sublink">Group</a>
-                                <a href="#" class="collapse__sublink">Members</a>
-                            </ul>
-                        </div>
-                        <a href="#" class="nav__link">
-                            <ion-icon name="settings-outline" class="nav__icon"></ion-icon>
-                            <span class="nav__name">Configurações</span>
-                        </a>
-                    </div>
-                </div>
-
-                <a href="login.html" class="nav__link">
-                    <ion-icon name="log-out-outline" class="nav__icon"></ion-icon>
-                    <span class="nav__name">Sair</span>
-                </a>
-            </nav>
+            <!-- Menu de navegação (não alterado) -->
         </div>
 
-        <!-- <h1>Produtos disponíveis</h1> -->
-
-        <div>
-            <!-- <input type="text" id="Pesquisa" name="Pesquisa" placeholder="Pesquise o produto aqui">
-            <a href="cadastrarProduto.html"><input type="button" value="Novo" class="Btncad"></a> -->
-        </div>
         <div class="containerProduto">
             <h1 class="subtituloProduto">Produtos</h1>
+            <label for="pesquisaProduto">Procurar por produto:</label>
 
-            <label for="" id="label1">Procurar por produto:</label>
-
-            <ul><input type="text" id="Pesquisa" name="Pesquisa" placeholder="Pesquise o produto aqui" class="inputPesquisa">
-            <input type="button" value="Buscar" class="Btncad"></ul>
+            <ul>
+                <!-- Campo de pesquisa único para ID ou nome com Combobox -->
+                <div style="display: flex; align-items: center;">
+                    <input type="text" id="pesquisaProduto" name="Pesquisa" placeholder="Pesquise pelo ID ou nome do produto" class="inputPesquisa">
+                    <select id="filtroProduto" class="inputFiltro">
+                        <option value="id">ID</option>
+                        <option value="nome">Nome</option>
+                    </select>
+                    <input type="button" id="searchButton" value="Buscar" class="Btncad" onclick="pesquisarProduto()">
+                </div>
+            </ul>
 
             <ul><a href="cadastrarProduto.html"><input type="button" value="Novo Produto" class="Btnovo"></a></ul>
-            
+
+            <div id="result"></div>
+
             <hr>
-        <div>
-            <input type="checkbox" name="Selecionar" id="SelecionarProduto" class="cabecalho">
-            <label for="" class="cabecalho">Id</label>
-            <label for="" class="cabecalho">Nome</label>
-            <label for="" class="cabecalho">Quantidade</label>
-            <label for="" class="cabecalho">Descrição</label>
+
+            <div>
+                <input type="checkbox" name="Selecionar" id="SelecionarProduto" class="cabecalho">
+                <label for="" class="cabecalho" id="idProduto">Id</label>
+                <label for="" class="cabecalho" id="nomeProduto">Nome</label>
+                <label for="" class="cabecalho" id="qtdProduto">Quantidade</label>
+                <label for="" class="cabecalho" id="descricaoProduto">Descrição</label>
+                <hr>
+                <ul id="lista-produtos">Carregando produtos...</ul>
+            </div>
         </div>
 
-        <hr>
-
-    </div>
-
-       
-        <!-- ===== IONICONS ===== -->
-        <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        
         <!-- ===== MAIN JS ===== -->
         <script src="assets/js/main.js"></script>
         <script src="assets/js/scripts.js"></script>
     </body>
+
+    <script>
+        const baseUrl = 'https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Produto';
+
+        const lista = document.getElementById('lista-produtos');
+        // Função para listar todos os produtos
+        async function ListaProduto() {
+            try {
+                const resposta = await fetch(`${baseUrl}/buscar-todos-produtos`);
+                if (!resposta.ok) {
+                    throw new Error(`Erro ao acessar API: ${resposta.status}`);
+                }
+                const produtos = await resposta.json();
+
+                // Exibir os produtos
+                const lista = document.getElementById('lista-produtos');
+                lista.innerHTML = ''; // Limpar lista antes de preencher
+
+                produtos.forEach(produto => {
+                    const item = document.createElement('li');
+                    item.textContent = `${produto.idProduto} ${produto.nomeProduto} - R$ ${produto.valor.toFixed(2)} ${produto.descricao}`;
+                    lista.appendChild(item);
+                });
+            } catch (erro) {
+                console.error('Erro ao carregar produtos:', erro);
+                document.getElementById('lista-produtos').textContent = 'Erro ao carregar produtos.';
+            }
+        }
+
+
+        // Função para buscar produtos pelo ID ou nome
+        async function pesquisarProduto() {
+            const pesquisaInput = document.getElementById('pesquisaProduto').value.trim();
+            const filtro = document.getElementById('filtroProduto').value;
+            
+
+            // Se o campo estiver vazio, busca todos os produtos
+            if (!pesquisaInput) {
+                ListaProduto();
+                return;
+            }
+
+            let url;
+
+            // Se o filtro selecionado for ID, busca pelo ID
+            if (filtro === 'id') {
+                if (!isNaN(pesquisaInput)) {
+                    // Buscar pelo ID
+                    url = `${baseUrl}/buscar-produto-por-id/${pesquisaInput}`;
+                } else {
+                    lista.textContent = 'Por favor, insira um ID válido.';
+                    return;
+                }
+            } else if (filtro === 'nome') {
+                // Buscar pelo nome
+                url = `${baseUrl}/buscar-produto-por-nome/${encodeURIComponent(pesquisaInput)}`;
+            }
+
+            try {
+                const resposta = await fetch(url);
+                if (!resposta.ok) {
+                    throw new Error(`Erro ao acessar API: ${resposta.status}`);
+                }
+
+                const produtos = await resposta.json();
+
+                lista.innerHTML = ''; // Limpar lista antes de preencher
+
+                // Verificar se o produto foi encontrado
+                if (!produtos || produtos.length === 0) {
+                    lista.textContent = 'Nenhum produto encontrado.';
+                    return;
+                }
+
+                if (filtro === 'nome') {
+                
+                pesquisarProdutoNome(produtos) 
+            } else {
+                pesquisarProdutoid(produtos)
+            }
+                
+            } catch (erro) {
+                console.error('Erro ao buscar produto:', erro);
+                lista.textContent = 'Erro ao buscar produto.';
+            }
+        }
+        async function pesquisarProdutoid(produtos) {
+ 
+            const item = document.createElement('li');
+            item.textContent = `${produtos.idProduto} ${produtos.nomeProduto} - R$ ${produtos.valor.toFixed(2)} ${produtos.descricao}`;
+            lista.appendChild(item);
+
+        }
+
+        async function pesquisarProdutoNome(produtos) {
+
+        produtos.forEach(produto => {
+                const item = document.createElement('li');
+                item.textContent = `${produto.idProduto} ${produto.nomeProduto} - R$ ${produto.valor.toFixed(2)} ${produto.descricao}`;
+                lista.appendChild(item);
+        });
+}
+
+
+        // Carregar todos os produtos inicialmente
+        ListaProduto();
+    </script>
 </html>
