@@ -120,7 +120,7 @@ a{
   grid-template-columns: 20px max-content 1fr;
 }
 .collapse__link{
-  justify-self: flex-end;
+  /* justify-self: flex-end; */
   transition: .5s;
 }
 .collapse__menu{
@@ -381,4 +381,65 @@ textarea {
   margin: 10% auto;
   text-align: center;
   position: relative;
+}
+
+/* Tables */
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+}
+
+.table th, 
+.table td {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+}
+
+/* Estilo do cabeçalho */
+.table th {
+  background-color: #5b087c; /* Cor de fundo do cabeçalho */
+  color: white; /* Cor do texto */
+  text-align: center;
+}
+
+/* Estilo das células */
+.table td {
+  text-align: center; /* Centraliza o conteúdo das células */
+}
+
+/* Alterna as cores das linhas */
+.table tr:nth-child(even) {
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+
+.table tr:hover {
+  background-color: #d7c1df; /* Cor de destaque ao passar o mouse */
+  cursor: pointer;
+}
+
+.action_buttons {
+  padding: 5px 10px;
+  margin: 0 5px; /* Espaçamento horizontal entre os botões */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  display: inline-block; /* Garante alinhamento lado a lado */
+}
+
+.button-edit {
+  color: #4CAF50;
+  font-size: 20px;
+  /* color: white; */
+}
+
+.button-delete {
+  color: #f44336;
+  font-size: 20px;
+  /* color: white; */
 }
