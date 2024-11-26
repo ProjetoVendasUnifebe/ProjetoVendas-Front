@@ -75,7 +75,7 @@
 
         <div class="container">
             <h1 class="subtitulo">Produto</h1>
-            <form class="cadastro-form" method="post">
+            <form class="cadastro-form" method="post" id="formP" onsubmit="event.preventDefault(); cadastrarProduto(); ">
                 <div class="forme">
                     <label for="nomeProduto">Produto:</label>
                     <input type="text" id="nomeProduto" name="nomeProduto" placeholder="Produto" required>
@@ -87,7 +87,7 @@
                     <textarea name="descricaoProduto" id="descricaoProduto" placeholder="Descrição" required></textarea>
                 </div>
                 <div class="Botões">
-                    <button type="submit" class="Btncad" onclick="validaSenhaUsuario()">Cadastrar</button>
+                    <button type="submit" class="Btncad">Cadastrar</button>
                     <button type="reset" class="Btnexc">Descartar</button>
                 </div>
             </form>
@@ -99,4 +99,53 @@
         <!-- ===== MAIN JS ===== -->
         <script src="../assets/js/main.js"></script>
     </body>
+
+    <script>
+
+        function cadastrarProduto() {
+            const url = 'https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Produto/adicionar-produto';
+            
+            // Captura os valores dos campos do formulário
+            const nomeProduto = document.getElementById("nomeProduto").value;
+            const valor = document.getElementById("qtdProduto").value;
+            const descricao = document.getElementById("descricaoProduto").value;
+    
+            // Cria o objeto de dados a ser enviado na requisição
+            const dadosProduto = {
+                nomeProduto: nomeProduto,
+                valor: valor,
+                descricao: descricao
+            };
+    
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Accept': '*/*',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dadosProduto)
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json(); // Converte a resposta em JSON se for bem-sucedida
+                } else {
+                    throw new Error('Erro ao cadastrar produto');
+                }
+            })
+            .then(data => {
+                console.log('produto cadastrado com sucesso:', data);
+                alert("produto cadastrado com sucesso!");
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert("Ocorreu um erro ao tentar cadastrar o produto.");
+            });
+        }
+    
+        // // Fecha o popup de aviso
+        // document.getElementById("ok-btn").addEventListener("click", function() {
+        //     document.getElementById("popup").style.display = "none";
+        // });
+    </script>
+    
 </html>

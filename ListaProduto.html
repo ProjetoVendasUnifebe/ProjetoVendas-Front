@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- ===== CSS ===== -->
+        <link rel="stylesheet" href="assets/css/styles.css">
+        <link rel="stylesheet" href="assets/css/ListaProduto.css">
+        <link rel="icon" type="image/x-icon" href="assets/img/file.ico">
+        
+        <title>Produtos</title>
+    </head>
+    <body class="body-telas" id="body-pd">
+        <div class="l-navbar" id="navbar">
+            <!-- Menu de navegação (não alterado) -->
+        </div>
+
+        <div class="containerProduto">
+            <h1 class="subtituloProduto">Produtos</h1>
+            <label for="pesquisaProduto">Procurar por produto:</label>
+
+            <ul>
+                <!-- Campo de pesquisa único para ID ou nome com Combobox -->
+                <div style="display: flex; align-items: center;">
+                    <input type="text" id="pesquisaProduto" name="Pesquisa" placeholder="Pesquise pelo ID ou nome do produto" class="inputPesquisa">
+                    <select id="filtroProduto" class="inputFiltro">
+                        <option value="id">ID</option>
+                        <option value="nome">Nome</option>
+                    </select>
+                    <input type="button" id="searchButton" value="Buscar" class="Btncad" onclick="pesquisarProduto()">
+                </div>
+            </ul>
+
+            <ul><a href="cadastrarProduto.html"><input type="button" value="Novo Produto" class="Btnovo"></a></ul>
+
+            <div id="result"></div>
+
+            <hr>
+
+            <div>
+                <input type="checkbox" name="Selecionar" id="SelecionarProduto" class="cabecalho">
+                <label for="" class="cabecalho" id="idProduto">Id</label>
+                <label for="" class="cabecalho" id="nomeProduto">Nome</label>
+                <label for="" class="cabecalho" id="qtdProduto">Quantidade</label>
+                <label for="" class="cabecalho" id="descricaoProduto">Descrição</label>
+                <hr>
+                <ul id="lista-produtos">Carregando produtos...</ul>
+            </div>
+        </div>
+
+        <!-- ===== MAIN JS ===== -->
+        <script src="assets/js/main.js"></script>
+        <script src="assets/js/scripts.js"></script>
+    </body>
+
+    <script>
+        const baseUrl = 'https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Produto';
+
+        const lista = document.getElementById('lista-produtos');
+        // Função para listar todos os produtos
+        async function ListaProduto() {
+            try {
+                const resposta = await fetch(`${baseUrl}/buscar-todos-produtos`);
+                if (!resposta.ok) {
+                    throw new Error(`Erro ao acessar API: ${resposta.status}`);
+                }
+                const produtos = await resposta.json();
+
+                // Exibir os produtos
+                const lista = document.getElementById('lista-produtos');
+                lista.innerHTML = ''; // Limpar lista antes de preencher
+
+                produtos.forEach(produto => {
+                    const item = document.createElement('li');
+                    item.textContent = `${produto.idProduto} ${produto.nomeProduto} - R$ ${produto.valor.toFixed(2)} ${produto.descricao}`;
+                    lista.appendChild(item);
+                });
+            } catch (erro) {
+                console.error('Erro ao carregar produtos:', erro);
+                document.getElementById('lista-produtos').textContent = 'Erro ao carregar produtos.';
+            }
+        }
+
+
+        // Função para buscar produtos pelo ID ou nome
+        async function pesquisarProduto() {
+            const pesquisaInput = document.getElementById('pesquisaProduto').value.trim();
+            const filtro = document.getElementById('filtroProduto').value;
+            
+
+            // Se o campo estiver vazio, busca todos os produtos
+            if (!pesquisaInput) {
+                ListaProduto();
+                return;
+            }
+
+            let url;
+
+            // Se o filtro selecionado for ID, busca pelo ID
+            if (filtro === 'id') {
+                if (!isNaN(pesquisaInput)) {
+                    // Buscar pelo ID
+                    url = `${baseUrl}/buscar-produto-por-id/${pesquisaInput}`;
+                } else {
+                    lista.textContent = 'Por favor, insira um ID válido.';
+                    return;
+                }
+            } else if (filtro === 'nome') {
+                // Buscar pelo nome
+                url = `${baseUrl}/buscar-produto-por-nome/${encodeURIComponent(pesquisaInput)}`;
+            }
+
+            try {
+                const resposta = await fetch(url);
+                if (!resposta.ok) {
+                    throw new Error(`Erro ao acessar API: ${resposta.status}`);
+                }
+
+                const produtos = await resposta.json();
+
+                lista.innerHTML = ''; // Limpar lista antes de preencher
+
+                // Verificar se o produto foi encontrado
+                if (!produtos || produtos.length === 0) {
+                    lista.textContent = 'Nenhum produto encontrado.';
+                    return;
+                }
+
+                if (filtro === 'nome') {
+                
+                pesquisarProdutoNome(produtos) 
+            } else {
+                pesquisarProdutoid(produtos)
+            }
+                
+            } catch (erro) {
+                console.error('Erro ao buscar produto:', erro);
+                lista.textContent = 'Erro ao buscar produto.';
+            }
+        }
+        async function pesquisarProdutoid(produtos) {
+ 
+            const item = document.createElement('li');
+            item.textContent = `${produtos.idProduto} ${produtos.nomeProduto} - R$ ${produtos.valor.toFixed(2)} ${produtos.descricao}`;
+            lista.appendChild(item);
+
+        }
+
+        async function pesquisarProdutoNome(produtos) {
+
+        produtos.forEach(produto => {
+                const item = document.createElement('li');
+                item.textContent = `${produto.idProduto} ${produto.nomeProduto} - R$ ${produto.valor.toFixed(2)} ${produto.descricao}`;
+                lista.appendChild(item);
+        });
+}
+
+
+        // Carregar todos os produtos inicialmente
+        ListaProduto();
+    </script>
+</html>
