@@ -24,17 +24,18 @@ linkColor.forEach(l=> l.addEventListener('click', colorLink))
 
 
 /*===== MENU  =====*/ 
-const linkCollapse = document.getElementsByClassName('collapse__link')
-var i
+const linkCollapse = document.querySelectorAll('.nav__link.collapse.collapse__link');
 
-for(i=0;i<linkCollapse.length;i++){
+for(let i = 0; i < linkCollapse.length; i++){
   linkCollapse[i].addEventListener('click', function(){
-    const collapseMenu = this.nextElementSibling
-    collapseMenu.classList.toggle('showCollapse')
+    const collapseMenu = this.querySelector('.collapse__menu');
+    collapseMenu.classList.toggle('showCollapse');
 
     const rotate = collapseMenu.previousElementSibling
     rotate.classList.toggle('rotate')
-  })
+  });
 }
+
+
 
 
