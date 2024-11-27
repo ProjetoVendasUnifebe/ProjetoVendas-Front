@@ -32,7 +32,7 @@ export class APIs {
                         document.getElementById('cidade').value = data.localidade;
                         document.getElementById('estado').value = data.uf;
                         document.getElementById('bairro').value = data.bairro;
-                        document.getElementById('endereco').value = data.logradouro;
+                        document.getElementById('rua').value = data.logradouro;
                     } else {
                         console.error('CEP não encontrado!', error);
                         this.popupInstance.showPopup('CEP não encontrado!');
@@ -53,7 +53,7 @@ export class APIs {
         document.getElementById('cidade').value = '';
         document.getElementById('estado').value = '';
         document.getElementById('bairro').value = '';
-        document.getElementById('endereco').value = '';
+        document.getElementById('rua').value = '';
         document.getElementById('cep').value = '';
     }
     
