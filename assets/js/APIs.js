@@ -34,17 +34,20 @@ export class APIs {
                         document.getElementById('bairro').value = data.bairro;
                         document.getElementById('rua').value = data.logradouro;
                     } else {
-                        console.error('CEP não encontrado!', error);
+                        console.error('CEP não encontrado!');
+                        console.log("Chamando showPopup com 'CEP não encontrado!'");
                         this.popupInstance.showPopup('CEP não encontrado!');
                         this.clearAddressFields();
                     }
                 })
                 .catch(error => {
                     console.error('Erro ao buscar o CEP:', error);
+                    console.log("Chamando showPopup com 'Erro ao buscar o CEP. Tente novamente!'");
                     this.popupInstance.showPopup('Erro ao buscar o CEP. Tente novamente!');
                 });
         } else {
-            console.error('CEP Inválido!', error);
+            console.error('CEP Inválido!');
+            console.log("Chamando showPopup com 'CEP inválido!'");
             this.popupInstance.showPopup('CEP inválido!');
         }
     }
