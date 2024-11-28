@@ -38,7 +38,7 @@ function cadastrarEstoque(event) {
         .then(data => {
             alert("Estoque cadastrado com sucesso!");
             console.log("Resposta da API:", data);
-            window.location.href = "estoque.html"; // Redireciona após sucesso
+            window.location.href = "../Listas/listagemEstoque.html"; // Redireciona após sucesso
         })
         .catch(error => {
             console.error("Erro:", error);

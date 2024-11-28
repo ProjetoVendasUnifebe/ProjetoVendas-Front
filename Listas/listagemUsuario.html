@@ -6,6 +6,7 @@
 
         <!-- ===== CSS ===== -->
         <link rel="stylesheet" href="../assets/css/styles.css">
+        <link rel="stylesheet" href="../assets/css/modal.css">
         <link rel="icon" type="image/x-icon" href="assets/img/file.ico">
         
         <title>Lista de Usuário</title>
@@ -85,7 +86,7 @@
 
         <h1>Lista de Usuário</h1>
 
-        <div class="container">
+        <div class="containerLista">
             <table class="table">
                 <thead>
                     <tr>
@@ -121,94 +122,6 @@
                         <button type="button" id="salvarEdicao" class="btn">Salvar</button>
                     </div>
                 </form>
-                <style>
-                    .form-modal {
-                        display: flex;
-                        flex-direction: column;
-                        gap: 15px;
-                    }
-
-                    .form-group {
-                        display: flex;
-                        flex-direction: column;
-                    }
-
-                    .form-group label {
-                        margin-bottom: 5px;
-                        font-weight: bold;
-                    }
-
-                    .form-group input[type="text"] {
-                        padding: 10px;
-                        border: 1px solid #ccc;
-                        border-radius: 5px;
-                    }
-
-                    .form-group input[type="checkbox"] {
-                        width: auto;
-                    }
-
-                    .btn {
-                        padding: 10px 20px;
-                        background-color: #4CAF50;
-                        color: white;
-                        border: none;
-                        border-radius: 5px;
-                        cursor: pointer;
-                        align-self: flex-start;
-                    }
-
-                    .btn:hover {
-                        background-color: #45a049;
-                    }
-
-                    .form-actions {
-                        display: flex;
-                        align-items: center; /* Alinha verticalmente os itens */
-                        gap: 10px; /* Espaçamento entre o texto e o checkbox */
-                        flex-direction: row;
-                        margin: 10px 0;
-                    }
-
-                    .form-actions label {
-                        margin: 0; /* Remove margens extras no rótulo */
-                    }
-
-                    .modal {
-                        display: none;
-                        position: fixed;
-                        z-index: 1;
-                        left: 0;
-                        top: 0;
-                        width: 100%;
-                        height: 100%;
-                        overflow: auto;
-                        background-color: rgb(0,0,0);
-                        background-color: rgba(0,0,0,0.4);
-                    }
-
-                    .modal-content {
-                        background-color: #fefefe;
-                        margin: 15% auto;
-                        padding: 20px;
-                        border: 1px solid #888;
-                        width: 80%;
-                    }
-
-                    .close {
-                        color: #aaa;
-                        float: right;
-                        font-size: 28px;
-                        font-weight: bold;
-                    }
-
-                    .close:hover,
-                    .close:focus {
-                        color: black;
-                        text-decoration: none;
-                        cursor: pointer;
-                    }
-                </style>
             </div>
         </div>
 
@@ -274,6 +187,6 @@
             }
         }
         </script>
-        <script src="../assets/js/requisicoes/cadastrarEstoque.js"></script>
+        <script src="../assets/js/requisicoes/cadastrarUsuario.js"></script>
     </body>
 </html>
