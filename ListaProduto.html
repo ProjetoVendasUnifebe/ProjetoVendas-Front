@@ -36,18 +36,61 @@
 
             <div id="result"></div>
 
+            <td>
+                <ion-icon name="create-outline" class="button-edit" data-id="${produto.idProduto}" onclick="editarUsuario(this)">Editar</ion-icon>
+                <!-- <ion-icon name="trash" class="button-delete" onclick="apagarUsuario(${produto.idProduto})">Apagar</ion-icon> -->
+            </td>
+
             <hr>
 
             <div>
-                <input type="checkbox" name="Selecionar" id="SelecionarProduto" class="cabecalho">
-                <label for="" class="cabecalho" id="idProduto">Id</label>
-                <label for="" class="cabecalho" id="nomeProduto">Nome</label>
-                <label for="" class="cabecalho" id="qtdProduto">Quantidade</label>
-                <label for="" class="cabecalho" id="descricaoProduto">Descrição</label>
-                <hr>
-                <ul id="lista-produtos">Carregando produtos...</ul>
+                
+
+                <div class="container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Valor</th>
+                                <th scope="col">Descrição</th>
+                                <th scope="col">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="produtos-container">
+                            <!-- Os dados dos usuários serão inseridos aqui -->
+                        </tbody>
+                    </table>
+                </div>
+
+                
+        
+                <!-- Modal de Edição de Usuário -->
+                <div id="editarProdutoModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" id="closeModal">&times;</span>
+                        <h2>Editar Produto</h2>
+                        <form id="editarUsuarioForm" class="form-modal">
+                            <div class="form-group">
+                                <label for="nomeProduto">Nome:</label>
+                                <input type="text" id="nomeProduto" name="nomeProduto" required>
+                                <label for="descricaoProduto">Descrição:</label>
+                                <input type="text" id="descricaoProduto" name="descricaoProduto">  
+                            <div class="form-group form-actions">
+                                <label for="Valor">Valor:</label>
+                                <input type="text" id="Valor" name="qtdProduto" required>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" id="salvarEdicao" class="btn">Salvar</button>
+                            </div>
+                        </form>
+
+                <!-- <ul id="lista-produtos">Carregando produtos...</ul> -->
             </div>
         </div>
+
+        <!-- ===== IONICONS ===== -->
+        <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
 
         <!-- ===== MAIN JS ===== -->
         <script src="assets/js/main.js"></script>
@@ -66,21 +109,48 @@
                     throw new Error(`Erro ao acessar API: ${resposta.status}`);
                 }
                 const produtos = await resposta.json();
+                const tbody = document.querySelector('#produtos-container')
 
-                // Exibir os produtos
-                const lista = document.getElementById('lista-produtos');
-                lista.innerHTML = ''; // Limpar lista antes de preencher
+                tbody.innerHTML = '';
 
-                produtos.forEach(produto => {
-                    const item = document.createElement('li');
-                    item.textContent = `${produto.idProduto} ${produto.nomeProduto} - R$ ${produto.valor.toFixed(2)} ${produto.descricao}`;
-                    lista.appendChild(item);
-                });
-            } catch (erro) {
-                console.error('Erro ao carregar produtos:', erro);
-                document.getElementById('lista-produtos').textContent = 'Erro ao carregar produtos.';
+                if(Array.isArray(produtos)) {
+                    produtos.forEach(produto => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                        <th scope="row">${produto.idProduto}</th>
+                        <td>${produto.nomeProduto}</td>
+                        <td>${produto.valor}</td>
+                        <td>${produto.descricao}</td>
+                     <td>
+                        <ion-icon name="create-outline" class="button-edit" data-id="${produto.idProduto}" onclick="editarProduto(this)">Editar</ion-icon> 
+                        <ion-icon name="trash" class="button-delete" onclick="apagarUsuario(${produto.idProduto})">Apagar</ion-icon>
+                    </td>`
+
+                    tbody.appendChild(row);
+                    })
+                }else {
+                console.error('A resposta não é um array:', produtos);
+                }
+            } catch (error){
+                console.error('Ocorreu um problema na sua requisição',error)
             }
         }
+            document.addEventListener('DOMContentLoaded', ListaProduto)
+
+                // Exibir os produtos
+            //    const lista = document.getElementById('lista-produtos');
+        //         lista.innerHTML = ''; // Limpar lista antes de preencher
+
+        //         produtos.forEach(produto => {
+        //             const item = document.createElement('tr');
+        //             item.textContent = ` ${produto.idProduto} ${produto.nomeProduto} - R$ ${produto.valor.toFixed(2)} ${produto.descricao}`;
+        //             lista.appendChild(item);
+        //         });
+        //     } catch (erro) {
+        //         console.error('Erro ao carregar produtos:', erro);
+        //         document.getElementById('lista-produtos').textContent = 'Erro ao carregar produtos.';
+        //     }
+        // }
 
 
         // Função para buscar produtos pelo ID ou nome
@@ -118,8 +188,12 @@
                 }
 
                 const produtos = await resposta.json();
+                const row = document.createElement('tr');
+                const tbody = document.querySelector('#produtos-container')
 
-                lista.innerHTML = ''; // Limpar lista antes de preencher
+                tbody.innerHTML = '';
+
+                row.innerHTML = ''; // Limpar lista antes de preencher
 
                 // Verificar se o produto foi encontrado
                 if (!produtos || produtos.length === 0) {
@@ -127,7 +201,7 @@
                     return;
                 }
 
-                if (filtro === 'nome') {
+            if (filtro === 'nome') {
                 
                 pesquisarProdutoNome(produtos) 
             } else {
@@ -140,24 +214,127 @@
             }
         }
         async function pesquisarProdutoid(produtos) {
- 
-            const item = document.createElement('li');
-            item.textContent = `${produtos.idProduto} ${produtos.nomeProduto} - R$ ${produtos.valor.toFixed(2)} ${produtos.descricao}`;
-            lista.appendChild(item);
+            const tbody = document.querySelector('#produtos-container')
+            const row = document.createElement('tr');
+            row.innerHTML = `
+            <th scope="row">${produtos.idProduto}</th>
+                        <td>${produtos.nomeProduto}</td>
+                        <td>${produtos.valor}</td>
+                        <td>${produtos.descricao}</td>
+                     <td>
+                        <ion-icon name="create-outline" class="button-edit" data-id="${produtos.idProduto}" onclick="editarUsuario(this)">Editar</ion-icon> 
+                        <ion-icon name="trash" class="button-delete" onclick="apagarUsuario(${produtos.idProduto})">Apagar</ion-icon>
+                    </td>`
+
+                tbody.appendChild(row);
+            
 
         }
 
         async function pesquisarProdutoNome(produtos) {
 
         produtos.forEach(produto => {
-                const item = document.createElement('li');
-                item.textContent = `${produto.idProduto} ${produto.nomeProduto} - R$ ${produto.valor.toFixed(2)} ${produto.descricao}`;
-                lista.appendChild(item);
+            const tbody = document.querySelector('#produtos-container')
+            const row = document.createElement('tr');
+                        row.innerHTML = `
+                        <th scope="row">${produto.idProduto}</th>
+                        <td>${produto.nomeProduto}</td>
+                        <td>${produto.valor}</td>
+                        <td>${produto.descricao}</td>
+                     <td>
+                        <ion-icon name="create-outline" class="button-edit" data-id="${produto.idProduto}" onclick="editarUsuario(this)">Editar</ion-icon> 
+                        <ion-icon name="trash" class="button-delete" onclick="apagarUsuario(${produto.idProduto})">Apagar</ion-icon>
+                    </td>`
+
+                    tbody.appendChild(row);
         });
 }
 
 
-        // Carregar todos os produtos inicialmente
+      // Carregar todos os produtos inicialmente
         ListaProduto();
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+async function editarProduto(element) {
+
+let id = element.getAttribute('data-id');
+// Abre o modal para editar o usuário
+const modal = document.getElementById('editarProdutoModal');
+const nomeProdutoInput = document.getElementById('nomeProduto');
+const ValorInput = document.getElementById('Valor');
+const descricaoInput = document.getElementById('descricaoProduto');
+
+// Mostra o modal
+modal.style.display = 'block';
+
+// Preenche os campos com os dados do usuário selecionado
+try {
+    const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Produto/buscar-produto-por-id/${id}`);
+    if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(`Erro ao buscar Produto: ${response.status} - ${errorMessage}`);
+    }
+
+    const produto = await response.json();
+    nomeProdutoInput.value = produto.nomeProduto || '';
+    ValorInput.value = produto.valor || '';
+    descricaoInput.value = produto.descricao || '';
+
+} catch (error) {
+    console.error('Erro ao buscar Produto:', error);
+    alert('Erro ao buscar os dados do Produto. Tente novamente.');
+    modal.style.display = 'none';
+    return;
+}
+
+// Remove event listener duplicado antes de adicionar novamente
+const salvarEdicaoButton = document.getElementById('salvarEdicao');
+salvarEdicaoButton.onclick = async () => {
+    const nomeProduto = nomeProdutoInput.value.trim();
+    const Valor = ValorInput.value.trim();
+    const descricaoProduto = descricaoInput.value.trim();
+
+    // Valida os campos antes de enviar
+    // if (!nomeProduto || !login) {
+    //     alert('Por favor, preencha todos os campos.');
+    //     return;
+    // }
+
+    try {
+        const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Produto/atualizar-produto`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                idProduto: id,
+                nomeProduto: nomeProduto,
+                valor: Valor,
+                descricao: descricaoProduto
+            })
+        });
+
+        if (!response.ok) {
+            const errorMessage = await response.text();
+            throw new Error(`Erro ao editar produto: ${response.status} - ${errorMessage}`);
+        }
+
+        alert('produto editado com sucesso!');
+        ListaProduto(); // Atualiza a lista de usuários
+        modal.style.display = 'none'; // Fecha o modal após sucesso
+
+    } catch (error) {
+        console.error('Erro ao editar o produto:', error);
+        alert('Você precisa alterar todos os dados para editar o produto.');
+    }
+};
+
+        document.addEventListener('DOMContentLoaded', ListaProduto);
+        document.getElementById('closeModal').onclick = function() {
+        document.getElementById('editarProdutoModal').style.display = 'none';
+    }
+}
+
+        
     </script>
 </html>
