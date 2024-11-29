@@ -5,10 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!-- ===== CSS ===== -->
-        <link rel="stylesheet" href="assets/css/styles.css">
+        <link rel="stylesheet" href="../assets/css/styles.css">
         <link rel="icon" type="image/x-icon" href="assets/img/file.ico">
+        <script src="assets/js/scripts.js" type="module"></script>
         
-        <title>Cadastro de Produto</title>
+        <title>Cadastro de Usuário</title>
     </head>
     <body class="body-telas" id="body-pd">
         <div class="l-navbar" id="navbar">
@@ -71,32 +72,106 @@
             </nav>
         </div>
 
-        <h1>Cadastro de Produto</h1>
-
+        <h1>Cadastro de Usuário</h1>
+        
         <div class="container">
-            <h1 class="subtitulo">Produto</h1>
-            <form class="cadastro-form" method="post">
+            <h1 class="subtitulo">Usuário</h1>
+            <form class="cadastro-form" onsubmit="event.preventDefault(); cadastrarUsuario();">
                 <div class="forme">
-                    <label for="nomeProduto">Produto:</label>
-                    <input type="text" id="nomeProduto" name="nomeProduto" placeholder="Produto" required>
-                    <label for="qtdProduto">Quantidade:</label>
-                    <input type="number" id="qtdProduto" name="qtdProduto" placeholder="Quantidade" required>
+                    <label for="nomeUsuario">Nome de Usuário:</label>
+                    <input type="text" id="nomeUsuario" name="nomeUsuario" placeholder="Nome de Usuário" required>
+                    <label for="login">Login:</label>
+                    <input type="text" id="login" name="login" placeholder="Login" required>
+                    <label for="ehAdm">É Administrador:</label>
+                    <select id="ehAdm" required>
+                        <option selected value="0">Não</option>
+                        <option value="1">Sim</option>
+                    </select>
                 </div>
                 <div class="formd">
-                    <label for="descricaoProduto">Descrição:</label>
-                    <textarea name="descricaoProduto" id="descricaoProduto" placeholder="Descrição" required></textarea>
+                    <label for="senhaUsuario">Senha:</label>
+                    <input type="password" id="senhaUsuario" name="senhaUsuario" placeholder="Senha" required>
+                    <label for="confSenhaUsuario">Confirmação de Senha:</label>
+                    <input type="password" id="confSenhaUsuario" name="confSenhaUsuario" placeholder="Confirmação de Senha" required>
                 </div>
                 <div class="Botões">
-                    <button type="submit" class="Btncad" onclick="validaSenhaUsuario()">Cadastrar</button>
+                    <button id="user-btn" type="submit" class="Btncad">Cadastrar</button>
                     <button type="reset" class="Btnexc">Descartar</button>
                 </div>
             </form>
+        </div>
+
+        <div id="popup" class="popup" style="display: none;">
+            <div class="popup-content">
+                <span class="close-btn">&times;</span>
+                <h2>Aviso</h2>
+                <p>Senha inválida!</p>
+                <button id="ok-btn">OK</button>
+            </div>
         </div>
 
         <!-- ===== IONICONS ===== -->
         <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
         
         <!-- ===== MAIN JS ===== -->
-        <script src="assets/js/main.js"></script>
+        <script src="../assets/js/main.js"></script>
+        <script src="assets/js/scripts.js" type="module"></script>
     </body>
+
+<script>
+    function cadastrarUsuario() {
+        const url = 'https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Usuario/cadastrar-usuario';
+        
+        // Captura os valores dos campos do formulário
+        const nomeUsuario = document.getElementById("nomeUsuario").value;
+        const senha = document.getElementById("senhaUsuario").value;
+        const confSenha = document.getElementById("confSenhaUsuario").value;
+        const ehAdm = parseInt(document.getElementById("ehAdm").value);
+        const login = document.getElementById("login").value;
+
+        // Verifica se as senhas coincidem
+        if (senha !== confSenha) {
+            document.getElementById("popup").style.display = "block";
+            return;
+        }
+
+        // Cria o objeto de dados a ser enviado na requisição
+        const dadosUsuario = {
+            nomeUsuario: nomeUsuario,
+            senha: senha,
+            ehAdm: ehAdm,
+            login: login
+        };
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Accept': '*/*',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dadosUsuario)
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json(); // Converte a resposta em JSON se for bem-sucedida
+            } else {
+                throw new Error('Erro ao cadastrar usuário');
+            }
+        })
+        .then(data => {
+            console.log('Usuário cadastrado com sucesso:', data);
+            alert("Usuário cadastrado com sucesso!");
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert("Ocorreu um erro ao tentar cadastrar o usuário.");
+        });
+    }
+
+    // Fecha o popup de aviso
+    document.getElementById("ok-btn").addEventListener("click", function() {
+        document.getElementById("popup").style.display = "none";
+    });
+</script>
+
 </html>
