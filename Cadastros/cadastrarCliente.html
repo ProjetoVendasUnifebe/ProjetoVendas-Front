@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- ===== CSS ===== -->
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="icon" type="image/x-icon" href="assets/img/file.ico">
-    <script type="module" src="assets/js/scripts.js"></script>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="icon" type="image/x-icon" href="../assets/img/file.ico">
+    <script type="module" src="../assets/js/scripts.js"></script>
 
     <title>Cadastro de Cliente</title>
 </head>
@@ -199,7 +199,7 @@
         })
 
         function cadastrarCliente(idEndereco) {
-
+                //Define a segunda url para o consumo da segunda API
             const url2 = 'https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Cliente/adicionar-cliente'
 
             const Nome = document.getElementById("name").value;
@@ -209,7 +209,7 @@
             const Telefone = document.getElementById("telefone").value;
             const Sexo = document.getElementById("sexo").value;
 
-
+            //Define os objetos faltantes 
             const dadosClientes = {
                 Nome: Nome,
                 Cpf: Cpf,
@@ -244,45 +244,7 @@
                     alert("Ocorreu um erro ao tentar cadastrar o Cliente.");
                 });
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /*function validarFormulario() {
-            const cep = document.getElementById("cep").value;
-        }
-            // Exemplo de validação simples para CEP (considerando apenas números e tamanho 8)
-            const cepValido = /^[0-9]{8}$/.test(cep);
-            
-            if (!cepValido) {
-                document.getElementById("popup").style.display = "block"; // Exibe o pop-up
-                return false; // Impede o envio do formulário
-            }
-    
-            // Se o CEP for válido, você pode prosseguir com o envio do formulário
-            return true;
-        
-    
-        // Fechar o popup
-        document.getElementById("ok-btn").addEventListener("click", function() {
-            document.getElementById("popup").style.display = "none";
-        });*/
-
-
-    </script>
+      </script>
 
 </body>
 
