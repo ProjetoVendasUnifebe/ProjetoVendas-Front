@@ -38,7 +38,7 @@ function cadastrarEstoque(event) {
         .then(data => {
             alert("Estoque cadastrado com sucesso!");
             console.log("Resposta da API:", data);
-            window.location.href = "estoque.html"; // Redireciona após sucesso
+            window.location.href = "../Listas/listagemEstoque.html"; // Redireciona após sucesso
         })
         .catch(error => {
             console.error("Erro:", error);
@@ -49,77 +49,102 @@ function cadastrarEstoque(event) {
 // Adiciona o evento de submissão ao formulário
 document.querySelector(".cadastro-form").addEventListener("submit", cadastrarEstoque);
 
-async function editarUsuario(element) {
+async function editarEstoque(element) {
+    const id = element.getAttribute('data-id');
+    const modal = document.getElementById('editarEstoqueModal');
+    const nomeInput = document.getElementById('nomeEstoque');
+    const capacidadeInput = document.getElementById('capacidadeEstoque');
 
-    let id = element.getAttribute('data-id');
-    // Abre o modal para editar o usuário
-    const modal = document.getElementById('editarUsuarioModal');
-    const nomeInput = document.getElementById('nomeUsuario');
-    const loginInput = document.getElementById('loginUsuario');
-    const ehAdmInput = document.getElementById('ehAdmUsuario');
-    
-    // Mostra o modal
+    // Exibe o modal para edição
     modal.style.display = 'block';
 
-    // Preenche os campos com os dados do usuário selecionado
+    // Preenche os campos com os dados do estoque selecionado
     try {
-        const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Usuario/buscar-usuario-por-id/${id}`);
+        const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Estoque/buscar-estoque-por-id/${id}`);
         if (!response.ok) {
             const errorMessage = await response.text();
-            throw new Error(`Erro ao buscar usuário: ${response.status} - ${errorMessage}`);
+            throw new Error(`Erro ao buscar estoque: ${response.status} - ${errorMessage}`);
         }
 
-        const usuario = await response.json();
-        nomeInput.value = usuario.nomeUsuario || '';
-        loginInput.value = usuario.login || '';
-        ehAdmInput.checked = usuario.ehAdm === 1;
+        const estoque = await response.json();
+        nomeInput.value = estoque.nome || '';
+        capacidadeInput.value = estoque.capacidade || '';
 
     } catch (error) {
-        console.error('Erro ao buscar usuário:', error);
-        alert('Erro ao buscar os dados do usuário. Tente novamente.');
+        console.error('Erro ao buscar estoque:', error);
+        alert('Erro ao buscar os dados do estoque. Tente novamente.');
         modal.style.display = 'none';
         return;
     }
 
-    // Remove event listener duplicado antes de adicionar novamente
-    const salvarEdicaoButton = document.getElementById('salvarEdicao');
+    // Configura o botão de salvar edição
+    const salvarEdicaoButton = document.getElementById('salvarEstoqueEdicao');
     salvarEdicaoButton.onclick = async () => {
-        const nomeUsuario = nomeInput.value.trim();
-        const login = loginInput.value.trim();
-        const ehAdm = ehAdmInput.checked ? 1 : 0;
+        const nomeEstoque = nomeInput.value.trim();
+        const capacidade = parseInt(capacidadeInput.value.trim(), 10);
 
         // Valida os campos antes de enviar
-        if (!nomeUsuario || !login) {
-            alert('Por favor, preencha todos os campos.');
+        if (!nomeEstoque || isNaN(capacidade) || capacidade <= 0) {
+            alert('Por favor, preencha todos os campos corretamente.');
             return;
         }
 
         try {
-            const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Usuario/atualizar-usuario`, {
+            const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Estoque/atualizar-estoque`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    idUsuario: id,
-                    nomeUsuario: nomeUsuario,
-                    ehAdm: ehAdm,
-                    login: login
-                })
+                    idEstoque: id,
+                    nome: nomeEstoque,
+                    capacidade: capacidade,
+                }),
             });
 
             if (!response.ok) {
                 const errorMessage = await response.text();
-                throw new Error(`Erro ao editar usuário: ${response.status} - ${errorMessage}`);
+                throw new Error(`Erro ao editar estoque: ${response.status} - ${errorMessage}`);
             }
 
-            alert('Usuário editado com sucesso!');
-            fetchUsuarios(); // Atualiza a lista de usuários
+            alert('Estoque editado com sucesso!');
+            fetchEstoques(); // Atualiza a lista de estoques
             modal.style.display = 'none'; // Fecha o modal após sucesso
 
         } catch (error) {
-            console.error('Erro ao editar usuário:', error);
-            alert('Você precisa alterar todos os dados para editar o usuário.');
+            console.error('Erro ao editar estoque:', error);
+            alert('Erro ao editar o estoque. Tente novamente.');
         }
     };
 }
+
+async function excluirEstoque(element) {
+    let id = element.getAttribute('data-id');
+
+    // Confirmação antes de excluir o estoque
+    const confirmacao = confirm("Tem certeza que deseja excluir este estoque?");
+    if (!confirmacao) {
+        return;
+    }
+
+    try {
+        // Realiza a requisição DELETE para a API
+        const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Estoque/remover-estoque/${id}`, {
+            method: 'DELETE',
+        });
+
+        if (!response.ok) {
+            const errorMessage = await response.text();
+            throw new Error(`Erro ao excluir estoque: ${response.status} - ${errorMessage}`);
+        }
+
+        alert('Estoque excluído com sucesso!');
+        fetchEstoques(); // Atualiza a lista de estoques na interface
+
+    } catch (error) {
+        console.error('Erro ao excluir estoque:', error);
+        alert('Erro ao excluir o estoque. Tente novamente.');
+    }
+}
+
+
