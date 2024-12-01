@@ -3,12 +3,13 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
         <link rel="stylesheet" href="../assets/css/styles.css">
         <link rel="stylesheet" href="../assets/css/modal.css">
-        <link rel="icon" type="../image/x-icon" href="assets/img/file.ico">
+        <link rel="stylesheet" href="../assets/css/autocomplete.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+        <link rel="icon" type="image/x-icon" href="../assets/img/file.ico">
         
-        <title>Lista de Estoques</title>
+        <title>Lista de Estoque</title>
     </head>
     <body class="body-telas" id="body-pd">
         <div class="l-navbar" id="navbar">
@@ -79,52 +80,71 @@
                     </div>
                 </div>
 
-                <a href="login.html" class="nav__link">
+                <a href="../login.html" class="nav__link">
                     <ion-icon name="log-out-outline" class="nav__icon"></ion-icon>
                     <span class="nav__name">Sair</span>
                 </a>
             </nav>
         </div>
 
-        <h1>Lista de Estoque</h1>
+        <h1>Lista de Estoque e seus produtos</h1>
 
         <div class="containerLista">
             <table class="table">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Nome do Estoque</th>
-                        <th scope="col">Capacidade</th>
+                        <th scope="col">Estoque</th>
+                        <th scope="col">Produto</th>
+                        <th scope="col">Quantidade</th>
                         <th scope="col">Ações</th>
                     </tr>
                 </thead>
-                <tbody id="estoques-container">
+                <tbody id="estoque-produto-container">
 
                 </tbody>
             </table>
         </div>
 
-        <div id="editarEstoqueModal" class="modal">
+        <div id="editarEstoqueProdutoModal" class="modal">
             <div class="modal-content">
                 <span class="close" id="closeModal">&times;</span>
-                <h2>Editar Estoque</h2>
-                <form id="editarEstoqueForm" class="form-modal">
-                    <div class="form-group">
-                        <label for="nomeEstoque">Nome do Estoque:</label>
-                        <input type="text" id="nomeEstoque" name="nomeEstoque" required>
+                <h2>Editar Estoque Produto</h2>
+                <form id="cadastroForm" class="cadastro-form">
+                    <div class="forme">
+                        <label for="nomeEstoque">Estoque:</label>
+                        <div class="autocomplete" style="width: 70%;">
+                            <input id="autocompleteEstoque" type="text" name="nomeEstoque" placeholder="Selecione o Estoque" required>
+                        </div>
+                    </div>
+        
+                    <div class="container" style="margin-top: 20px;" id="product-container">
+                        <div class="product-group">
+                            <div class="forme">
+                                <label for="nomeProduto">Nome do Produto:</label>
+                                <div class="autocomplete" style="width: 100%;">
+                                    <input type="text" name="nomeProduto" id="autocompleteProduto" placeholder="Nome do Produto" required>
+                                </div>
+                            </div>
+                            <div class="formd">
+                                <label for="quantidade">Quantidade:</label>
+                                <input type="number" name="quantidade" style="border-radius: 10px;" id="quantidade" placeholder="Quantidade" required>
+                            </div>
+                        </div>
+                        <button type="button" style="margin-top: 10px;" id="salvarEstoqueProdutoEdicao" class="btn">Salvar</button>
                     </div>
                     <div class="form-group">
-                        <label for="capacidadeEstoque">Capacidade:</label>
-                        <input type="number" id="capacidadeEstoque" name="capacidadeEstoque" required>
-                    </div>
-                    <div class="form-group">
-                        <button type="button" id="salvarEstoqueEdicao" class="btn">Salvar</button>
+                       
                     </div>
                 </form>
             </div>
         </div>
+        
         <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
         <script src="../assets/js/main.js"></script>
-        <script src="../assets/js/requisicoes/cadastrarEstoque.js"></script>
+        <script src="../assets/js/modal.js"></script>
+        <script src="../assets/js/autocomplete.js"></script>
+        <script src="../assets/js/requisicoes/cadastrarEstoqueProduto.js"></script>    
     </body>
 </html>
