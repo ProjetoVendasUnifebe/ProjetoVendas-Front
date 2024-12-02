@@ -33,11 +33,12 @@ async function fetchEstoques() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', fetchEstoques);
-
-document.getElementById('closeModal').onclick = function () {
-    document.getElementById('editarEstoqueModal').style.display = 'none';
+if(window.location.pathname.includes('listagemEstoque.html')) {
+    document.getElementById('closeModal').onclick = function () {
+        document.getElementById('editarEstoqueModal').style.display = 'none';
+    }
 }
+
 
 window.onclick = function (event) {
     if (event.target == document.getElementById('editarEstoqueModal')) {
@@ -89,7 +90,7 @@ function cadastrarEstoque(event) {
         });
 }
 
-document.querySelector(".cadastro-form").addEventListener("submit", cadastrarEstoque);
+// document.querySelector(".cadastro-form").addEventListener("submit", cadastrarEstoque);
 
 async function editarEstoque(element) {
     const id = element.getAttribute('data-id');
@@ -183,6 +184,9 @@ async function excluirEstoque(element) {
     }
 }
 
-window.onload  = fetchEstoques;
+if(window.location.pathname.includes('listagemEstoque.html')) {
+        window.onload  = fetchEstoques;
+    }
+
 
 
