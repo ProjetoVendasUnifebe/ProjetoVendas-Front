@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../assets/css/modal.css">
     <link rel="icon" type="../image/x-icon" href="../assets/img/file.ico">
 
-    <title>Lista de Estoques</title>
+    <title>Lista de Clientes</title>
 </head>
 
 <body class="body-telas" id="body-pd">
@@ -88,46 +88,69 @@
         </nav>
     </div>
 
-    <h1>Lista de Estoque</h1>
+    <h1>Lista de Clientes</h1>
 
     <div class="containerLista">
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Nome do Estoque</th>
-                    <th scope="col">Capacidade</th>
+                    <th scope="col">Nome do Cliente</th>
+                    <th scope="col">CPF</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Telefone</th>
+                    <th scope="col">Sexo</th>
+                    <th scope="col">Endereço</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
-            <tbody id="estoques-container">
+            <tbody id="clientes-container">
 
             </tbody>
         </table>
     </div>
 
-    <div id="editarEstoqueModal" class="modal">
+    <div id="editarClienteModal" class="modal">
         <div class="modal-content">
             <span class="close" id="closeModal">&times;</span>
-            <h2>Editar Estoque</h2>
-            <form id="editarEstoqueForm" class="form-modal">
+            <h2>Editar Cliente</h2>
+            <form id="editarClienteForm" class="form-modal">
                 <div class="form-group">
-                    <label for="nomeEstoque">Nome do Estoque:</label>
-                    <input type="text" id="nomeEstoque" name="nomeEstoque" required>
+                    <label for="nomeCliente">Nome do Cliente:</label>
+                    <input type="text" id="nomeCliente" name="nomeCliente" required>
                 </div>
                 <div class="form-group">
-                    <label for="capacidadeEstoque">Capacidade:</label>
-                    <input type="number" id="capacidadeEstoque" name="capacidadeEstoque" required>
+                    <label for="cpfCliente">CPF:</label>
+                    <input type="text" id="cpfCliente" name="cpfCliente" required>
                 </div>
                 <div class="form-group">
-                    <button type="button" id="salvarEstoqueEdicao" class="btn">Salvar</button>
+                    <label for="emailCliente">Email:</label>
+                    <input type="email" id="emailCliente" name="emailCliente" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefoneCliente">Telefone:</label>
+                    <input type="tel" id="telefoneCliente" name="telefoneCliente" required>
+                </div>
+                <div class="form-group">
+                    <label for="sexoCliente">Sexo:</label>
+                    <select id="sexoCliente" name="sexoCliente" required>
+                        <option value="M">Masculino</option>
+                        <option value="F">Feminino</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="enderecoCliente">Endereço:</label>
+                    <input type="text" id="enderecoCliente" name="enderecoCliente" required>
+                </div>
+                <div class="form-group">
+                    <button type="button" id="salvarEdicaoCliente" class="btn">Salvar</button>
                 </div>
             </form>
         </div>
     </div>
     <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
     <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/requisicoes/cadastrarEstoque.js"></script>
+    <script src="../assets/js/requisicoes/cadastrarCliente.js"></script>
 </body>
 
 </html>
