@@ -150,6 +150,15 @@ a{
   box-shadow: 0 0 25px rgba(0.1, 0.1, 0.1, 0.1);
 }
 
+.containerLista {
+  width: 90%;
+  margin: auto;
+  margin-top: 20px;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 0 25px rgba(0.1, 0.1, 0.1, 0.1);
+}
+
 .subtitulo {
   color: #5b087c;
   text-align: center;
@@ -433,7 +442,7 @@ textarea {
 }
 
 .button-edit {
-  color: #4CAF50;
+  color: #fca434;
   font-size: 20px;
   /* color: white; */
 }
