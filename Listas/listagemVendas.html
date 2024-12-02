@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- ===== CSS ===== -->
+        <link rel="stylesheet" href="../assets/css/styles.css">
+        <link rel="stylesheet" href="../assets/css/ListaProduto.css">
+        <link rel="icon" type="image/x-icon" href="assets/img/file.ico">
+        
+        <title>Vendas</title>
+    </head>
+    <body class="body-telas" id="body-pd">
+        <div class="l-navbar" id="navbar">
+            <nav class="nav">
+                <div>
+                    <div class="nav__brand">
+                        <ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
+                        <a href="index.html" class="nav__logo">Comercialize</a>
+                    </div>
+                    <div class="nav__list">
+                        <a href="index.html" class="nav__link active">
+                            <ion-icon name="home-outline" class="nav__icon"></ion-icon>
+                            <span class="nav__name">Dashboard</span>
+                        </a>
+                        <a href="#" class="nav__link">
+                            <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
+                            <span class="nav__name">Messenger</span>
+                        </a>
+
+                        <div  class="nav__link collapse collapse__link">
+                            <ion-icon name="folder-outline" class="nav__icon"></ion-icon>
+                            <span class="nav__name">Cadastros</span>
+
+                            <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
+
+                            <ul class="collapse__menu">
+                                <a href="../Cadastros/cadastrarCliente.html" class="collapse__sublink">Cliente</a>
+                                <a href="../Cadastros/cadastrarProduto.html" class="collapse__sublink">Produto</a>
+                                <a href="../Cadastros/cadastrarUsuario.html" class="collapse__sublink">Usuário</a>
+                                <a href="../Cadastros/cadastrarEstoque.html" class="collapse__sublink">Estoque</a>
+                            </ul>
+                        </div>
+
+                        <div  class="nav__link collapse collapse__link">
+                            <ion-icon name="folder-outline" class="nav__icon"></ion-icon>
+                            <span class="nav__name">Listagens</span>
+
+                            <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
+
+                            <ul class="collapse__menu">
+                                <a href="listagemCliente.html" class="collapse__sublink">Cliente</a>
+                                <a href="listagemProduto.html" class="collapse__sublink">Produto</a>
+                                <a href="../Listas/listagemUsuario.html" class="collapse__sublink">Usuário</a>
+                                <a href="../Listas/listagemEstoque.html" class="collapse__sublink">Estoque</a>
+                            </ul>
+                        </div>
+
+                        <a href="#" class="nav__link">
+                            <ion-icon name="pie-chart-outline" class="nav__icon"></ion-icon>
+                            <span class="nav__name">Analytics</span>
+                        </a>
+                        <div class="nav__link collapse">
+                            <ion-icon name="people-outline" class="nav__icon"></ion-icon>
+                            <span class="nav__name">Team</span>
+
+                            <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
+
+                            <ul class="collapse__menu">
+                                <a href="#" class="collapse__sublink">Data</a>
+                                <a href="#" class="collapse__sublink">Group</a>
+                                <a href="#" class="collapse__sublink">Members</a>
+                            </ul>
+                        </div>
+                        <a href="#" class="nav__link">
+                            <ion-icon name="settings-outline" class="nav__icon"></ion-icon>
+                            <span class="nav__name">Configurações</span>
+                        </a>
+                    </div>
+                </div>
+
+                <a href="login.html" class="nav__link">
+                    <ion-icon name="log-out-outline" class="nav__icon"></ion-icon>
+                    <span class="nav__name">Sair</span>
+                </a>
+            </nav>
+        </div>
+
+        <div class="containerProduto">
+            <h1 class="subtituloProduto">Vendas</h1>
+            <label for="pesquisaProduto">Vendas por Vendas:</label>
+
+            <ul>
+                <!-- Campo de pesquisa único para ID ou nome com Combobox -->
+                <div style="display: flex; align-items: center;">
+                    <input type="text" id="pesquisaVenda" name="Pesquisa" placeholder="Pesquise pelo ID da venda" class="inputPesquisa">
+                    <select id="filtroVenda" class="inputFiltro">
+                        <option value="id">ID</option>
+                        <option value="data">Data de Venda</option>
+                    </select>
+                    <input type="button" id="searchButton" value="Buscar" class="Btncad" onclick="pesquisarVenda()">
+
+                    <form action="" name="FormData" style="display:none;">
+
+                    <input type="datetime" id="dataInicio" name="pesquisa" placeholder="Pesquise pela data inicio de venda" class="inputPesquisa" onclick="pesquisarVendaData()">
+                    <input type="datetime" id="dataFim" name="pesquisa" placeholder="Pesquise pela data fim de venda" class="inputPesquisa" onclick="pesquisarVendaData()">
+                    <input type="button" id="searchButton" value="Buscar" class="Btncad" onclick="pesquisarVendaData()">
+
+                </form>
+
+                </div>
+            </ul>
+
+            <ul><a href="../Cadastros/cadastrarVendas.html"><input type="button" value="Nova Venda" class="Btnovo"></a></ul>
+
+            <div id="result"></div>
+
+            <hr>
+
+            <div>
+                
+
+                <div class="containerLista">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">IDVenda</th>
+                                <th scope="col">IDUsuario</th>
+                                <th scope="col">IDCliente</th>
+                                <th scope="col">Valor</th>
+                                <th scope="col">Data da Venda</th>
+                                <th scope="col">Forma de Pagamento</th>
+                                <th scope="col">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="vendas-container">
+                            <!-- Os dados dos usuários serão inseridos aqui -->
+                        </tbody>
+                    </table>
+                </div>
+
+                
+        
+                <!-- Modal de Edição de Usuário -->
+                <div id="editarVendaModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" id="closeModal">&times;</span>
+                        <h2>Editar Venda</h2>
+                        <form id="editarUsuarioForm" class="form-modal">
+                            <div class="form-group">
+                                <label for="IdUsuario">Id do Usuário:</label>
+                                <input type="text" id="IdUsuario" name="IdUsuario" required>
+                                <label for="IdCliente">Id do Cliente:</label>
+                                <input type="text" id="IdCliente" name="IdCliente">
+                                <label for="forma_pagamento">Forma de Pagamento</label>
+                                <input type="text" id="forma_pagamento" name="forma_pagamento">
+                                <label for="dataCadastro">Data de Cadastro</label>
+                                <input type="text" id="dataCadastro" name="dataCadastro">
+                            <div class="form-group form-actions">
+                                <label for="Valor">Valor:</label>
+                                <input type="text" id="Valor" name="valor" required>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" id="salvarEdicao" class="btn">Salvar</button>
+                            </div>
+                        </form>
+
+                <!-- <ul id="lista-produtos">Carregando produtos...</ul> -->
+            </div>
+        </div>
+
+        <!-- ===== IONICONS ===== -->
+        <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
+
+        <!-- ===== MAIN JS ===== -->
+        <script src="../assets/js/main.js"></script>
+        <script src="../assets/js/scripts.js"></script>
+
+        <script src="../assets/js/requisicoes/listagemVendas.js"></script>
+
+        
+
+    </body>
+
+</html>

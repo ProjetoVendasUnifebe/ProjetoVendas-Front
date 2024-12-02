@@ -1,25 +1,20 @@
 function cadastrarEstoque(event) {
-    event.preventDefault(); // Evita o recarregamento da página ao enviar o formulário
+    event.preventDefault();
 
     const url = 'https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Estoque/adicionar-estoque';
 
-    // Captura os valores dos campos do formulário
     const nome = document.getElementById("nome").value.trim();
     const capacidade = parseInt(document.getElementById("capacidade").value, 10);
 
-    // Validação básica dos dados
     if (!nome || isNaN(capacidade) || capacidade <= 0) {
         alert("Por favor, preencha os campos corretamente.");
         return;
     }
 
-    // Cria o objeto de dados a ser enviado na requisição
     const dadosEstoque = {
         nome: nome,
         capacidade: capacidade
     };
-
-    // Envia a requisição
     fetch(url, {
         method: 'POST',
         headers: {
@@ -30,7 +25,7 @@ function cadastrarEstoque(event) {
     })
         .then(response => {
             if (response.ok) {
-                return response.json(); // Processa a resposta se for bem-sucedida
+                return response.json();
             } else {
                 throw new Error('Erro ao cadastrar o estoque.');
             }
@@ -38,7 +33,7 @@ function cadastrarEstoque(event) {
         .then(data => {
             alert("Estoque cadastrado com sucesso!");
             console.log("Resposta da API:", data);
-            window.location.href = "estoque.html"; // Redireciona após sucesso
+            window.location.href = "../Listas/ListagemEstoque.html";
         })
         .catch(error => {
             console.error("Erro:", error);
@@ -46,22 +41,18 @@ function cadastrarEstoque(event) {
         });
 }
 
-// Adiciona o evento de submissão ao formulário
 document.querySelector(".cadastro-form").addEventListener("submit", cadastrarEstoque);
 
 async function editarUsuario(element) {
 
     let id = element.getAttribute('data-id');
-    // Abre o modal para editar o usuário
     const modal = document.getElementById('editarUsuarioModal');
     const nomeInput = document.getElementById('nomeUsuario');
     const loginInput = document.getElementById('loginUsuario');
     const ehAdmInput = document.getElementById('ehAdmUsuario');
     
-    // Mostra o modal
     modal.style.display = 'block';
 
-    // Preenche os campos com os dados do usuário selecionado
     try {
         const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Usuario/buscar-usuario-por-id/${id}`);
         if (!response.ok) {
@@ -81,14 +72,12 @@ async function editarUsuario(element) {
         return;
     }
 
-    // Remove event listener duplicado antes de adicionar novamente
     const salvarEdicaoButton = document.getElementById('salvarEdicao');
     salvarEdicaoButton.onclick = async () => {
         const nomeUsuario = nomeInput.value.trim();
         const login = loginInput.value.trim();
         const ehAdm = ehAdmInput.checked ? 1 : 0;
 
-        // Valida os campos antes de enviar
         if (!nomeUsuario || !login) {
             alert('Por favor, preencha todos os campos.');
             return;
@@ -114,8 +103,8 @@ async function editarUsuario(element) {
             }
 
             alert('Usuário editado com sucesso!');
-            fetchUsuarios(); // Atualiza a lista de usuários
-            modal.style.display = 'none'; // Fecha o modal após sucesso
+            fetchUsuarios();
+            modal.style.display = 'none';
 
         } catch (error) {
             console.error('Erro ao editar usuário:', error);
@@ -127,14 +116,12 @@ async function editarUsuario(element) {
 async function excluirUsuario(element) {
     let id = element.getAttribute('data-id');
 
-    // Confirmação antes de excluir o usuário
     const confirmacao = confirm("Tem certeza que deseja excluir este usuário?");
     if (!confirmacao) {
         return;
     }
 
     try {
-        // Realiza a requisição DELETE para a API
         const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Usuario/remover-usuario/${id}`, {
             method: 'DELETE',
         });
@@ -145,7 +132,7 @@ async function excluirUsuario(element) {
         }
 
         alert('Usuário excluído com sucesso!');
-        fetchUsuarios(); // Atualiza a lista de usuários na interface
+        fetchUsuarios();
 
     } catch (error) {
         console.error('Erro ao excluir usuário:', error);

@@ -3,10 +3,12 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- ===== CSS ===== -->
         <link rel="stylesheet" href="../assets/css/styles.css">
         <link rel="icon" type="image/x-icon" href="assets/img/file.ico">
         
-        <title>Cadastro de Estoque</title>
+        <title>Cadastro de Vendas</title>
     </head>
     <body class="body-telas" id="body-pd">
         <div class="l-navbar" id="navbar">
@@ -33,24 +35,9 @@
                             <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
 
                             <ul class="collapse__menu">
-                                <a href="../Cadastros/cadastrarCliente.html" class="collapse__sublink">Cliente</a>
-                                <a href="../Cadastros/cadastrarProduto.html" class="collapse__sublink">Produto</a>
-                                <a href="../Cadastros/cadastrarUsuario.html" class="collapse__sublink">Usuário</a>
-                                <a href="../Cadastros/cadastrarEstoque.html" class="collapse__sublink">Estoque</a>
-                            </ul>
-                        </div>
-
-                        <div  class="nav__link collapse collapse__link">
-                            <ion-icon name="folder-outline" class="nav__icon"></ion-icon>
-                            <span class="nav__name">Listagens</span>
-
-                            <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
-
-                            <ul class="collapse__menu">
-                                <a href="../Listas/listagemEstoque.html" class="collapse__sublink">Cliente</a>
-                                <a href="listagemProduto.html" class="collapse__sublink">Produto</a>
-                                <a href="listagemUsuario.html" class="collapse__sublink">Usuário</a>
-                                <a href="listagemEstoque.html" class="collapse__sublink">Estoque</a>
+                                <a href="cadastrarCliente.html" class="collapse__sublink">Cliente</a>
+                                <a href="cadastrarProduto.html" class="collapse__sublink">Produto</a>
+                                <a href="cadastrarUsuario.html" class="collapse__sublink">Usuário</a>
                             </ul>
                         </div>
 
@@ -58,7 +45,7 @@
                             <ion-icon name="pie-chart-outline" class="nav__icon"></ion-icon>
                             <span class="nav__name">Analytics</span>
                         </a>
-                        <div class="nav__link collapse collapse__link">
+                        <div class="nav__link collapse">
                             <ion-icon name="people-outline" class="nav__icon"></ion-icon>
                             <span class="nav__name">Team</span>
 
@@ -84,28 +71,39 @@
             </nav>
         </div>
 
-        <h1>Cadastro de Estoque</h1>
+        <h1>Cadastro de Vendas</h1>
 
         <div class="container">
-            <h1 class="subtitulo">Estoque</h1>
-            <form class="cadastro-form" method="post">
-                <div class="forme">
-                    <label for="nome">Nome do Estoque:</label>
-                    <input type="text" id="nome" name="nome" placeholder="Nome do Estoque" required>
+            <h1 class="subtitulo">Vendas</h1>
+            <form class="cadastro-form" method="post" id="formP">
+                <div class="forme"> 
+                    <label for="IdUsuario">IdUsuario:</label>
+                    <input type="number" id="IdUsuario" name="IdUsuario" placeholder="Id do Usuario" required>
+                    <label for="IdCliente">IdCliente:</label>
+                    <input type="number" id="IdCliente" name="IdCliente" placeholder="Id do Cliente" required>
                 </div>
                 <div class="formd">
-                    <label for="capacidade">Capacidade:</label>
-                    <input type="number" id="capacidade" name="capacidade" placeholder="Capacidade" required>
+                    <label for="valor">valor:</label>
+                    <input type="number" id="valor" name="valor" placeholder="Valor" required>
+                    <label for="forma_pagamento">Forma de Pagamento:</label>
+                    <input type="text" id="forma_pagamento" name="forma_pagamento" placeholder="Forma de Pagamento" required>
                 </div>
                 <div class="Botões">
-                    <button type="submit" class="Btncad" onclick="cadastrarEstoque()">Cadastrar</button>
+                    <button type="submit" class="Btncad" onclick=" event.preventDefault(); cadastrarVenda();">Cadastrar</button>
                     <button type="reset" class="Btnexc">Descartar</button>
                 </div>
             </form>
         </div>
 
+        <!-- ===== IONICONS ===== -->
         <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
+        
+        <!-- ===== MAIN JS ===== -->
         <script src="../assets/js/main.js"></script>
-        <script src="../assets/js/requisicoes/cadastrarEstoque.js"></script>
+
+        <!-- ===== CadastrarVendas JS ===== -->
+        <script src="../assets/js/requisicoes/cadastrarVendas.js"></script>
+
     </body>
+    
 </html>
