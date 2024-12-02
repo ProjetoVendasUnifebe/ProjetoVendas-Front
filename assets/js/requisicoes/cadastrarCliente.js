@@ -37,6 +37,13 @@ async function fetchClientes() {
     }
 }
 
+if (window.location.pathname.includes('listagemCliente.html')) {
+    document.getElementById('closeModal').onclick = function () {
+        document.getElementById('editarClienteModal').style.display = 'none';
+    }
+}
+
+
 async function editarCliente(element) {
     let id = element.getAttribute('data-id');
     const modal = document.getElementById('editarClienteModal');
