@@ -5,8 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!-- ===== CSS ===== -->
-        <link rel="stylesheet" href="assets/css/styles.css">
-        <link rel="icon" type="image/x-icon" href="assets/img/file.ico">
+        <link rel="stylesheet" href="/assets/css/styles.css">
+        <link rel="icon" type="image/x-icon" href="/assets/img/file.ico">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
         <title>Home</title>
     </head>
     <body class="body-telas" id="body-pd">
@@ -15,12 +16,12 @@
                 <div>
                     <div class="nav__brand">
                         <ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
-                        <a href="index.html" class="nav__logo">Comercialize</a>
+                        <a href="/index.html" class="nav__logo">Componentes</a>
                     </div>
                     <div class="nav__list">
-                        <a href="index.html" class="nav__link active">
+                        <a href="/index.html" class="nav__link active">
                             <ion-icon name="home-outline" class="nav__icon"></ion-icon>
-                            <span class="nav__name">Dashboard</span>
+                            <span class="nav__name">Home</span>
                         </a>
                         <a href="#" class="nav__link">
                             <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
@@ -34,9 +35,22 @@
                             <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
 
                             <ul class="collapse__menu">
-                                <a href="cadastrarCliente.html" class="collapse__sublink">Cliente</a>
-                                <a href="cadastrarProduto.html" class="collapse__sublink">Produto</a>
-                                <a href="cadastrarUsuario.html" class="collapse__sublink">Usuário</a>
+                                <a href="../Cadastros/cadastrarCliente.html" class="collapse__sublink">Cliente</a>
+                                <a href="../Cadastros/cadastrarProduto.html" class="collapse__sublink">Produto</a>
+                                <a href="../Cadastros/cadastrarUsuario.html" class="collapse__sublink">Usuário</a>
+                                <a href="../Cadastros/cadastrarEstoque.html" class="collapse__sublink">Estoque</a>
+                            </ul>
+                        </div>
+
+                        <div  class="nav__link collapse">
+                            <ion-icon name="file-tray-full-outline" class="nav__icon"></ion-icon>
+                            <span class="nav__name">Listagens</span>
+
+                            <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
+
+                            <ul class="collapse__menu">
+                                <a href="/Listas/listagemEstoque.html" class="collapse__sublink">Estoque</a>
+                                <a href="/Listas/listagemUsuario.html" class="collapse__sublink">Usuário</a>
                             </ul>
                         </div>
 
@@ -44,18 +58,6 @@
                             <ion-icon name="pie-chart-outline" class="nav__icon"></ion-icon>
                             <span class="nav__name">Analytics</span>
                         </a>
-                        <div class="nav__link collapse">
-                            <ion-icon name="people-outline" class="nav__icon"></ion-icon>
-                            <span class="nav__name">Team</span>
-
-                            <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
-
-                            <ul class="collapse__menu">
-                                <a href="#" class="collapse__sublink">Data</a>
-                                <a href="#" class="collapse__sublink">Group</a>
-                                <a href="#" class="collapse__sublink">Members</a>
-                            </ul>
-                        </div>
                         <a href="#" class="nav__link">
                             <ion-icon name="settings-outline" class="nav__icon"></ion-icon>
                             <span class="nav__name">Configurações</span>
@@ -63,7 +65,7 @@
                     </div>
                 </div>
 
-                <a href="login.html" class="nav__link">
+                <a href="/login.html" class="nav__link">
                     <ion-icon name="log-out-outline" class="nav__icon"></ion-icon>
                     <span class="nav__name">Sair</span>
                 </a>
@@ -71,10 +73,38 @@
         </div>
 
         <h1>Componentes</h1>
+
+            <div class="shortcut-container">
+                <div class="shortcut">
+                  <i class="fas fa-users"></i>
+                  <span>Consultar Clientes</span>
+                </div>
+                <div class="shortcut">
+                  <i class="fas fa-box"></i>
+                  <span>Cadastrar Produto</span>
+                </div>
+                
+              </div>
+
+              <div class="shortcut-container">
+                <div class="shortcut">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Dashboards</span>
+                  </div>
+                  <div class="shortcut">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    <span>Faturamento Mensal</span>
+                  </div>
+                  <div class="shortcut">
+                    <i class="fas fa-cogs"></i>
+                    <span>Configurações</span>
+                  </div>
+              </div>
+
         <!-- ===== IONICONS ===== -->
         <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
         
         <!-- ===== MAIN JS ===== -->
-        <script src="assets/js/main.js"></script>
+        <script src="/assets/js/main.js"></script>
     </body>
 </html>

@@ -14,7 +14,7 @@ const showMenu = (toggleId, navbarId, bodyId)=>{
 }
 showMenu('nav-toggle','navbar','body-pd')
 
-/*===== LINKS  =====*/ 
+/*===== LINK ACTIVE  =====*/ 
 const linkColor = document.querySelectorAll('.nav__link')
 function colorLink(){
   linkColor.forEach(l=> l.classList.remove('active'))
@@ -23,19 +23,17 @@ function colorLink(){
 linkColor.forEach(l=> l.addEventListener('click', colorLink))
 
 
-/*===== MENU  =====*/ 
-const linkCollapse = document.querySelectorAll('.nav__link.collapse.collapse__link');
+/*===== COLLAPSE MENU  =====*/ 
+const linkCollapse = document.getElementsByClassName('collapse__link')
+var i
 
-for(let i = 0; i < linkCollapse.length; i++){
+for(i=0;i<linkCollapse.length;i++){
   linkCollapse[i].addEventListener('click', function(){
-    const collapseMenu = this.querySelector('.collapse__menu');
-    collapseMenu.classList.toggle('showCollapse');
+    const collapseMenu = this.nextElementSibling
+    collapseMenu.classList.toggle('showCollapse')
 
     const rotate = collapseMenu.previousElementSibling
     rotate.classList.toggle('rotate')
-  });
+  })
 }
-
-
-
 

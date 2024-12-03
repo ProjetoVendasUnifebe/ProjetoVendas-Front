@@ -146,5 +146,3 @@ async function excluirEstoque(element) {
         alert('Erro ao excluir o estoque. Tente novamente.');
     }
 }
-
-

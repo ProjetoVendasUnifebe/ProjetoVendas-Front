@@ -60,6 +60,8 @@ a{
 }
 
 /*===== Menu Lateral =====*/
+
+/*===== NAV =====*/
 .nav{
   height: 100%;
   display: flex;
@@ -106,21 +108,27 @@ a{
   font-size: var(--small-font-size);
 }
 
-/*===== Menu Expansivo =====*/
+/*Expander menu*/
 .expander{
   width: calc(var(--nav-width) + 9.25rem);
 }
+
+/*Add padding body*/
 .body-pd{
   padding: 2rem 0 0 16rem;
 }
+
+/*Active links menu*/
 .active{
   background-color: var(--first-color);
 }
+
+/*===== COLLAPSE =====*/
 .collapse{
   grid-template-columns: 20px max-content 1fr;
 }
 .collapse__link{
-  /* justify-self: flex-end; */
+  justify-self: flex-end;
   transition: .5s;
 }
 .collapse__menu{
@@ -134,9 +142,13 @@ a{
 .collapse__sublink:hover{
   color: var(--white-color);
 }
+
+/*Show collapse*/
 .showCollapse{
   display: block;
 }
+
+/*Rotate icon*/
 .rotate{
   transform: rotate(180deg);
 }
@@ -144,6 +156,14 @@ a{
 /*===== Telas de Cadastro =====*/
 .container {
   width: 60%;
+  margin: auto;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 0 25px rgba(0.1, 0.1, 0.1, 0.1);
+}
+
+.containerHome {
+  width: 95%;
   margin: auto;
   background-color: #fff;
   padding: 20px;
@@ -162,6 +182,50 @@ a{
 .subtitulo {
   color: #5b087c;
   text-align: center;
+}
+
+.shortcut-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 99%;
+  justify-content: center;
+}
+
+/* Estilo para cada atalho */
+.shortcut {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  text-align: center;
+  transition: all 0.3s ease;
+  background-color: #f0f0f0;
+}
+
+.shortcut:hover {
+  background-color: #e6e6e6;
+  transform: translateY(-5px);
+  cursor: pointer;
+}
+
+.shortcut i {
+  font-size: 24px;
+  color: #5b087c;
+  margin-bottom: 10px;
+}
+
+.shortcut span {
+  font-size: 14px;
+  color: #000000;
 }
 
 form {
