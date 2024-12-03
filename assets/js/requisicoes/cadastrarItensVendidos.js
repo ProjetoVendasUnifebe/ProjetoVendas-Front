@@ -1,7 +1,7 @@
 function autocomplete(input, data) {
     let currentFocus;
 
-    input.addEventListener("input", function(e) {
+    input.addEventListener("input", function (e) {
         let list, item, val = this.value;
         closeAllLists();
         if (!val) return false;
@@ -16,7 +16,7 @@ function autocomplete(input, data) {
             if (data[i].toLowerCase().includes(val.toLowerCase())) {
                 item = document.createElement("div");
                 item.innerHTML = data[i];
-                item.addEventListener("click", function(e) {
+                item.addEventListener("click", function (e) {
                     input.value = this.innerText;
                     closeAllLists();
                 });
@@ -25,7 +25,7 @@ function autocomplete(input, data) {
         }
     });
 
-    input.addEventListener("keydown", function(e) {
+    input.addEventListener("keydown", function (e) {
         let list = document.getElementById(this.id + "-autocomplete-list");
         if (list) list = list.getElementsByTagName("div");
         if (e.keyCode === 40) {
@@ -65,7 +65,7 @@ function autocomplete(input, data) {
         }
     }
 
-    document.addEventListener("click", function(e) {
+    document.addEventListener("click", function (e) {
         closeAllLists(e.target);
     });
 }
@@ -96,7 +96,7 @@ async function iniciandoAutocompletes() {
     const vendas = await fetchVendas();
     autocomplete(document.getElementById("autocompleteVenda"), vendas);
 
-    const produtos = await fetchProdutos(); 
+    const produtos = await fetchProdutos();
     autocomplete(document.getElementById('autocompleteProduto'), produtos);
 }
 
@@ -175,12 +175,12 @@ async function fetchItensVendidos() {
 if (window.location.pathname.includes('listagemItensVendidos.html')) {//IF necessário para a página rodar(depois separar em arquivos diferentes)
     document.getElementById('closeModal').onclick = function () {
         document.getElementById('editarItemVendidoModal').style.display = 'none';
-    }    
+    }
 }
 
 async function substituirIDPorNomeVenda() {
     const linhasTabela = document.querySelectorAll('#itens-vendidos-container tr');
-    
+
     for (let linha of linhasTabela) {
         const celulaVenda = linha.querySelector('td:nth-child(2)');
         const idVenda = celulaVenda.textContent.trim();
@@ -196,7 +196,7 @@ async function substituirIDPorNomeVenda() {
 
 async function substituirIDPorNomeProduto() {
     const linhasTabela = document.querySelectorAll('#itens-vendidos-container tr');
-    
+
     for (let linha of linhasTabela) {
         const celulaProduto = linha.querySelector('td:nth-child(3)');
         const idProduto = celulaProduto.textContent.trim();
@@ -344,6 +344,61 @@ async function excluirItemVendido(element) {
     catch (error) {
         console.error('Erro ao excluir item vendido:', error);
         alert('Erro ao excluir item vendido. Tente novamente.');
+    }
+}
+
+async function pesquisarEstoque() {
+    const pesquisaInput = document.getElementById('pesquisaEstoque').value.trim();
+    const filtro = document.getElementById('filtroEstoque').value;
+
+    if (!pesquisaInput) {
+        fetchItensVendidos();
+        return;
+    }
+
+    let url;
+
+    if (filtro === 'id') {
+        if (!isNaN(pesquisaInput)) {
+            url = `https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/ItensVendidos/buscar-itens-vendidos-por-id/${pesquisaInput}`;
+        } else {
+            alert('Por favor, insira um ID válido.');
+            return;
+        }
+    }
+
+    try {
+        const resposta = await fetch(url);
+        if (!resposta.ok) {
+            throw new Error(`Erro ao acessar API: ${resposta.status}`);
+        }
+
+        const itensVendidos = await resposta.json();
+        const tbody = document.querySelector('#itens-vendidos-container');
+        tbody.innerHTML = '';
+
+        if (!itensVendidos || itensVendidos.length === 0) {
+            alert('Nenhum item vendido encontrado.');
+            return;
+        }
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <th scope="row">${itensVendidos.idItensVendidos}</th>
+            <td>${itensVendidos.idVenda}</td>
+            <td>${itensVendidos.idProduto}</td>
+            <td>${itensVendidos.qtdVendida}</td>
+            <td>
+                <ion-icon name="create-outline" class="button-edit" data-id="${itensVendidos.idItensVendidos}" onclick="editarItemVendido(this)">Editar</ion-icon>
+                <ion-icon name="trash" class="button-delete" data-id="${itensVendidos.idItensVendidos}" onclick="excluirItemVendido(this)">Apagar</ion-icon>
+            </td>`;
+        tbody.appendChild(row);
+
+        substituirIDPorNomeVenda();
+        substituirIDPorNomeProduto();
+    } catch (erro) {
+        console.error('Erro ao buscar item vendido:', erro);
+        alert('Erro ao buscar item vendido.');
     }
 }
 

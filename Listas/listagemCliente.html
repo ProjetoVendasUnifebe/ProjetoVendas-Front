@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="../assets/css/styles.css">
     <link rel="stylesheet" href="../assets/css/modal.css">
+    <link rel="stylesheet" href="../assets/css/ListaProduto.css">
     <link rel="icon" type="../image/x-icon" href="../assets/img/file.ico">
 
     <title>Lista de Clientes</title>
@@ -88,8 +89,27 @@
         </nav>
     </div>
 
-    <h1>Lista de Clientes</h1>
+    <div class="containerCliente">
+        <h1 class="subtitulo">Clientes</h1>
+        <label for="pesquisaCliente">Procurar por cliente:</label>
 
+        <ul>
+            <div style="display: flex; align-items: center;">
+                <input type="text" id="pesquisaCliente" name="Pesquisa"
+                    placeholder="Pesquise pelo ID ou nome do cliente" class="inputPesquisa">
+                <select id="filtroCliente" class="inputFiltro">
+                    <option value="id">ID</option>
+                    <option value="nome">Nome</option>
+                </select>
+                <input type="button" id="searchButton" value="Buscar" class="Btncad" onclick="pesquisarCliente()">
+            </div>
+        </ul>
+
+        <ul><a href="../Cadastros/cadastrarCliente.html"><input type="button" value="Novo Cliente" class="Btnovo"></a>
+        </ul>
+
+        <hr>
+    </div>
     <div class="containerLista">
         <table class="table">
             <thead>
