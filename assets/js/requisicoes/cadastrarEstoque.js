@@ -1,25 +1,69 @@
+async function fetchEstoques() {
+    try {
+        const response = await fetch('https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Estoque/buscar-todos-estoques');
+        if (!response.ok) {
+            const errorMessage = await response.text();
+            throw new Error(`Erro ao buscar estoques: ${response.status} - ${errorMessage}`);
+        }
+
+        const estoques = await response.json();
+        const tbody = document.querySelector('#estoques-container');
+        tbody.innerHTML = '';
+
+        if (Array.isArray(estoques)) {
+            estoques.forEach(estoque => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <th scope="row">${estoque.idEstoque}</th>
+                    <td>${estoque.nome}</td>
+                    <td>${estoque.capacidade}</td>
+                    <td>
+                        <ion-icon name="create-outline" class="button-edit" data-id="${estoque.idEstoque}" onclick="editarEstoque(this)">Editar</ion-icon> 
+                        <ion-icon name="trash" class="button-delete" data-id="${estoque.idEstoque}" onclick="excluirEstoque(this)">Apagar</ion-icon>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        } else {
+            console.error('A resposta não é um array:', estoques);
+        }
+    } catch (error) {
+        console.error('Erro ao buscar estoques:', error);
+        alert('Erro ao carregar estoques. Tente novamente mais tarde.');
+    }
+}
+
+if(window.location.pathname.includes('listagemEstoque.html')) {
+    document.getElementById('closeModal').onclick = function () {
+        document.getElementById('editarEstoqueModal').style.display = 'none';
+    }
+}
+
+
+window.onclick = function (event) {
+    if (event.target == document.getElementById('editarEstoqueModal')) {
+        document.getElementById('editarEstoqueModal').style.display = 'none';
+    }
+}
+
 function cadastrarEstoque(event) {
-    event.preventDefault(); // Evita o recarregamento da página ao enviar o formulário
+    event.preventDefault();
 
     const url = 'https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Estoque/adicionar-estoque';
 
-    // Captura os valores dos campos do formulário
     const nome = document.getElementById("nome").value.trim();
     const capacidade = parseInt(document.getElementById("capacidade").value, 10);
 
-    // Validação básica dos dados
     if (!nome || isNaN(capacidade) || capacidade <= 0) {
         alert("Por favor, preencha os campos corretamente.");
         return;
     }
 
-    // Cria o objeto de dados a ser enviado na requisição
     const dadosEstoque = {
         nome: nome,
         capacidade: capacidade
     };
 
-    // Envia a requisição
     fetch(url, {
         method: 'POST',
         headers: {
@@ -30,7 +74,7 @@ function cadastrarEstoque(event) {
     })
         .then(response => {
             if (response.ok) {
-                return response.json(); // Processa a resposta se for bem-sucedida
+                return response.json();
             } else {
                 throw new Error('Erro ao cadastrar o estoque.');
             }
@@ -38,7 +82,7 @@ function cadastrarEstoque(event) {
         .then(data => {
             alert("Estoque cadastrado com sucesso!");
             console.log("Resposta da API:", data);
-            window.location.href = "estoque.html"; // Redireciona após sucesso
+            window.location.href = "../Listas/listagemEstoque.html";
         })
         .catch(error => {
             console.error("Erro:", error);
@@ -46,80 +90,103 @@ function cadastrarEstoque(event) {
         });
 }
 
-// Adiciona o evento de submissão ao formulário
-document.querySelector(".cadastro-form").addEventListener("submit", cadastrarEstoque);
+// document.querySelector(".cadastro-form").addEventListener("submit", cadastrarEstoque);
 
-async function editarUsuario(element) {
+async function editarEstoque(element) {
+    const id = element.getAttribute('data-id');
+    const modal = document.getElementById('editarEstoqueModal');
+    const nomeInput = document.getElementById('nomeEstoque');
+    const capacidadeInput = document.getElementById('capacidadeEstoque');
 
-    let id = element.getAttribute('data-id');
-    // Abre o modal para editar o usuário
-    const modal = document.getElementById('editarUsuarioModal');
-    const nomeInput = document.getElementById('nomeUsuario');
-    const loginInput = document.getElementById('loginUsuario');
-    const ehAdmInput = document.getElementById('ehAdmUsuario');
-    
-    // Mostra o modal
     modal.style.display = 'block';
 
-    // Preenche os campos com os dados do usuário selecionado
     try {
-        const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Usuario/buscar-usuario-por-id/${id}`);
+        const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Estoque/buscar-estoque-por-id/${id}`);
         if (!response.ok) {
             const errorMessage = await response.text();
-            throw new Error(`Erro ao buscar usuário: ${response.status} - ${errorMessage}`);
+            throw new Error(`Erro ao buscar estoque: ${response.status} - ${errorMessage}`);
         }
 
-        const usuario = await response.json();
-        nomeInput.value = usuario.nomeUsuario || '';
-        loginInput.value = usuario.login || '';
-        ehAdmInput.checked = usuario.ehAdm === 1;
+        const estoque = await response.json();
+        nomeInput.value = estoque.nome || '';
+        capacidadeInput.value = estoque.capacidade || '';
 
     } catch (error) {
-        console.error('Erro ao buscar usuário:', error);
-        alert('Erro ao buscar os dados do usuário. Tente novamente.');
+        console.error('Erro ao buscar estoque:', error);
+        alert('Erro ao buscar os dados do estoque. Tente novamente.');
         modal.style.display = 'none';
         return;
     }
 
-    // Remove event listener duplicado antes de adicionar novamente
-    const salvarEdicaoButton = document.getElementById('salvarEdicao');
+    const salvarEdicaoButton = document.getElementById('salvarEstoqueEdicao');
     salvarEdicaoButton.onclick = async () => {
-        const nomeUsuario = nomeInput.value.trim();
-        const login = loginInput.value.trim();
-        const ehAdm = ehAdmInput.checked ? 1 : 0;
+        const nomeEstoque = nomeInput.value.trim();
+        const capacidade = parseInt(capacidadeInput.value.trim(), 10);
 
-        // Valida os campos antes de enviar
-        if (!nomeUsuario || !login) {
-            alert('Por favor, preencha todos os campos.');
+        if (!nomeEstoque || isNaN(capacidade) || capacidade <= 0) {
+            alert('Por favor, preencha todos os campos corretamente.');
             return;
         }
 
         try {
-            const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Usuario/atualizar-usuario`, {
+            const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Estoque/atualizar-estoque`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    idUsuario: id,
-                    nomeUsuario: nomeUsuario,
-                    ehAdm: ehAdm,
-                    login: login
-                })
+                    idEstoque: id,
+                    nome: nomeEstoque,
+                    capacidade: capacidade,
+                }),
             });
 
             if (!response.ok) {
                 const errorMessage = await response.text();
-                throw new Error(`Erro ao editar usuário: ${response.status} - ${errorMessage}`);
+                throw new Error(`Erro ao editar estoque: ${response.status} - ${errorMessage}`);
             }
 
-            alert('Usuário editado com sucesso!');
-            fetchUsuarios(); // Atualiza a lista de usuários
-            modal.style.display = 'none'; // Fecha o modal após sucesso
+            alert('Estoque editado com sucesso!');
+            fetchEstoques();
+            modal.style.display = 'none';
 
         } catch (error) {
-            console.error('Erro ao editar usuário:', error);
-            alert('Você precisa alterar todos os dados para editar o usuário.');
+            console.error('Erro ao editar estoque:', error);
+            alert('Erro ao editar o estoque. Tente novamente.');
         }
     };
 }
+
+async function excluirEstoque(element) {
+    let id = element.getAttribute('data-id');
+
+    const confirmacao = confirm("Tem certeza que deseja excluir este estoque?");
+    if (!confirmacao) {
+        return;
+    }
+
+    try {
+        const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Estoque/remover-estoque/${id}`, {
+            method: 'DELETE',
+        });
+
+        if (!response.ok) {
+            const errorMessage = await response.text();
+            throw new Error(`Erro ao excluir estoque: ${response.status} - ${errorMessage}`);
+        }
+
+        alert('Estoque excluído com sucesso!');
+        fetchEstoques();
+
+    } catch (error) {
+        console.error('Erro ao excluir estoque:', error);
+        alert('Erro ao excluir o estoque. Tente novamente.');
+    }
+}
+
+if(window.location.pathname.includes('listagemEstoque.html')) {
+        window.onload  = fetchEstoques;
+    }
+
+
+
