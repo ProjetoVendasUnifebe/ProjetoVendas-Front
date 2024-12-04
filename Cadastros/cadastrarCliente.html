@@ -19,10 +19,10 @@
             <div>
                 <div class="nav__brand">
                     <ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
-                    <a href="index.html" class="nav__logo">Comercialize</a>
+                    <a href="../index.html" class="nav__logo">Comercialize</a>
                 </div>
                 <div class="nav__list">
-                    <a href="index.html" class="nav__link active">
+                    <a href="../index.html" class="nav__link active">
                         <ion-icon name="home-outline" class="nav__icon"></ion-icon>
                         <span class="nav__name">Dashboard</span>
                     </a>
@@ -31,16 +31,40 @@
                         <span class="nav__name">Messenger</span>
                     </a>
 
-                    <div class="nav__link collapse">
+                    <div class="nav__link collapse collapse__link">
                         <ion-icon name="folder-outline" class="nav__icon"></ion-icon>
                         <span class="nav__name">Cadastros</span>
 
                         <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
 
                         <ul class="collapse__menu">
-                            <a href="cadastrarCliente.html" class="collapse__sublink">Cliente</a>
-                            <a href="cadastrarProduto.html" class="collapse__sublink">Produto</a>
-                            <a href="cadastrarUsuario.html" class="collapse__sublink">Usuário</a>
+                            <a href="../Cadastros/cadastrarCliente.html" class="collapse__sublink">Cliente</a>
+                            <a href="../Cadastros/cadastrarProduto.html" class="collapse__sublink">Produto</a>
+                            <a href="../Cadastros/cadastrarUsuario.html" class="collapse__sublink">Usuário</a>
+                            <a href="../Cadastros/cadastrarEstoque.html" class="collapse__sublink">Estoque</a>
+                            <a href="../Cadastros/cadastrarEstoqueProduto.html" class="collapse__sublink">Estoque
+                                Produto</a>
+                            <a href="../Cadastros/cadastrarVendas.html" class="collapse__sublink">Vendas</a>
+                            <a href="../Cadastros/cadastrarItensVendidos.html" class="collapse__sublink">Itens por
+                                venda</a>
+                        </ul>
+                    </div>
+
+                    <div class="nav__link collapse collapse__link">
+                        <ion-icon name="folder-outline" class="nav__icon"></ion-icon>
+                        <span class="nav__name">Listagens</span>
+
+                        <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
+
+                        <ul class="collapse__menu">
+                            <a href="../Listas/listagemCliente.html" class="collapse__sublink">Cliente</a>
+                            <a href="../Listas/ListaProduto.html" class="collapse__sublink">Produto</a>
+                            <a href="../Listas/listagemUsuario.html" class="collapse__sublink">Usuário</a>
+                            <a href="../Listas/listagemEstoque.html" class="collapse__sublink">Estoque</a>
+                            <a href="../Listas/listagemEstoqueProduto.html" class="collapse__sublink">Estoque
+                                Produto</a>
+                            <a href="../Listas/listagemVendas.html" class="collapse__sublink">Vendas</a>
+                            <a href="../Listas/listagemItensVendidos.html" class="collapse__sublink">Itens por venda</a>
                         </ul>
                     </div>
 
@@ -67,7 +91,7 @@
                 </div>
             </div>
 
-            <a href="login.html" class="nav__link">
+            <a href="../login.html" class="nav__link">
                 <ion-icon name="log-out-outline" class="nav__icon"></ion-icon>
                 <span class="nav__name">Sair</span>
             </a>
@@ -199,9 +223,9 @@
         })
 
         function cadastrarCliente(idEndereco) {
-                //Define a segunda url para o consumo da segunda API
+            //Define a segunda url para o consumo da segunda API
             const url2 = 'https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Cliente/adicionar-cliente'
- //pega os valores do formulario
+            //pega os valores do formulario
             const Nome = document.getElementById("name").value;
             const Cpf = document.getElementById("cpf").value;
             const Email = document.getElementById("email").value;
@@ -244,7 +268,7 @@
                     alert("Ocorreu um erro ao tentar cadastrar o Cliente.");
                 });
         }
-      </script>
+    </script>
 
 </body>
 

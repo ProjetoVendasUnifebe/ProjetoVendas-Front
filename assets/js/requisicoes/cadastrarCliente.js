@@ -151,6 +151,92 @@ async function excluirCliente(element) {
     }
 }
 
+async function pesquisarCliente() {
+    const pesquisaInput = document.getElementById('pesquisaCliente').value.trim();
+    const filtro = document.getElementById('filtroCliente').value;
+
+    if (!pesquisaInput) {
+        fetchClientes();
+        return;
+    }
+
+    let url;
+
+    if (filtro === 'id') {
+        if (!isNaN(pesquisaInput)) {
+            url = `https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Cliente/buscar-cliente-por-id/${pesquisaInput}`;
+        } else {
+            alert('Por favor, insira um ID válido.');
+            return;
+        }
+    } else if (filtro === 'nome') {
+        url = `https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Cliente/buscar-cliente-por-nome/${encodeURIComponent(pesquisaInput)}`;
+    }
+
+    try {
+        const resposta = await fetch(url);
+        if (!resposta.ok) {
+            throw new Error(`Erro ao acessar API: ${resposta.status}`);
+        }
+
+        const clientes = await resposta.json();
+        const tbody = document.querySelector('#clientes-container');
+        tbody.innerHTML = '';
+
+        if (!clientes || clientes.length === 0) {
+            alert('Nenhum cliente encontrado.');
+            return;
+        }
+
+        if (filtro === 'nome') {
+            pesquisarClienteNome(clientes);
+        } else {
+            pesquisarClienteId(clientes);
+        }
+    } catch (erro) {
+        console.error('Erro ao buscar cliente:', erro);
+        alert('Erro ao buscar cliente.');
+    }
+}
+
+async function pesquisarClienteId(clientes) {
+    const tbody = document.querySelector('#clientes-container');
+    const row = document.createElement('tr');
+    row.innerHTML = `
+    <th scope="row">${clientes.idCliente}</th>
+    <td>${clientes.nome}</td>
+    <td>${clientes.cpf}</td>
+    <td>${clientes.email}</td>
+    <td>${clientes.telefone}</td>
+    <td>${clientes.sexo}</td>
+    <td>${clientes.idEndereco}</td>
+    <td>
+        <ion-icon name="create-outline" class="button-edit" data-id="${clientes.idCliente}" onclick="editarCliente(this)">Editar</ion-icon>
+        <ion-icon name="trash" class="button-delete" data-id='${clientes.idCliente}' onclick="excluirCliente(this)">Apagar</ion-icon>
+    </td>`;
+    tbody.appendChild(row);
+}
+
+async function pesquisarClienteNome(clientes) {
+    const tbody = document.querySelector('#clientes-container');
+    clientes.forEach(cliente => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+        <th scope="row">${cliente.idCliente}</th>
+        <td>${cliente.nome}</td>
+        <td>${cliente.cpf}</td>
+        <td>${cliente.email}</td>
+        <td>${cliente.telefone}</td>
+        <td>${cliente.sexo}</td>
+        <td>${cliente.idEndereco}</td>
+        <td>
+            <ion-icon name="create-outline" class="button-edit" data-id="${cliente.idCliente}" onclick="editarCliente(this)">Editar</ion-icon>
+            <ion-icon name="trash" class="button-delete" data-id='${cliente.idCliente}' onclick="excluirCliente(this)">Apagar</ion-icon>
+        </td>`;
+        tbody.appendChild(row);
+    });
+}
+
 if (window.location.pathname.includes('listagemCliente.html')) {
     window.onload = fetchClientes;
 }
