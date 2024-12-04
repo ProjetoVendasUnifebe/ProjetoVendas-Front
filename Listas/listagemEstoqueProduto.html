@@ -20,10 +20,10 @@
             <div>
                 <div class="nav__brand">
                     <ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
-                    <a href="index.html" class="nav__logo">Comercialize</a>
+                    <a href="../index.html" class="nav__logo">Comercialize</a>
                 </div>
                 <div class="nav__list">
-                    <a href="index.html" class="nav__link active">
+                    <a href="../index.html" class="nav__link active">
                         <ion-icon name="home-outline" class="nav__icon"></ion-icon>
                         <span class="nav__name">Dashboard</span>
                     </a>
@@ -39,10 +39,15 @@
                         <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
 
                         <ul class="collapse__menu">
-                            <a href="cadastrarCliente.html" class="collapse__sublink">Cliente</a>
-                            <a href="cadastrarProduto.html" class="collapse__sublink">Produto</a>
-                            <a href="cadastrarUsuario.html" class="collapse__sublink">Usuário</a>
-                            <a href="cadastrarEstoque.html" class="collapse__sublink">Estoque</a>
+                            <a href="../Cadastros/cadastrarCliente.html" class="collapse__sublink">Cliente</a>
+                            <a href="../Cadastros/cadastrarProduto.html" class="collapse__sublink">Produto</a>
+                            <a href="../Cadastros/cadastrarUsuario.html" class="collapse__sublink">Usuário</a>
+                            <a href="../Cadastros/cadastrarEstoque.html" class="collapse__sublink">Estoque</a>
+                            <a href="../Cadastros/cadastrarEstoqueProduto.html" class="collapse__sublink">Estoque
+                                Produto</a>
+                            <a href="../Cadastros/cadastrarVendas.html" class="collapse__sublink">Vendas</a>
+                            <a href="../Cadastros/cadastrarItensVendidos.html" class="collapse__sublink">Itens por
+                                venda</a>
                         </ul>
                     </div>
 
@@ -53,10 +58,14 @@
                         <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
 
                         <ul class="collapse__menu">
-                            <a href="listagemCliente.html" class="collapse__sublink">Cliente</a>
-                            <a href="listagemProduto.html" class="collapse__sublink">Produto</a>
-                            <a href="listagemUsuario.html" class="collapse__sublink">Usuário</a>
-                            <a href="listagemEstoque.html" class="collapse__sublink">Estoque</a>
+                            <a href="../Listas/listagemCliente.html" class="collapse__sublink">Cliente</a>
+                            <a href="../Listas/ListaProduto.html" class="collapse__sublink">Produto</a>
+                            <a href="../Listas/listagemUsuario.html" class="collapse__sublink">Usuário</a>
+                            <a href="../Listas/listagemEstoque.html" class="collapse__sublink">Estoque</a>
+                            <a href="../Listas/listagemEstoqueProduto.html" class="collapse__sublink">Estoque
+                                Produto</a>
+                            <a href="../Listas/listagemVendas.html" class="collapse__sublink">Vendas</a>
+                            <a href="../Listas/listagemItensVendidos.html" class="collapse__sublink">Itens por venda</a>
                         </ul>
                     </div>
 
@@ -90,7 +99,7 @@
         </nav>
     </div>
 
-    <div class="containerFiltro">
+    <div class="containerLista">
         <h1 class="subtitulo">Produtos por Estoque</h1>
         <label for="pesquisaEstoque">Procurar por estoque ou produto:</label>
 
@@ -114,9 +123,7 @@
         <div id="result"></div>
 
         <hr>
-    </div>
 
-    <div class="containerLista">
         <table class="table">
             <thead>
                 <tr>
