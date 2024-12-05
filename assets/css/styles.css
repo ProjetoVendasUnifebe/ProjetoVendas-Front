@@ -453,9 +453,119 @@ textarea {
   /* color: white; */
 }
 
+
+.inputData{
+  width: 35%;
+}
+
+.divData{
+  margin-top: 5px;
+  padding: 5px;
+  
+}
+
+#formRelatorio{
+  @include form;
+  flex-direction: column;
+}
+
+#formRelatorio2{
+  @include form;
+  flex-direction: column;
+}
+
+.inputNumber{
+  width: 20%;
+}
+
+#graficoFaturamento{
+ 
+  /* background-color: red; */
+  position: absolute;
+  left: 0;
+  /* height: 60% !important; */
+  top: 50%;
+  transform: translateY(-50%);
+  /* width: 100% !important; */
+  padding: 30px;
+  box-sizing: border-box; 
+
+}
+
+
+.paiCanva{
+  position: relative;
+  width: 60%;
+  height: 90vh;
+  
+}
+
+.paiDeTodos{
+  display: flex;
+}
+
+#paipesquisa{
+  width: 40%;
+}
+
+/* Página Home */
+.home-container {
+  padding: 2rem;
+  text-align: center;
+  background-color: #ffff;
+  margin: 2rem auto;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  max-width: 800px;
+}
+
+.home-title {
+  color: #5b087c;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.home-description, .home-team, .home-goal {
+  color: #333;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.btn-relatorio {
+  width: 150px;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  background-color: #5b087c;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border-radius: 10px;
+  box-shadow: 0px 10px 40px -12px #000;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-relatorio:hover {
+  background-color: #8324a8;
+}
+
+.body-telas-index{
+  background-color: #fbf0ff64;
+  position: relative;
+  margin: 0;
+  padding: 2rem 0 0 6.75rem;
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  transition: .5s;
+}
 .paragrafo {
 
   color: #ffff;
   padding-top: 3%;
 
 }
+
+

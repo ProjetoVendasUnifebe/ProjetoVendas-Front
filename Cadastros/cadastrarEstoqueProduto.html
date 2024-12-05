@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,9 @@
     <link rel="stylesheet" href="../assets/css/styles.css">
     <link rel="icon" type="image/x-icon" href="../assets/img/file.ico">
     <link rel="stylesheet" href="../assets/css/autocomplete.css">
+    <script src="/assets/js/ApenasSessao.js"></script>
 </head>
+
 <body class="body-telas" id="body-pd">
 
     <body class="body-telas" id="body-pd">
@@ -16,10 +19,12 @@
                 <div>
                     <div class="nav__brand">
                         <ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
-                        <a href="../login.html" class="nav__logo">Comercialize</a>
+                      
+                        <a href="../index.html" class="nav__logo">Comercialize</a>
                     </div>
                     <div class="nav__list">
-                        <a href="../login.html" class="nav__link active">
+                        <a href="../index.html" class="nav__link active">
+
                             <ion-icon name="home-outline" class="nav__icon"></ion-icon>
                             <span class="nav__name">Dashboard</span>
                         </a>
@@ -40,24 +45,35 @@
                                 <a href="../Cadastros/cadastrarEstoqueProduto.html" class="collapse__sublink">Estoque/Produto</a>
                                 <a href="../Cadastros/cadastrarProduto.html" class="collapse__sublink">Produto</a>
                                 <a href="../Cadastros/cadastrarUsuario.html" class="collapse__sublink">Usuário</a>
+
+                                <a href="../Cadastros/cadastrarEstoque.html" class="collapse__sublink">Estoque</a>
+                                <a href="../Cadastros/cadastrarEstoqueProduto.html" class="collapse__sublink">Estoque
+                                    Produto</a>
                                 <a href="../Cadastros/cadastrarVendas.html" class="collapse__sublink">Vendas</a>
-                                
+                                <a href="../Cadastros/cadastrarItensVendidos.html" class="collapse__sublink">Itens por
+                                    venda</a>
+
                             </ul>
                         </div>
 
-                        <div  class="nav__link collapse collapse__link">
+                        <div class="nav__link collapse collapse__link">
                             <ion-icon name="folder-outline" class="nav__icon"></ion-icon>
                             <span class="nav__name">Listagens</span>
 
                             <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
 
                             <ul class="collapse__menu">
-                                <a href="../Listas/listagemCliente" class="collapse__sublink">Cliente</a>
-                                <a href="../Listas/listagemEstoque" class="collapse__sublink">Estoque</a>
-                                <a href="../Listas/listagemEstoqueProduto.html" class="collapse__sublink">Estoque/Produto</a>
-                                <a href="../Listas/listagemProduto" class="collapse__sublink">Produto</a>
-                                <a href="../Listas/listagemUsuario" class="collapse__sublink">Usuário</a>
+
+                                <a href="../Listas/listagemCliente.html" class="collapse__sublink">Cliente</a>
+                                <a href="../Listas/ListaProduto.html" class="collapse__sublink">Produto</a>
+                                <a href="../Listas/listagemUsuario.html" class="collapse__sublink">Usuário</a>
+                                <a href="../Listas/listagemEstoque.html" class="collapse__sublink">Estoque</a>
+                                <a href="../Listas/listagemEstoqueProduto.html" class="collapse__sublink">Estoque
+                                    Produto</a>
                                 <a href="../Listas/listagemVendas.html" class="collapse__sublink">Vendas</a>
+                                <a href="../Listas/listagemItensVendidos.html" class="collapse__sublink">Itens por
+                                    venda</a>
+
                             </ul>
                         </div>
 
@@ -91,42 +107,46 @@
             </nav>
         </div>
 
-    <div class="container">
-        <h1 class="subtitulo">Cadastro Produtos em Estoque</h1>
-        
-        <form class="cadastro-form" id="cadastroForm">
-            <div class="forme">
-                <label for="nomeEstoque">Estoque:</label>
-                <div class="autocomplete" style="width: 70%;">
-                    <input id="autocompleteEstoque" type="text" name="nomeEstoque" placeholder="Selecione o Estoque" required>
-                </div>
-            </div>
+        <div class="container">
+            <h1 class="subtitulo">Cadastro Produtos em Estoque</h1>
 
-            <div class="container" style="margin-top: 20px;" id="product-container">
-                <div class="product-group">
-                    <div class="forme">
-                        <label for="nomeProduto">Nome do Produto:</label>
-                        <div class="autocomplete" style="width: 100%;">
-                            <input type="text" name="nomeProduto" id="autocompleteProduto" placeholder="Nome do Produto" required>
+            <form class="cadastro-form" id="cadastroForm">
+                <div class="forme">
+                    <label for="nomeEstoque">Estoque:</label>
+                    <div class="autocomplete" style="width: 70%;">
+                        <input id="autocompleteEstoque" type="text" name="nomeEstoque" placeholder="Selecione o Estoque"
+                            required>
+                    </div>
+                </div>
+
+                <div class="container" style="margin-top: 20px;" id="product-container">
+                    <div class="product-group">
+                        <div class="forme">
+                            <label for="nomeProduto">Nome do Produto:</label>
+                            <div class="autocomplete" style="width: 100%;">
+                                <input type="text" name="nomeProduto" id="autocompleteProduto"
+                                    placeholder="Nome do Produto" required>
+                            </div>
+                        </div>
+                        <div class="formd">
+                            <label for="quantidade">Quantidade:</label>
+                            <input type="number" name="quantidade" style="border-radius: 10px;" id="quantidade"
+                                placeholder="Quantidade" required>
                         </div>
                     </div>
-                    <div class="formd">
-                        <label for="quantidade">Quantidade:</label>
-                        <input type="number" name="quantidade" style="border-radius: 10px;" id="quantidade" placeholder="Quantidade" required>
-                    </div>
                 </div>
-            </div>
 
-            <div class="Botões" style="justify-content: start;">
-                <button type="button" class="Btncad" onclick="cadastrarEstoqueProduto()">Cadastrar</button>
-                <button type="reset" class="Btnexc">Descartar</button>
-            </div>
-        </form>
-    </div>
+                <div class="Botões" style="justify-content: start;">
+                    <button type="button" class="Btncad" onclick="cadastrarEstoqueProduto()">Cadastrar</button>
+                    <button type="reset" class="Btnexc">Descartar</button>
+                </div>
+            </form>
+        </div>
 
-    <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
-    <script src="../assets/js/requisicoes/cadastrarEstoqueProduto.js"></script>
-    <script src="../assets/js/main.js"></script>
+        <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
+        <script src="../assets/js/requisicoes/cadastrarEstoqueProduto.js"></script>
+        <script src="../assets/js/main.js"></script>
 
-</body>
+    </body>
+
 </html>
