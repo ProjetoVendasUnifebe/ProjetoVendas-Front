@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="../assets/css/styles.css">
     <link rel="stylesheet" href="../assets/css/modal.css">
     <link rel="stylesheet" href="../assets/css/ListaProduto.css">
-    <link rel="icon" type="image/x-icon" href="assets/img/file.ico">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="icon" type="image/x-icon" href="../assets/img/file.ico">
 
     <title>Lista de Usuário</title>
 </head>
@@ -133,12 +134,11 @@
                 </tr>
             </thead>
             <tbody id="usuarios-container">
-                <!-- Os dados dos usuários serão inseridos aqui -->
+
             </tbody>
         </table>
     </div>
 
-    <!-- Modal de Edição de Usuário -->
     <div id="editarUsuarioModal" class="modal">
         <div class="modal-content">
             <span class="close" id="closeModal">&times;</span>
@@ -150,8 +150,11 @@
                     <label for="loginUsuario">Login:</label>
                     <input type="text" id="loginUsuario" name="loginUsuario" required>
                     <div class="form-group form-actions">
-                        <label for="ehAdmUsuario">Administrador:</label>
-                        <input type="checkbox" id="ehAdmUsuario" name="ehAdmUsuario">
+                        <label id="ehAdmUsuarioLabel" for="ehAdmUsuario">Administrador:</label>
+                        <select id="ehAdmUsuario" name="ehAdmUsuario">
+                            <option value=1>Sim</option>
+                            <option value=3>Não</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <button type="button" id="salvarEdicao" class="btn">Salvar</button>
@@ -161,9 +164,9 @@
     </div>
 
     <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
-
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/requisicoes/cadastrarUsuario.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </body>
 
 </html>
