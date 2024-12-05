@@ -298,13 +298,6 @@ async function editarItemVendido(element) {
                 const errorMessage = await response.text();
                 throw new Error(`Erro ao editar item vendido: ${response.status} - ${errorMessage}`);
             }
-            // Toastify({
-            //     text: "Item vendido editado com sucesso!",
-            //     className: "info",
-            //     style: {
-            //       background: "linear-gradient(to right,  #711e92, #5b087c)",
-            //     }
-            //   }).showToast();
             alert('Item vendido editado com sucesso!');
             fetchItensVendidos();
             modal.style.display = 'none';

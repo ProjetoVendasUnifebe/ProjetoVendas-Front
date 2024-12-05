@@ -1,3 +1,34 @@
+function toast(tipoToast, mensagem) {
+    switch (tipoToast) {
+        case "success":
+
+            Toastify({
+                text: mensagem,
+                className: "success",
+                style: {
+                    background: "linear-gradient(to right,  #711e92, #5b087c)",
+                }
+            }).showToast();
+
+            break;
+        case "error":
+
+            Toastify({
+                text: mensagem,
+                className: "error",
+                style: {
+                    background: "linear-gradient(to right, #ff0000, #b30000, #800000)"
+                }
+            }).showToast();
+
+            break;
+    }
+
+}
+
+let usuarioString = sessionStorage.getItem("DadosUsuario");
+let usuario = JSON.parse(usuarioString);
+
 function cadastrarUsuario() {
     const url = 'https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Usuario/cadastrar-usuario';
 
@@ -31,16 +62,15 @@ function cadastrarUsuario() {
             if (response.ok) {
                 return response.json();
             } else {
-                throw new Error('Erro ao cadastrar usuário');
+                toast('error', 'Ocorreu um erro ao tentar cadastrar o usuário.');
             }
         })
         .then(data => {
-            console.log('Usuário cadastrado com sucesso:', data);
-            alert("Usuário cadastrado com sucesso!");
+            toast('success', 'Usuário cadastrado com sucesso!');
         })
         .catch(error => {
             console.error('Erro:', error);
-            alert("Ocorreu um erro ao tentar cadastrar o usuário.");
+            toast('error', 'Ocorreu um erro ao tentar cadastrar o usuário.');
         });
 }
 if (window.location.pathname.includes('cadastrarUsuario.html')) {
@@ -57,6 +87,11 @@ async function editarUsuario(element) {
     const loginInput = document.getElementById('loginUsuario');
     const ehAdmInput = document.getElementById('ehAdmUsuario');
 
+    if (usuario.ehAdm == 0) {
+        ehAdmInput.disabled = true;
+        ehAdmInput.onclick = toast('error', 'Você não tem permissão para editar este campo.');
+    }
+
     modal.style.display = 'block';
 
     try {
@@ -69,11 +104,11 @@ async function editarUsuario(element) {
         const usuario = await response.json();
         nomeInput.value = usuario.nomeUsuario || '';
         loginInput.value = usuario.login || '';
-        ehAdmInput.checked = usuario.ehAdm === 1;
+        ehAdmInput.value = usuario.ehAdm ? '1' : '0';
 
     } catch (error) {
         console.error('Erro ao buscar usuário:', error);
-        alert('Erro ao buscar os dados do usuário. Tente novamente.');
+        toast('error', 'Erro ao buscar usuário.');
         modal.style.display = 'none';
         return;
     }
@@ -82,12 +117,7 @@ async function editarUsuario(element) {
     salvarEdicaoButton.onclick = async () => {
         const nomeUsuario = nomeInput.value.trim();
         const login = loginInput.value.trim();
-        const ehAdm = ehAdmInput.checked ? 1 : 0;
-
-        if (!nomeUsuario || !login) {
-            alert('Por favor, preencha todos os campos.');
-            return;
-        }
+        const ehAdm = parseInt(ehAdmInput.value);
 
         try {
             const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Usuario/atualizar-usuario`, {
@@ -105,16 +135,17 @@ async function editarUsuario(element) {
 
             if (!response.ok) {
                 const errorMessage = await response.text();
-                throw new Error(`Erro ao editar usuário: ${response.status} - ${errorMessage}`);
+                console.error(`Erro ao editar usuário: ${response.status} - ${errorMessage}`);
+                toast('error', 'Erro ao editar usuário.');
             }
 
-            alert('Usuário editado com sucesso!');
+            toast('success', 'Usuário editado com sucesso!');
             fetchUsuarios();
             modal.style.display = 'none';
 
         } catch (error) {
             console.error('Erro ao editar usuário:', error);
-            alert('Você precisa alterar todos os dados para editar o usuário.');
+            toast('error', 'Erro ao editar usuário.');
         }
     };
 }
@@ -134,7 +165,7 @@ async function excluirUsuario(element) {
 
         if (!response.ok) {
             const errorMessage = await response.text();
-            throw new Error(`Erro ao excluir usuário: ${response.status} - ${errorMessage}`);
+            console.error(`Erro ao excluir usuário: ${response.status} - ${errorMessage}`);
         }
 
         alert('Usuário excluído com sucesso!');
@@ -142,7 +173,7 @@ async function excluirUsuario(element) {
 
     } catch (error) {
         console.error('Erro ao excluir usuário:', error);
-        alert('Erro ao excluir o usuário. Tente novamente.');
+        toast('error', 'Erro ao excluir usuário.');
     }
 }
 
@@ -174,7 +205,8 @@ async function pesquisarUsuario() {
     try {
         const resposta = await fetch(url);
         if (!resposta.ok) {
-            throw new Error(`Erro ao acessar API: ${resposta.status}`);
+            console.error(`Erro ao acessar API: ${resposta.status}`);
+            toast('error', 'Erro ao buscar usuário.');
         }
 
         const usuarios = await resposta.json();
@@ -197,6 +229,7 @@ async function pesquisarUsuario() {
         }
     } catch (erro) {
         console.error('Erro ao buscar usuário:', erro);
+        toast('error', 'Erro ao buscar usuário.');
     }
 }
 
@@ -284,7 +317,8 @@ async function fetchUsuarios() {
             console.error('A resposta não é um array:', usuarios);
         }
     } catch (error) {
-        console.error('There has been a problem with your fetch operation:', error);
+        console.error('Erro ao buscar usuários:', error);
+        toast('error', 'Erro ao buscar usuários.');
     }
 }
 
@@ -303,4 +337,3 @@ if (window.location.pathname.includes('listagemUsuario.html')) {
 if (window.location.pathname.includes('listagemUsuario.html')) {
     window.onload = fetchUsuarios;
 }
-
