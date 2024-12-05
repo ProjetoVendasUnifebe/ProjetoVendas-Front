@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <script src="assets/js/ControledeSessao.js"></script>
-   <script src="assets/js/Login.js"></script>
-
-    <title>Login</title>
+    <script src="/assets/js/ControledeSessao.js"></script>
+    <script src="/assets/js/ValidarLogin.js"></script>
+    <script src="/assets/js/redefinirSenha.js"></script>
+    <title>Redefinir Senha</title>
     <link rel="icon" type="image/x-icon" href="/assets/img/file.ico">
     <link rel="stylesheet" href="/assets/css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,15 +15,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
 
 </head>
-
 <body class="body-login">
-
+    
     <div class="main-login">
         <div class="left-login">
-
-            <img src="./assets/img/logo.png" class="left-login-img"
-                alt="Animação em 2D de uma astronauta em um traje verde flutuando entre estrelas e luas">
-
+            <img src="./assets/img/logo.png" class="left-login-img">
         </div>
         <div class="right-login">
             <div class="card-login">
@@ -34,17 +28,16 @@
                     <label for="usuario">Usuário</label>
                     <input type="text" name="usuario" id="usuario" placeholder="Digite seu usuário">
                 </div>
-                <div class="textfield">
+                <div class="textfield"> 
                     <label for="senha">Senha</label>
                     <input type="password" name="senha" id="senha" placeholder="Digite a sua senha">
-                    <p class="paragrafo">Esqueceu sua senha? <a href="/redefinirSenha.html" style="color: #ce6ff4;">Clique Aqui!</a></p>
+                    <p class="paragrafo">Para fazer Login, <a href="/login.html" style="color: #ce6ff4;">Clique Aqui!</a></p>
                 </div>
-                <button class="btn-login" onclick="Logar()">LOGIN</button>
+                <button class="btn-login" onclick="redefinirSenhaUsuario()">ALTERAR SENHA</button>
             </div>
 
         </div>
 
     </div>
 </body>
-
 </html>

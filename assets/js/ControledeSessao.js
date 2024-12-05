@@ -73,6 +73,15 @@ function Logar(){
     CriarToken();
     verificarSessao();
 }
- Logar()
+
+
+function redefinirSenhaUsuario(){
+
+    redefineSenha();
+
+}
+Logar();
+validaLogin();
+redefineSenha();
 
 
