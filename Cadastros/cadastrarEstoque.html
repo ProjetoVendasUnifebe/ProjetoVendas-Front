@@ -14,10 +14,10 @@
                 <div>
                     <div class="nav__brand">
                         <ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
-                        <a href="index.html" class="nav__logo">Comercialize</a>
+                        <a href="../login.html" class="nav__logo">Comercialize</a>
                     </div>
                     <div class="nav__list">
-                        <a href="index.html" class="nav__link active">
+                        <a href="../login.html" class="nav__link active">
                             <ion-icon name="home-outline" class="nav__icon"></ion-icon>
                             <span class="nav__name">Dashboard</span>
                         </a>
@@ -26,7 +26,7 @@
                             <span class="nav__name">Messenger</span>
                         </a>
 
-                        <div  class="nav__link collapse">
+                        <div class="nav__link collapse collapse__link">
                             <ion-icon name="folder-outline" class="nav__icon"></ion-icon>
                             <span class="nav__name">Cadastros</span>
 
@@ -34,9 +34,12 @@
 
                             <ul class="collapse__menu">
                                 <a href="../Cadastros/cadastrarCliente.html" class="collapse__sublink">Cliente</a>
+                                <a href="../Cadastros/cadastrarEstoque.html" class="collapse__sublink">Estoque</a>
+                                <a href="../Cadastros/cadastrarEstoqueProduto.html" class="collapse__sublink">Estoque/Produto</a>
                                 <a href="../Cadastros/cadastrarProduto.html" class="collapse__sublink">Produto</a>
                                 <a href="../Cadastros/cadastrarUsuario.html" class="collapse__sublink">Usuário</a>
-                                <a href="../Cadastros/cadastrarEstoque.html" class="collapse__sublink">Estoque</a>
+                                <a href="../Cadastros/cadastrarVendas.html" class="collapse__sublink">Vendas</a>
+                                
                             </ul>
                         </div>
 
@@ -47,10 +50,12 @@
                             <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
 
                             <ul class="collapse__menu">
-                                <a href="../Listas/listagemEstoque.html" class="collapse__sublink">Cliente</a>
-                                <a href="listagemProduto.html" class="collapse__sublink">Produto</a>
-                                <a href="listagemUsuario.html" class="collapse__sublink">Usuário</a>
-                                <a href="listagemEstoque.html" class="collapse__sublink">Estoque</a>
+                                <a href="../Listas/listagemCliente" class="collapse__sublink">Cliente</a>
+                                <a href="../Listas/listagemEstoque" class="collapse__sublink">Estoque</a>
+                                <a href="../Listas/listagemEstoqueProduto.html" class="collapse__sublink">Estoque/Produto</a>
+                                <a href="../Listas/listagemProduto" class="collapse__sublink">Produto</a>
+                                <a href="../Listas/listagemUsuario" class="collapse__sublink">Usuário</a>
+                                <a href="../Listas/listagemVendas.html" class="collapse__sublink">Vendas</a>
                             </ul>
                         </div>
 
@@ -58,7 +63,7 @@
                             <ion-icon name="pie-chart-outline" class="nav__icon"></ion-icon>
                             <span class="nav__name">Analytics</span>
                         </a>
-                        <div class="nav__link collapse collapse__link">
+                        <div class="nav__link collapse">
                             <ion-icon name="people-outline" class="nav__icon"></ion-icon>
                             <span class="nav__name">Team</span>
 
@@ -77,7 +82,7 @@
                     </div>
                 </div>
 
-                <a href="login.html" class="nav__link">
+                <a href="../login.html" class="nav__link" onclick="sessaoExpirada()">
                     <ion-icon name="log-out-outline" class="nav__icon"></ion-icon>
                     <span class="nav__name">Sair</span>
                 </a>

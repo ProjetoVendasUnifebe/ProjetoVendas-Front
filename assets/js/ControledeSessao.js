@@ -77,6 +77,13 @@ function Logar(){
 
 
 }
+
+function redefinirSenhaUsuario(){
+
+    redefineSenha();
+
+}
 Logar();
 validaLogin();
+redefineSenha();
 
