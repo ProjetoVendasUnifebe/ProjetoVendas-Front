@@ -1,80 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <!-- ===== CSS ===== -->
-        <link rel="stylesheet" href="assets/css/styles.css">
-        <link rel="icon" type="image/x-icon" href="assets/img/file.ico">
-        <title>Home</title>
-    </head>
-    <body class="body-telas" id="body-pd">
-        <div class="l-navbar" id="navbar">
-            <nav class="nav">
-                <div>
-                    <div class="nav__brand">
-                        <ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
-                        <a href="index.html" class="nav__logo">Comercialize</a>
-                    </div>
-                    <div class="nav__list">
-                        <a href="index.html" class="nav__link active">
-                            <ion-icon name="home-outline" class="nav__icon"></ion-icon>
-                            <span class="nav__name">Dashboard</span>
-                        </a>
-                        <a href="#" class="nav__link">
-                            <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
-                            <span class="nav__name">Messenger</span>
-                        </a>
-
-                        <div  class="nav__link collapse">
-                            <ion-icon name="folder-outline" class="nav__icon"></ion-icon>
-                            <span class="nav__name">Cadastros</span>
-
-                            <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
-
-                            <ul class="collapse__menu">
-                                <a href="cadastrarCliente.html" class="collapse__sublink">Cliente</a>
-                                <a href="cadastrarProduto.html" class="collapse__sublink">Produto</a>
-                                <a href="cadastrarUsuario.html" class="collapse__sublink">Usuário</a>
-                            </ul>
-                        </div>
-
-                        <a href="#" class="nav__link">
-                            <ion-icon name="pie-chart-outline" class="nav__icon"></ion-icon>
-                            <span class="nav__name">Analytics</span>
-                        </a>
-                        <div class="nav__link collapse">
-                            <ion-icon name="people-outline" class="nav__icon"></ion-icon>
-                            <span class="nav__name">Team</span>
-
-                            <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
-
-                            <ul class="collapse__menu">
-                                <a href="#" class="collapse__sublink">Data</a>
-                                <a href="#" class="collapse__sublink">Group</a>
-                                <a href="#" class="collapse__sublink">Members</a>
-                            </ul>
-                        </div>
-                        <a href="#" class="nav__link">
-                            <ion-icon name="settings-outline" class="nav__icon"></ion-icon>
-                            <span class="nav__name">Configurações</span>
-                        </a>
-                    </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" type="image/x-icon" href="assets/img/file.ico">
+    <title>Home - Comercialize</title>
+</head>
+<body class="body-telas-index" id="body-pd">
+    <div class="l-navbar" id="navbar">
+        <nav class="nav">
+            <div>
+                <div class="nav__brand">
+                    <ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
+                    <a href="../index.html" class="nav__logo">Comercialize</a>
                 </div>
-
-                <a href="login.html" class="nav__link">
-                    <ion-icon name="log-out-outline" class="nav__icon"></ion-icon>
-                    <span class="nav__name">Sair</span>
-                </a>
-            </nav>
-        </div>
-
-        <h1>Componentes</h1>
-        <!-- ===== IONICONS ===== -->
-        <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
-        
-        <!-- ===== MAIN JS ===== -->
-        <script src="assets/js/main.js"></script>
-    </body>
+                <div class="nav__list">
+                    <a href="../index.html" class="nav__link active">
+                        <ion-icon name="home-outline" class="nav__icon"></ion-icon>
+                        <span class="nav__name">Dashboard</span>
+                    </a>
+                    <a href="#" class="nav__link">
+                        <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
+                        <span class="nav__name">Messenger</span>
+                    </a>
+                    <div class="nav__link collapse collapse__link">
+                        <ion-icon name="folder-outline" class="nav__icon"></ion-icon>
+                        <span class="nav__name">Cadastros</span>
+                        <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
+                        <ul class="collapse__menu">
+                            <a href="../Cadastros/cadastrarCliente.html" class="collapse__sublink">Cliente</a>
+                            <a href="../Cadastros/cadastrarProduto.html" class="collapse__sublink">Produto</a>
+                            <a href="../Cadastros/cadastrarUsuario.html" class="collapse__sublink">Usuário</a>
+                            <a href="../Cadastros/cadastrarEstoque.html" class="collapse__sublink">Estoque</a>
+                            <a href="../Cadastros/cadastrarEstoqueProduto.html" class="collapse__sublink">Estoque Produto</a>
+                            <a href="../Cadastros/cadastrarVendas.html" class="collapse__sublink">Vendas</a>
+                            <a href="../Cadastros/cadastrarItensVendidos.html" class="collapse__sublink">Itens por venda</a>
+                        </ul>
+                    </div>
+                    <div class="nav__link collapse collapse__link">
+                        <ion-icon name="folder-outline" class="nav__icon"></ion-icon>
+                        <span class="nav__name">Listagens</span>
+                        <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
+                        <ul class="collapse__menu">
+                            <a href="../Listas/listagemCliente.html" class="collapse__sublink">Cliente</a>
+                            <a href="../Listas/ListaProduto.html" class="collapse__sublink">Produto</a>
+                            <a href="../Listas/listagemUsuario.html" class="collapse__sublink">Usuário</a>
+                            <a href="../Listas/listagemEstoque.html" class="collapse__sublink">Estoque</a>
+                            <a href="../Listas/listagemEstoqueProduto.html" class="collapse__sublink">Estoque Produto</a>
+                            <a href="../Listas/listagemVendas.html" class="collapse__sublink">Vendas</a>
+                            <a href="../Listas/listagemItensVendidos.html" class="collapse__sublink">Itens por venda</a>
+                        </ul>
+                    </div>
+                    <a href="#" class="nav__link">
+                        <ion-icon name="pie-chart-outline" class="nav__icon"></ion-icon>
+                        <span class="nav__name">Analytics</span>
+                    </a>
+                    <a href="#" class="nav__link">
+                        <ion-icon name="settings-outline" class="nav__icon"></ion-icon>
+                        <span class="nav__name">Configurações</span>
+                    </a>
+                </div>
+            </div>
+            <a href="../login.html" class="nav__link">
+                <ion-icon name="log-out-outline" class="nav__icon"></ion-icon>
+                <span class="nav__name">Sair</span>
+            </a>
+        </nav>
+    </div>
+    <main>
+        <section class="home-container">
+            <h1 class="home-title">Bem-vindo à Comercialize!</h1>
+            <p class="home-description">Nós somos o Comercialize, um grupo focado em oferecer soluções de gestão para empresas de todos os portes. Nosso objetivo é simplificar sua jornada empresarial, com ferramentas intuitivas e suporte excepcional.</p>
+            <p class="home-team"><strong>Integrantes:</strong> Andrei Leite, João Vitor Pereira, Leonardo Tachini, Luis Felipe Peirão, Luis Felipe Richter Barnabé e Lucas Wilbert.</p>
+            <p class="home-goal"><strong>Nosso objetivo:</strong> Ser referência no mercado em inovação e suporte, tornando a gestão de negócios eficiente, acessível e orientada a resultados.</p>
+        </section>
+        <button class="btn-relatorio" onclick="location.href='../relatorios.html'">Relatórios</button>
+    </main>
+    <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
+    <!-- ===== MAIN JS ===== -->
+    <script src="assets/js/main.js"></script>
+</body>
 </html>
