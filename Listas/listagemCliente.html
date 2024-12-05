@@ -8,10 +8,9 @@
     <link rel="stylesheet" href="../assets/css/styles.css">
     <link rel="stylesheet" href="../assets/css/modal.css">
     <link rel="stylesheet" href="../assets/css/ListaProduto.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <link rel="icon" type="image/x-icon" href="../assets/img/file.ico">
+    <link rel="icon" type="../image/x-icon" href="../assets/img/file.ico">
 
-    <title>Lista de Usuário</title>
+    <title>Lista de Clientes</title>
 </head>
 
 <body class="body-telas" id="body-pd">
@@ -100,26 +99,23 @@
     </div>
 
     <div class="containerLista">
-        <h1 class="subtitulo">Usuários</h1>
-        <label for="pesquisaUsuario">Procurar por Usuário:</label>
+        <h1 class="subtitulo">Clientes</h1>
+        <label for="pesquisaCliente">Procurar por cliente:</label>
 
         <ul>
             <div style="display: flex; align-items: center;">
-                <input type="text" id="pesquisaUsuario" name="Pesquisa"
-                    placeholder="Pesquise pelo ID ou nome do usuário" class="inputPesquisa">
-                <select id="filtroUsuario" class="inputFiltro">
+                <input type="text" id="pesquisaCliente" name="Pesquisa"
+                    placeholder="Pesquise pelo ID ou nome do cliente" class="inputPesquisa">
+                <select id="filtroCliente" class="inputFiltro">
                     <option value="id">ID</option>
                     <option value="nome">Nome</option>
-                    <option value="login">Login</option>
                 </select>
-                <input type="button" id="searchButton" value="Buscar" class="Btncad" onclick="pesquisarUsuario()">
+                <input type="button" id="searchButton" value="Buscar" class="Btncad" onclick="pesquisarCliente()">
             </div>
         </ul>
 
-        <ul><a href="../Cadastros/cadastrarUsuario.html"><input type="button" value="Novo Usuário" class="Btnovo"></a>
+        <ul><a href="../Cadastros/cadastrarCliente.html"><input type="button" value="Novo Cliente" class="Btnovo"></a>
         </ul>
-
-        <div id="result"></div>
 
         <hr>
 
@@ -127,46 +123,62 @@
             <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Login</th>
-                    <th scope="col">Administrador</th>
+                    <th scope="col">Nome do Cliente</th>
+                    <th scope="col">CPF</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Telefone</th>
+                    <th scope="col">Sexo</th>
+                    <th scope="col">Endereço</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
-            <tbody id="usuarios-container">
+            <tbody id="clientes-container">
 
             </tbody>
         </table>
     </div>
 
-    <div id="editarUsuarioModal" class="modal">
+    <div id="editarClienteModal" class="modal">
         <div class="modal-content">
             <span class="close" id="closeModal">&times;</span>
-            <h2>Editar Usuário</h2>
-            <form id="editarUsuarioForm" class="form-modal">
+            <h2>Editar Cliente</h2>
+            <form id="editarClienteForm" class="form-modal">
                 <div class="form-group">
-                    <label for="nomeUsuario">Nome:</label>
-                    <input type="text" id="nomeUsuario" name="nomeUsuario" required>
-                    <label for="loginUsuario">Login:</label>
-                    <input type="text" id="loginUsuario" name="loginUsuario" required>
-                    <div class="form-group form-actions">
-                        <label id="ehAdmUsuarioLabel" for="ehAdmUsuario">Administrador:</label>
-                        <select id="ehAdmUsuario" name="ehAdmUsuario">
-                            <option value=1>Sim</option>
-                            <option value=3>Não</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <button type="button" id="salvarEdicao" class="btn">Salvar</button>
-                    </div>
+                    <label for="nomeCliente">Nome do Cliente:</label>
+                    <input type="text" id="nomeCliente" name="nomeCliente" required>
+                </div>
+                <div class="form-group">
+                    <label for="cpfCliente">CPF:</label>
+                    <input type="text" id="cpfCliente" name="cpfCliente" required>
+                </div>
+                <div class="form-group">
+                    <label for="emailCliente">Email:</label>
+                    <input type="email" id="emailCliente" name="emailCliente" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefoneCliente">Telefone:</label>
+                    <input type="tel" id="telefoneCliente" name="telefoneCliente" required>
+                </div>
+                <div class="form-group">
+                    <label for="sexoCliente">Sexo:</label>
+                    <select id="sexoCliente" name="sexoCliente" required>
+                        <option value="M">Masculino</option>
+                        <option value="F">Feminino</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="enderecoCliente">Endereço:</label>
+                    <input type="text" id="enderecoCliente" name="enderecoCliente" required>
+                </div>
+                <div class="form-group">
+                    <button type="button" id="salvarEdicaoCliente" class="btn">Salvar</button>
+                </div>
             </form>
         </div>
     </div>
-
     <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
     <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/requisicoes/cadastrarUsuario.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="../assets/js/requisicoes/cadastrarCliente.js"></script>
 </body>
 
 </html>

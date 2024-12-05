@@ -1,196 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- ===== CSS ===== -->
-        <link rel="stylesheet" href="../assets/css/styles.css">
-        <link rel="stylesheet" href="../assets/css/modal.css">
-        <link rel="icon" type="image/x-icon" href="assets/img/file.ico">
-        
-        <title>Lista de Estoque</title>
-    </head>
-    <body class="body-telas" id="body-pd">
-        <div class="l-navbar" id="navbar">
-            <nav class="nav">
-                <div>
-                    <div class="nav__brand">
-                        <ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
-                        <a href="index.html" class="nav__logo">Comercialize</a>
-                    </div>
-                    <div class="nav__list">
-                        <a href="index.html" class="nav__link active">
-                            <ion-icon name="home-outline" class="nav__icon"></ion-icon>
-                            <span class="nav__name">Dashboard</span>
-                        </a>
-                        <a href="#" class="nav__link">
-                            <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
-                            <span class="nav__name">Messenger</span>
-                        </a>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-                        <div  class="nav__link collapse collapse__link">
-                            <ion-icon name="folder-outline" class="nav__icon"></ion-icon>
-                            <span class="nav__name">Cadastros</span>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/modal.css">
+    <link rel="stylesheet" href="../assets/css/ListaProduto.css">
+    <link rel="icon" type="../image/x-icon" href="../assets/img/file.ico">
 
-                            <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
+    <title>Lista de Estoques</title>
+</head>
 
-                            <ul class="collapse__menu">
-                                <a href="cadastrarCliente.html" class="collapse__sublink">Cliente</a>
-                                <a href="cadastrarProduto.html" class="collapse__sublink">Produto</a>
-                                <a href="cadastrarUsuario.html" class="collapse__sublink">Usuário</a>
-                                <a href="cadastrarEstoque.html" class="collapse__sublink">Estoque</a>
-                            </ul>
-                        </div>
-
-                        <div  class="nav__link collapse collapse__link">
-                            <ion-icon name="folder-outline" class="nav__icon"></ion-icon>
-                            <span class="nav__name">Listagens</span>
-
-                            <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
-
-                            <ul class="collapse__menu">
-                                <a href="listagemCliente.html" class="collapse__sublink">Cliente</a>
-                                <a href="listagemProduto.html" class="collapse__sublink">Produto</a>
-                                <a href="listagemUsuario.html" class="collapse__sublink">Usuário</a>
-                                <a href="listagemEstoque.html" class="collapse__sublink">Estoque</a>
-                            </ul>
-                        </div>
-
-                        <a href="#" class="nav__link">
-                            <ion-icon name="pie-chart-outline" class="nav__icon"></ion-icon>
-                            <span class="nav__name">Analytics</span>
-                        </a>
-                        <div class="nav__link collapse">
-                            <ion-icon name="people-outline" class="nav__icon"></ion-icon>
-                            <span class="nav__name">Team</span>
-
-                            <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
-
-                            <ul class="collapse__menu">
-                                <a href="#" class="collapse__sublink">Data</a>
-                                <a href="#" class="collapse__sublink">Group</a>
-                                <a href="#" class="collapse__sublink">Members</a>
-                            </ul>
-                        </div>
-                        <a href="#" class="nav__link">
-                            <ion-icon name="settings-outline" class="nav__icon"></ion-icon>
-                            <span class="nav__name">Configurações</span>
-                        </a>
-                    </div>
+<body class="body-telas" id="body-pd">
+    <div class="l-navbar" id="navbar">
+        <nav class="nav">
+            <div>
+                <div class="nav__brand">
+                    <ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
+                    <a href="../index.html" class="nav__logo">Comercialize</a>
                 </div>
+                <div class="nav__list">
+                    <a href="../index.html" class="nav__link active">
+                        <ion-icon name="home-outline" class="nav__icon"></ion-icon>
+                        <span class="nav__name">Dashboard</span>
+                    </a>
+                    <a href="#" class="nav__link">
+                        <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
+                        <span class="nav__name">Messenger</span>
+                    </a>
 
-                <a href="login.html" class="nav__link">
-                    <ion-icon name="log-out-outline" class="nav__icon"></ion-icon>
-                    <span class="nav__name">Sair</span>
-                </a>
-            </nav>
-        </div>
+                    <div class="nav__link collapse collapse__link">
+                        <ion-icon name="folder-outline" class="nav__icon"></ion-icon>
+                        <span class="nav__name">Cadastros</span>
 
-        <h1>Lista de Estoque</h1>
+                        <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
 
-        <div class="containerLista">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Nome do Estoque</th>
-                        <th scope="col">Capacidade</th>
-                        <th scope="col">Ações</th>
-                    </tr>
-                </thead>
-                <tbody id="estoques-container">
-                    <!-- Os dados dos estoques serão inseridos aqui dinamicamente -->
-                </tbody>
-            </table>
-        </div>
-
-        <div id="editarEstoqueModal" class="modal">
-            <div class="modal-content">
-                <span class="close" id="closeModal">&times;</span>
-                <h2>Editar Estoque</h2>
-                <form id="editarEstoqueForm" class="form-modal">
-                    <div class="form-group">
-                        <label for="nomeEstoque">Nome do Estoque:</label>
-                        <input type="text" id="nomeEstoque" name="nomeEstoque" required>
+                        <ul class="collapse__menu">
+                            <a href="../Cadastros/cadastrarCliente.html" class="collapse__sublink">Cliente</a>
+                            <a href="../Cadastros/cadastrarProduto.html" class="collapse__sublink">Produto</a>
+                            <a href="../Cadastros/cadastrarUsuario.html" class="collapse__sublink">Usuário</a>
+                            <a href="../Cadastros/cadastrarEstoque.html" class="collapse__sublink">Estoque</a>
+                            <a href="../Cadastros/cadastrarEstoqueProduto.html" class="collapse__sublink">Estoque
+                                Produto</a>
+                            <a href="../Cadastros/cadastrarVendas.html" class="collapse__sublink">Vendas</a>
+                            <a href="../Cadastros/cadastrarItensVendidos.html" class="collapse__sublink">Itens por
+                                venda</a>
+                        </ul>
                     </div>
-                    <div class="form-group">
-                        <label for="capacidadeEstoque">Capacidade:</label>
-                        <input type="number" id="capacidadeEstoque" name="capacidadeEstoque" required>
+
+                    <div class="nav__link collapse collapse__link">
+                        <ion-icon name="folder-outline" class="nav__icon"></ion-icon>
+                        <span class="nav__name">Listagens</span>
+
+                        <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
+
+                        <ul class="collapse__menu">
+                            <a href="../Listas/listagemCliente.html" class="collapse__sublink">Cliente</a>
+                            <a href="../Listas/ListaProduto.html" class="collapse__sublink">Produto</a>
+                            <a href="../Listas/listagemUsuario.html" class="collapse__sublink">Usuário</a>
+                            <a href="../Listas/listagemEstoque.html" class="collapse__sublink">Estoque</a>
+                            <a href="../Listas/listagemEstoqueProduto.html" class="collapse__sublink">Estoque
+                                Produto</a>
+                            <a href="../Listas/listagemVendas.html" class="collapse__sublink">Vendas</a>
+                            <a href="../Listas/listagemItensVendidos.html" class="collapse__sublink">Itens por venda</a>
+                        </ul>
                     </div>
-                    <div class="form-group">
-                        <button type="button" id="salvarEstoqueEdicao" class="btn">Salvar</button>
+
+                    <a href="#" class="nav__link">
+                        <ion-icon name="pie-chart-outline" class="nav__icon"></ion-icon>
+                        <span class="nav__name">Analytics</span>
+                    </a>
+                    <div class="nav__link collapse">
+                        <ion-icon name="people-outline" class="nav__icon"></ion-icon>
+                        <span class="nav__name">Team</span>
+
+                        <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
+
+                        <ul class="collapse__menu">
+                            <a href="#" class="collapse__sublink">Data</a>
+                            <a href="#" class="collapse__sublink">Group</a>
+                            <a href="#" class="collapse__sublink">Members</a>
+                        </ul>
                     </div>
-                </form>
+                    <a href="#" class="nav__link">
+                        <ion-icon name="settings-outline" class="nav__icon"></ion-icon>
+                        <span class="nav__name">Configurações</span>
+                    </a>
+                </div>
             </div>
+
+            <a href="../login.html" class="nav__link">
+                <ion-icon name="log-out-outline" class="nav__icon"></ion-icon>
+                <span class="nav__name">Sair</span>
+            </a>
+        </nav>
+    </div>
+
+    <div class="containerLista">
+        <h1 class="subtitulo">Estoque</h1>
+        <label for="pesquisaEstoque">Procurar por estoque:</label>
+
+        <ul>
+            <div style="display: flex; align-items: center;">
+                <input type="text" id="pesquisaEstoque" name="Pesquisa"
+                    placeholder="Pesquise pelo ID ou nome do estoque" class="inputPesquisa">
+                <select id="filtroEstoque" class="inputFiltro">
+                    <option value="id">ID</option>
+                    <option value="nome">Nome</option>
+                </select>
+                <input type="button" id="searchButton" value="Buscar" class="Btncad" onclick="pesquisarEstoque()">
+            </div>
+        </ul>
+
+        <ul><a href="../Cadastros/cadastrarEstoque.html"><input type="button" value="Novo Estoque" class="Btnovo"></a>
+        </ul>
+
+        <hr>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nome do Estoque</th>
+                    <th scope="col">Capacidade</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody id="estoques-container">
+
+            </tbody>
+        </table>
+    </div>
+
+    <div id="editarEstoqueModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <h2>Editar Estoque</h2>
+            <form id="editarEstoqueForm" class="form-modal">
+                <div class="form-group">
+                    <label for="nomeEstoque">Nome do Estoque:</label>
+                    <input type="text" id="nomeEstoque" name="nomeEstoque" required>
+                </div>
+                <div class="form-group">
+                    <label for="capacidadeEstoque">Capacidade:</label>
+                    <input type="number" id="capacidadeEstoque" name="capacidadeEstoque" required>
+                </div>
+                <div class="form-group">
+                    <button type="button" id="salvarEstoqueEdicao" class="btn">Salvar</button>
+                </div>
+            </form>
         </div>
+    </div>
+    <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/requisicoes/cadastrarEstoque.js"></script>
+</body>
 
-        <style>
-        
-        </style>
-
-        <!-- ===== IONICONS ===== -->
-        <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
-        
-        <!-- ===== MAIN JS ===== -->
-        <script src="../assets/js/main.js"></script>
-        <script>
-        async function fetchEstoques() {
-        try {
-            // Alterar a URL para a API de estoques
-            const response = await fetch('https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Estoque/buscar-todos-estoques');
-
-            // Verifica se a resposta está ok (status 200-299)
-            if (!response.ok) {
-                const errorMessage = await response.text(); // Captura a mensagem de erro do servidor
-                throw new Error(`Erro ao buscar estoques: ${response.status} - ${errorMessage}`);
-            }
-
-            const estoques = await response.json();
-            const tbody = document.querySelector('#estoques-container');
-
-            // Limpa o tbody antes de adicionar novos estoques
-            tbody.innerHTML = '';
-
-            // Verifica se a resposta contém estoques
-            if (Array.isArray(estoques)) {
-                estoques.forEach(estoque => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <th scope="row">${estoque.idEstoque}</th>
-                        <td>${estoque.nome}</td>
-                        <td>${estoque.capacidade}</td>
-                        <td>
-                            <ion-icon name="create-outline" class="button-edit" data-id="${estoque.idEstoque}" onclick="editarEstoque(this)">Editar</ion-icon> 
-                            <ion-icon name="trash" class="button-delete" data-id="${estoque.idEstoque}" onclick="excluirEstoque(this)">Apagar</ion-icon>
-                        </td>
-                    `;
-                    tbody.appendChild(row);
-                });
-            } else {
-                console.error('A resposta não é um array:', estoques);
-            }
-        } catch (error) {
-            console.error('Erro ao buscar estoques:', error);
-            alert('Erro ao carregar estoques. Tente novamente mais tarde.');
-        }
-    }
-
-    // Chama o fetchEstoques ao carregar a página
-    document.addEventListener('DOMContentLoaded', fetchEstoques);
-
-    // Configura o fechamento do modal
-    document.getElementById('closeModal').onclick = function () {
-        document.getElementById('editarEstoqueModal').style.display = 'none';
-    }
-
-    // Fecha o modal ao clicar fora dele
-    window.onclick = function (event) {
-        if (event.target == document.getElementById('editarEstoqueModal')) {
-            document.getElementById('editarEstoqueModal').style.display = 'none';
-        }
-    }
-        </script>
-        <script src="../assets/js/requisicoes/cadastrarEstoque.js"></script>
-    </body>
 </html>

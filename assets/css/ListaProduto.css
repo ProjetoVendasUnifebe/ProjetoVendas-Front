@@ -4,9 +4,16 @@
     margin-bottom: 20px;
 }
 
-.inputPesquisa{
+.subtitulo {
+    color: #5b087c;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.inputPesquisa {
     width: 70%;
 }
+
 .containerProduto {
     width: 90%;
     margin: 5%;
@@ -14,13 +21,23 @@
     padding: 20px;
     box-shadow: 0 0 25px rgba(0.1, 0.1, 0.1, 0.1);
     margin-top: auto;
-  }
+}
 
-hr{
+.containerFiltro {
+    width: 90%;
+    margin: 5%;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 25px rgba(0.1, 0.1, 0.1, 0.1);
+    margin-top: auto;
+}
+
+hr {
     margin: 20px;
 }
 
-.Btnovo, .Btnexc {
+.Btnovo,
+.Btnexc {
     background-color: #5b087c;
     color: white;
     padding: 10px 20px;
@@ -28,9 +45,9 @@ hr{
     border-radius: 5px;
     cursor: pointer;
     margin-top: 20px;
-  }
+}
 
-.cabecalho{
+.cabecalho {
     margin-left: 10%;
 }
 
@@ -41,14 +58,15 @@ ul {
 
 li {
     /* background: #f9f9f9; */
-    margin: 5px 0; 
+    margin: 5px 0;
     padding: 10px;
-    
+
 }
 
 .table td {
-    text-align: center; /* Centraliza o conteúdo das células */
-  }
+    text-align: center;
+    /* Centraliza o conteúdo das células */
+}
 
 .modal {
     display: none;
@@ -59,8 +77,8 @@ li {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
@@ -72,10 +90,10 @@ li {
 }
 
 .button-edit {
-    color: #4CAF50;
+    color: #fca434;
     font-size: 20px;
     /* color: white; */
-  }
+}
 
 .form-group {
     display: flex;
@@ -115,14 +133,17 @@ li {
 
 .form-actions {
     display: flex;
-    align-items: center; /* Alinha verticalmente os itens */
-    gap: 10px; /* Espaçamento entre o texto e o checkbox */
+    align-items: center;
+    /* Alinha verticalmente os itens */
+    gap: 10px;
+    /* Espaçamento entre o texto e o checkbox */
     flex-direction: row;
     margin: 10px 0;
 }
 
 .form-actions label {
-    margin: 0; /* Remove margens extras no rótulo */
+    margin: 0;
+    /* Remove margens extras no rótulo */
 }
 
 .close {
@@ -157,4 +178,3 @@ li {
     padding: 20px;
     box-shadow: 0 0 25px rgba(0.1, 0.1, 0.1, 0.1);
 }
-
