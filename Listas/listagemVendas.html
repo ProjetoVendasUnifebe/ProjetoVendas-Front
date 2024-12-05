@@ -80,7 +80,7 @@
                     </div>
                 </div>
 
-                <a href="login.html" class="nav__link">
+                <a href="../login.html" class="nav__link" onclick="sessaoExpirada()">
                     <ion-icon name="log-out-outline" class="nav__icon"></ion-icon>
                     <span class="nav__name">Sair</span>
                 </a>
@@ -169,7 +169,7 @@
                                 <input type="text" id="Valor" name="valor" required>
                             </div>
                             <div class="form-group">
-                                <button type="button" id="salvarEdicao" class="btn">Salvar</button>
+                                <button type="button" id="salvarEdicao" class="btn" >Salvar</button>
                             </div>
                         </form>
 
@@ -185,6 +185,8 @@
         <script src="../assets/js/scripts.js"></script>
 
         <script src="../assets/js/requisicoes/listagemVendas.js"></script>
+        <script src="/assets/js/ControledeSessao.js"></script>
+        <script src="/assets/js/ApenasSessao.js"></script>
 
 
 

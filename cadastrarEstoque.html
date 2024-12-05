@@ -3,7 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+           <script src="assets/js/ControledeSessao.js"> </script>
+           <script src="/assets/js/ApenasSessao.js"></script>
         <!-- ===== CSS ===== -->
         <link rel="stylesheet" href="assets/css/styles.css">
         <link rel="icon" type="image/x-icon" href="assets/img/file.ico">
@@ -79,7 +80,7 @@
                     </div>
                 </div>
 
-                <a href="login.html" class="nav__link">
+                <a href="../login.html" class="nav__link" onclick="sessaoExpirada()">
                     <ion-icon name="log-out-outline" class="nav__icon"></ion-icon>
                     <span class="nav__name">Sair</span>
                 </a>
@@ -100,7 +101,7 @@
                     <input type="number" id="capacidade" name="capacidade" placeholder="Capacidade" required>
                 </div>
                 <div class="Botões">
-                    <button type="submit" class="Btncad" onclick="cadastrarEstoque()">Cadastrar</button>
+                    <button type="submit" class="Btncad" onclick="cadastrarEstoque();">Cadastrar</button>
                     <button type="reset" class="Btnexc">Descartar</button>
                 </div>
             </form>

@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <script src="/assets/js/ControledeSessao.js"></script>
+    <script src="/assets/js/ApenasSessao.js"></script>
     <link rel="stylesheet" href="../assets/css/styles.css">
     <link rel="icon" type="image/x-icon" href="../assets/img/file.ico">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
@@ -68,13 +69,12 @@
                         </ul>
                     </div>
 
-                    <a href="#" class="nav__link">
-                        <ion-icon name="pie-chart-outline" class="nav__icon"></ion-icon>
-                        <span class="nav__name">Analytics</span>
-                    </a>
-                    <div class="nav__link collapse">
-                        <ion-icon name="people-outline" class="nav__icon"></ion-icon>
-                        <span class="nav__name">Team</span>
+                <a href="../login.html" class="nav__link" onclick="sessaoExpirada()">
+                    <ion-icon name="log-out-outline" class="nav__icon"></ion-icon>
+                    <span class="nav__name">Sair</span>
+                </a>
+            </nav>
+        </div>
 
                         <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
 

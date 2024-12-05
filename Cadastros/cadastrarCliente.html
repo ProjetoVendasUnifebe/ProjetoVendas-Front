@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="../assets/css/styles.css">
     <link rel="icon" type="image/x-icon" href="../assets/img/file.ico">
     <script type="module" src="../assets/js/scripts.js"></script>
-
+    <script src = "/assets/js/ControledeSessao.js"></script>
+    <script src="/assets/js/ApenasSessao.js"></script>
     <title>Cadastro de Cliente</title>
 </head>
 
@@ -90,7 +91,7 @@
                 </div>
             </div>
 
-            <a href="../login.html" class="nav__link">
+            <a href="../login.html" class="nav__link" onclick="sessaoExpirada()">
                 <ion-icon name="log-out-outline" class="nav__icon"></ion-icon>
                 <span class="nav__name">Sair</span>
             </a>
@@ -224,7 +225,7 @@
         function cadastrarCliente(idEndereco) {
             //Define a segunda url para o consumo da segunda API
             const url2 = 'https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Cliente/adicionar-cliente'
-            //pega os valores do formulario
+                //pega os valores do formulario
             const Nome = document.getElementById("name").value;
             const Cpf = document.getElementById("cpf").value;
             const Email = document.getElementById("email").value;

@@ -1,50 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/css/styles.css">
-    <link rel="icon" type="image/x-icon" href="assets/img/file.ico">
-
-    <title>Cadastro de Estoque</title>
-</head>
-
-<body class="body-telas" id="body-pd">
-    <div class="l-navbar" id="navbar">
-        <nav class="nav">
-            <div>
-                <div class="nav__brand">
-                    <ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
-                    <a href="../index.html" class="nav__logo">Comercialize</a>
-                </div>
-                <div class="nav__list">
-                    <a href="../index.html" class="nav__link active">
-                        <ion-icon name="home-outline" class="nav__icon"></ion-icon>
-                        <span class="nav__name">Dashboard</span>
-                    </a>
-                    <a href="#" class="nav__link">
-                        <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
-                        <span class="nav__name">Messenger</span>
-                    </a>
-
-                    <div class="nav__link collapse collapse__link">
-                        <ion-icon name="folder-outline" class="nav__icon"></ion-icon>
-                        <span class="nav__name">Cadastros</span>
-
-                        <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
-
-                        <ul class="collapse__menu">
-                            <a href="../Cadastros/cadastrarCliente.html" class="collapse__sublink">Cliente</a>
-                            <a href="../Cadastros/cadastrarProduto.html" class="collapse__sublink">Produto</a>
-                            <a href="../Cadastros/cadastrarUsuario.html" class="collapse__sublink">Usuário</a>
-                            <a href="../Cadastros/cadastrarEstoque.html" class="collapse__sublink">Estoque</a>
-                            <a href="../Cadastros/cadastrarEstoqueProduto.html" class="collapse__sublink">Estoque
-                                Produto</a>
-                            <a href="../Cadastros/cadastrarVendas.html" class="collapse__sublink">Vendas</a>
-                            <a href="../Cadastros/cadastrarItensVendidos.html" class="collapse__sublink">Itens por
-                                venda</a>
-                        </ul>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../assets/css/styles.css">
+        <link rel="icon" type="image/x-icon" href="assets/img/file.ico">
+        <script src="/assets/js/ControledeSessao.js"></script>
+        <script src="/assets/js/ApenasSessao.js"></script>
+        <title>Cadastro de Estoque</title>
+    </head>
+    <body class="body-telas" id="body-pd">
+        <div class="l-navbar" id="navbar">
+            <nav class="nav">
+                <div>
+                    <div class="nav__brand">
+                        <ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
+                        <a href="index.html" class="nav__logo">Comercialize</a>
                     </div>
 
                     <div class="nav__link collapse collapse__link">
@@ -65,13 +36,12 @@
                         </ul>
                     </div>
 
-                    <a href="#" class="nav__link">
-                        <ion-icon name="pie-chart-outline" class="nav__icon"></ion-icon>
-                        <span class="nav__name">Analytics</span>
-                    </a>
-                    <div class="nav__link collapse">
-                        <ion-icon name="people-outline" class="nav__icon"></ion-icon>
-                        <span class="nav__name">Team</span>
+                <a href="../login.html" class="nav__link" onclick="sessaoExpirada()">
+                    <ion-icon name="log-out-outline" class="nav__icon"></ion-icon>
+                    <span class="nav__name">Sair</span>
+                </a>
+            </nav>
+        </div>
 
                         <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
 
@@ -88,7 +58,7 @@
                 </div>
             </div>
 
-            <a href="../login.html" class="nav__link">
+            <a href="../login.html" class="nav__link" onclick="sessaoExpirada()">
                 <ion-icon name="log-out-outline" class="nav__icon"></ion-icon>
                 <span class="nav__name">Sair</span>
             </a>
