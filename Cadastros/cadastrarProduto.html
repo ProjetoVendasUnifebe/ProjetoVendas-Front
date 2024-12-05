@@ -6,9 +6,11 @@
         
         <!-- ===== CSS ===== -->
         <link rel="stylesheet" href="../assets/css/styles.css">
-        <link rel="icon" type="image/x-icon" href="assets/img/file.ico">
+        <link rel="stylesheet" href="../assets/css/ListaProduto.css">
+        <link rel="icon" type="image/x-icon" href="../assets/img/file.ico">
         <script src="/assets/js/ApenasSessao.js"></script>
-        <title>Cadastro de Produto</title>
+        
+        <title>Cadastro de Produtos</title>
     </head>
     <body class="body-telas" id="body-pd">
         <div class="l-navbar" id="navbar">
@@ -28,16 +30,33 @@
                             <span class="nav__name">Messenger</span>
                         </a>
 
-                        <div  class="nav__link collapse">
+                        <div  class="nav__link collapse collapse__link">
                             <ion-icon name="folder-outline" class="nav__icon"></ion-icon>
                             <span class="nav__name">Cadastros</span>
 
                             <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
 
                             <ul class="collapse__menu">
-                                <a href="cadastrarCliente.html" class="collapse__sublink">Cliente</a>
-                                <a href="cadastrarProduto.html" class="collapse__sublink">Produto</a>
-                                <a href="cadastrarUsuario.html" class="collapse__sublink">Usuário</a>
+                                <a href="../Cadastros/cadastrarCliente.html" class="collapse__sublink">Cliente</a>
+                                <a href="../Cadastros/cadastrarProduto.html" class="collapse__sublink">Produto</a>
+                                <a href="../Cadastros/cadastrarUsuario.html" class="collapse__sublink">Usuário</a>
+                                <a href="../Cadastros/cadastrarEstoque.html" class="collapse__sublink">Estoque</a>
+                                <a href="../Cadastros/cadastrarVendas.html" class="collapse__sublink">Vendas</a>
+                            </ul>
+                        </div>
+
+                        <div  class="nav__link collapse collapse__link">
+                            <ion-icon name="folder-outline" class="nav__icon"></ion-icon>
+                            <span class="nav__name">Listagens</span>
+
+                            <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
+
+                            <ul class="collapse__menu">
+                                <a href="../Listas/listagemCliente.html" class="collapse__sublink">Cliente</a>
+                                <a href="../Listas/listagemProduto.html" class="collapse__sublink">Produto</a>
+                                <a href="../Listas/listagemUsuario.html" class="collapse__sublink">Usuário</a>
+                                <a href="../Listas/listagemEstoque.html" class="collapse__sublink">Estoque</a>
+                                <a href="../Listas/listagemVendas.html" class="collapse__sublink">Vendas</a>
                             </ul>
                         </div>
 
@@ -87,7 +106,7 @@
                     <textarea name="descricaoProduto" id="descricaoProduto" placeholder="Descrição" required></textarea>
                 </div>
                 <div class="Botões">
-                    <button type="submit" class="Btncad" >Cadastrar</button>
+                    <button type="submit" class="Btnexc">Cadastrar</button>
                     <button type="reset" class="Btnexc">Descartar</button>
                 </div>
             </form>
@@ -98,6 +117,7 @@
         
         <!-- ===== MAIN JS ===== -->
         <script src="../assets/js/main.js"></script>
+        <script src="../assets/js/scripts.js"></script>
     </body>
 
     <script>
@@ -135,6 +155,7 @@
             .then(data => {
                 console.log('produto cadastrado com sucesso:', data);
                 alert("produto cadastrado com sucesso!");
+                window.location.href = "../Listas/listagemProduto.html"; // Redireciona após sucesso
             })
             .catch(error => {
                 console.error('Erro:', error);

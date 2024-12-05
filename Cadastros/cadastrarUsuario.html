@@ -1,71 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- ===== CSS ===== -->
-        <link rel="stylesheet" href="../assets/css/styles.css">
-        <link rel="icon" type="image/x-icon" href="assets/img/file.ico">
-        <script src="assets/js/scripts.js" type="module"></script>
-        <script src="/assets/js/ControledeSessao.js"></script>
-        <script src="/assets/js/ApenasSessao.js"></script>
-        
-        <title>Cadastro de Usuário</title>
-    </head>
-    <body class="body-telas" id="body-pd">
-        <div class="l-navbar" id="navbar">
-            <nav class="nav">
-                <div>
-                    <div class="nav__brand">
-                        <ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
-                        <a href="index.html" class="nav__logo">Comercialize</a>
-                    </div>
-                    <div class="nav__list">
-                        <a href="index.html" class="nav__link active">
-                            <ion-icon name="home-outline" class="nav__icon"></ion-icon>
-                            <span class="nav__name">Dashboard</span>
-                        </a>
-                        <a href="#" class="nav__link">
-                            <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
-                            <span class="nav__name">Messenger</span>
-                        </a>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/assets/js/ControledeSessao.js"></script>
+    <script src="/assets/js/ApenasSessao.js"></script>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="icon" type="image/x-icon" href="../assets/img/file.ico">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <!-- <script src="assets/js/scripts.js" type="module"></script> -->
 
-                        <div  class="nav__link collapse">
-                            <ion-icon name="folder-outline" class="nav__icon"></ion-icon>
-                            <span class="nav__name">Cadastros</span>
+    <title>Cadastro de Usuário</title>
+</head>
 
-                            <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
-
-                            <ul class="collapse__menu">
-                                <a href="cadastrarCliente.html" class="collapse__sublink">Cliente</a>
-                                <a href="cadastrarProduto.html" class="collapse__sublink">Produto</a>
-                                <a href="cadastrarUsuario.html" class="collapse__sublink">Usuário</a>
-                            </ul>
-                        </div>
-
-                        <a href="#" class="nav__link">
-                            <ion-icon name="pie-chart-outline" class="nav__icon"></ion-icon>
-                            <span class="nav__name">Analytics</span>
-                        </a>
-                        <div class="nav__link collapse">
-                            <ion-icon name="people-outline" class="nav__icon"></ion-icon>
-                            <span class="nav__name">Team</span>
-
-                            <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
-
-                            <ul class="collapse__menu">
-                                <a href="#" class="collapse__sublink">Data</a>
-                                <a href="#" class="collapse__sublink">Group</a>
-                                <a href="#" class="collapse__sublink">Members</a>
-                            </ul>
-                        </div>
-                        <a href="#" class="nav__link">
-                            <ion-icon name="settings-outline" class="nav__icon"></ion-icon>
-                            <span class="nav__name">Configurações</span>
-                        </a>
-                    </div>
+<body class="body-telas" id="body-pd">
+    <div class="l-navbar" id="navbar">
+        <nav class="nav">
+            <div>
+                <div class="nav__brand">
+                    <ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
+                    <a href="../index.html" class="nav__logo">Comercialize</a>
                 </div>
+                <div class="nav__list">
+                    <a href="../index.html" class="nav__link active">
+                        <ion-icon name="home-outline" class="nav__icon"></ion-icon>
+                        <span class="nav__name">Dashboard</span>
+                    </a>
+                    <a href="#" class="nav__link">
+                        <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
+                        <span class="nav__name">Messenger</span>
+                    </a>
+
+                    <div class="nav__link collapse collapse__link">
+                        <ion-icon name="folder-outline" class="nav__icon"></ion-icon>
+                        <span class="nav__name">Cadastros</span>
+
+                        <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
+
+                        <ul class="collapse__menu">
+                            <a href="../Cadastros/cadastrarCliente.html" class="collapse__sublink">Cliente</a>
+                            <a href="../Cadastros/cadastrarProduto.html" class="collapse__sublink">Produto</a>
+                            <a href="../Cadastros/cadastrarUsuario.html" class="collapse__sublink">Usuário</a>
+                            <a href="../Cadastros/cadastrarEstoque.html" class="collapse__sublink">Estoque</a>
+                            <a href="../Cadastros/cadastrarEstoqueProduto.html" class="collapse__sublink">Estoque
+                                Produto</a>
+                            <a href="../Cadastros/cadastrarVendas.html" class="collapse__sublink">Vendas</a>
+                            <a href="../Cadastros/cadastrarItensVendidos.html" class="collapse__sublink">Itens por
+                                venda</a>
+                        </ul>
+                    </div>
+
+                    <div class="nav__link collapse collapse__link">
+                        <ion-icon name="folder-outline" class="nav__icon"></ion-icon>
+                        <span class="nav__name">Listagens</span>
+
+                        <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
+
+                        <ul class="collapse__menu">
+                            <a href="../Listas/listagemCliente.html" class="collapse__sublink">Cliente</a>
+                            <a href="../Listas/ListaProduto.html" class="collapse__sublink">Produto</a>
+                            <a href="../Listas/listagemUsuario.html" class="collapse__sublink">Usuário</a>
+                            <a href="../Listas/listagemEstoque.html" class="collapse__sublink">Estoque</a>
+                            <a href="../Listas/listagemEstoqueProduto.html" class="collapse__sublink">Estoque
+                                Produto</a>
+                            <a href="../Listas/listagemVendas.html" class="collapse__sublink">Vendas</a>
+                            <a href="../Listas/listagemItensVendidos.html" class="collapse__sublink">Itens por venda</a>
+                        </ul>
+                    </div>
 
                 <a href="../login.html" class="nav__link" onclick="sessaoExpirada()">
                     <ion-icon name="log-out-outline" class="nav__icon"></ion-icon>
@@ -74,106 +76,73 @@
             </nav>
         </div>
 
-        <h1>Cadastro de Usuário</h1>
-        
-        <div class="container">
-            <h1 class="subtitulo">Usuário</h1>
-            <form class="cadastro-form" onsubmit="event.preventDefault(); cadastrarUsuario();">
-                <div class="forme">
-                    <label for="nomeUsuario">Nome de Usuário:</label>
-                    <input type="text" id="nomeUsuario" name="nomeUsuario" placeholder="Nome de Usuário" required>
-                    <label for="login">Login:</label>
-                    <input type="text" id="login" name="login" placeholder="Login" required>
-                    <label for="ehAdm">É Administrador:</label>
-                    <select id="ehAdm" required>
-                        <option selected value="0">Não</option>
-                        <option value="1">Sim</option>
-                    </select>
-                </div>
-                <div class="formd">
-                    <label for="senhaUsuario">Senha:</label>
-                    <input type="password" id="senhaUsuario" name="senhaUsuario" placeholder="Senha" required>
-                    <label for="confSenhaUsuario">Confirmação de Senha:</label>
-                    <input type="password" id="confSenhaUsuario" name="confSenhaUsuario" placeholder="Confirmação de Senha" required>
-                </div>
-                <div class="Botões">
-                    <button id="user-btn" type="submit" class="Btncad">Cadastrar</button>
-                    <button type="reset" class="Btnexc">Descartar</button>
-                </div>
-            </form>
-        </div>
+                        <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
 
-        <div id="popup" class="popup" style="display: none;">
-            <div class="popup-content">
-                <span class="close-btn">&times;</span>
-                <h2>Aviso</h2>
-                <p>Senha inválida!</p>
-                <button id="ok-btn">OK</button>
+                        <ul class="collapse__menu">
+                            <a href="#" class="collapse__sublink">Data</a>
+                            <a href="#" class="collapse__sublink">Group</a>
+                            <a href="#" class="collapse__sublink">Members</a>
+                        </ul>
+                    </div>
+                    <a href="#" class="nav__link">
+                        <ion-icon name="settings-outline" class="nav__icon"></ion-icon>
+                        <span class="nav__name">Configurações</span>
+                    </a>
+                </div>
             </div>
+
+            <a href="../login.html" class="nav__link">
+                <ion-icon name="log-out-outline" class="nav__icon"></ion-icon>
+                <span class="nav__name">Sair</span>
+            </a>
+        </nav>
+    </div>
+
+    <h1>Cadastro de Usuário</h1>
+
+    <div class="container">
+        <h1 class="subtitulo">Usuário</h1>
+        <form class="cadastro-form" onsubmit="event.preventDefault(); cadastrarUsuario();">
+            <div class="forme">
+                <label for="nomeUsuario">Nome de Usuário:</label>
+                <input type="text" id="nomeUsuario" name="nomeUsuario" placeholder="Nome de Usuário" required>
+                <label for="login">Login:</label>
+                <input type="text" id="login" name="login" placeholder="Login" required>
+                <label for="ehAdm">É Administrador:</label>
+                <select id="ehAdm" required>
+                    <option selected value="0">Não</option>
+                    <option value="1">Sim</option>
+                </select>
+            </div>
+            <div class="formd">
+                <label for="senhaUsuario">Senha:</label>
+                <input type="password" id="senhaUsuario" name="senhaUsuario" placeholder="Senha" required>
+                <label for="confSenhaUsuario">Confirmação de Senha:</label>
+                <input type="password" id="confSenhaUsuario" name="confSenhaUsuario" placeholder="Confirmação de Senha"
+                    required>
+            </div>
+            <div class="Botões">
+                <button id="user-btn" type="submit" class="Btncad">Cadastrar</button>
+                <button type="reset" class="Btnexc">Descartar</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="popup" class="popup" style="display: none;">
+        <div class="popup-content">
+            <span class="close-btn">&times;</span>
+            <h2>Aviso</h2>
+            <p>Senha inválida!</p>
+            <button id="ok-btn">OK</button>
         </div>
+    </div>
 
-        <!-- ===== IONICONS ===== -->
-        <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
-        
-        <!-- ===== MAIN JS ===== -->
-        <script src="../assets/js/main.js"></script>
-        <script src="assets/js/scripts.js" type="module"></script>
-    </body>
+    <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
 
-<script>
-    function cadastrarUsuario() {
-        const url = 'https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Usuario/cadastrar-usuario';
-        
-        // Captura os valores dos campos do formulário
-        const nomeUsuario = document.getElementById("nomeUsuario").value;
-        const senha = document.getElementById("senhaUsuario").value;
-        const confSenha = document.getElementById("confSenhaUsuario").value;
-        const ehAdm = parseInt(document.getElementById("ehAdm").value);
-        const login = document.getElementById("login").value;
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/requisicoes/cadastrarUsuario.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
-        // Verifica se as senhas coincidem
-        if (senha !== confSenha) {
-            document.getElementById("popup").style.display = "block";
-            return;
-        }
-
-        // Cria o objeto de dados a ser enviado na requisição
-        const dadosUsuario = {
-            nomeUsuario: nomeUsuario,
-            senha: senha,
-            ehAdm: ehAdm,
-            login: login
-        };
-
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Accept': '*/*',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(dadosUsuario)
-        })
-        .then(response => {
-            if (response.ok) {
-                return response.json(); // Converte a resposta em JSON se for bem-sucedida
-            } else {
-                throw new Error('Erro ao cadastrar usuário');
-            }
-        })
-        .then(data => {
-            console.log('Usuário cadastrado com sucesso:', data);
-            alert("Usuário cadastrado com sucesso!");
-        })
-        .catch(error => {
-            console.error('Erro:', error);
-            alert("Ocorreu um erro ao tentar cadastrar o usuário.");
-        });
-    }
-
-    // Fecha o popup de aviso
-    document.getElementById("ok-btn").addEventListener("click", function() {
-        document.getElementById("popup").style.display = "none";
-    });
-</script>
+</body>
 
 </html>

@@ -1,27 +1,24 @@
-// Função para mostrar ou esconder o formData com base na opção selecionada
-function toggleFormData() {
-    const filtroVenda = document.getElementById('filtroVenda').value;  // Obtém o valor da opção selecionada
-    const formData = document.getElementById('formData');  // Obtém o formData
-
-    if (filtroVenda === 'data') {
-        formData.style.display = 'block';  // Exibe o formData se a opção for "data"
-    } else {
-        formData.style.display = 'none';  // Oculta o formData se a opção for "id"
-    }
-}
-
-// Chama a função `toggleFormData` sempre que a opção selecionada no filtroVenda mudar
-document.getElementById('filtroVenda').addEventListener('change', toggleFormData);
-
-
-
-
-
 
 const baseUrl = 'https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Venda';
 
 const lista = document.getElementById('lista-produtos');
 // Função para listar todos os produtos
+
+    function formatarData(data){
+
+        // Convertendo a data para o formato brasileiro
+            let dataFormatada = new Date(data).toLocaleDateString("pt-BR");
+
+            // Formatando a hora para o padrão 24 horas (opcional)
+            let horaFormatada = new Date(data).toLocaleTimeString("pt-BR", {
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit'
+            });
+
+            return dataFormatada + ' ' + horaFormatada
+    }
+
 async function ListaVenda() {
     try {
         const resposta = await fetch(`${baseUrl}/buscar-todas-vendas`);
@@ -32,16 +29,17 @@ async function ListaVenda() {
         const tbody = document.querySelector('#vendas-container')
 
         tbody.innerHTML = '';
+       
 
         if (Array.isArray(vendas)) {
             vendas.forEach(venda => {
-                const row = document.createElement('tr');
+                const row = document.createElement('tr');                
                 row.innerHTML = `
                     <th scope="row">${venda.idVenda}</th>
                     <td>${venda.idUsuario}</td>
                     <td>${venda.idCliente}</td>
                     <td>${venda.valor}</td>
-                    <td>${venda.data_venda}</td>
+                    <td>${formatarData(venda.data_venda)}</td>
                     <td>${venda.forma_pagamento}</td>
                     <td>
                         <ion-icon name="create-outline" class="button-edit" data-id="${venda.idVenda}" onclick="editarVenda(this)">Editar</ion-icon>
@@ -96,7 +94,7 @@ async function pesquisarVenda() {
             <td>${venda.idUsuario}</td>
             <td>${venda.idCliente}</td>
             <td>${venda.valor}</td>
-            <td>${venda.data_venda}</td>
+            <td>${formatarData(venda.data_venda)}</td>
             <td>${venda.forma_pagamento}</td>
             <td>
                 <ion-icon name="create-outline" class="button-edit" data-id="${venda.idVenda}" onclick="editarVenda(this)">Editar</ion-icon>
@@ -157,6 +155,7 @@ async function pesquisarVendaData() {
             tbody.textContent = 'Nenhuma venda encontrada.';
             return;
         }
+        
 
         // Exibir vendas
         vendas.forEach(venda => {
@@ -166,7 +165,7 @@ async function pesquisarVendaData() {
                 <td>${venda.idUsuario}</td>
                 <td>${venda.idCliente}</td>
                 <td>${venda.valor}</td>
-                <td>${venda.data_venda}</td>
+                <td>${formatarData(venda.data_venda)}</td>
                 <td>${venda.forma_pagamento}</td>
                 <td>
                     <ion-icon name="create-outline" class="button-edit" data-id="${venda.idVenda}" onclick="editarVenda(this)">Editar</ion-icon>
@@ -183,6 +182,8 @@ async function pesquisarVendaData() {
 
 // Carregar todos os produtos inicialmente
 ListaVenda();
+
+    
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

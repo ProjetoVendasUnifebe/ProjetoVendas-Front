@@ -33,7 +33,7 @@ async function fetchEstoques() {
     }
 }
 
-if(window.location.pathname.includes('listagemEstoque.html')) {
+if (window.location.pathname.includes('listagemEstoque.html')) {
     document.getElementById('closeModal').onclick = function () {
         document.getElementById('editarEstoqueModal').style.display = 'none';
     }
@@ -184,9 +184,87 @@ async function excluirEstoque(element) {
     }
 }
 
-if(window.location.pathname.includes('listagemEstoque.html')) {
-        window.onload  = fetchEstoques;
+async function pesquisarEstoque() {
+    const pesquisaInput = document.getElementById('pesquisaEstoque').value.trim();
+    const filtro = document.getElementById('filtroEstoque').value;
+
+    if (!pesquisaInput) {
+        fetchEstoques();
+        return;
     }
+
+    let url;
+
+    if (filtro === 'id') {
+        if (!isNaN(pesquisaInput)) {
+            url = `https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Estoque/buscar-estoque-por-id/${pesquisaInput}`;
+        } else {
+            lista.textContent = 'Por favor, insira um ID válido.';
+            return;
+        }
+    } else if (filtro === 'nome') {
+        url = `https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Estoque/buscar-estoque-por-nome/${encodeURIComponent(pesquisaInput)}`;
+    }
+
+    try {
+        const resposta = await fetch(url);
+        if (!resposta.ok) {
+            throw new Error(`Erro ao acessar API: ${resposta.status}`);
+        }
+
+        const estoques = await resposta.json();
+        const tbody = document.querySelector('#estoques-container');
+        tbody.innerHTML = '';
+
+        if (!estoques || estoques.length === 0) {
+            lista.textContent = 'Nenhum estoque encontrado.';
+            return;
+        }
+
+        if (filtro === 'nome') {
+            pesquisarEstoqueNome(estoques);
+        } else {
+            pesquisarEstoqueId(estoques);
+        }
+    } catch (erro) {
+        console.error('Erro ao buscar estoque:', erro);
+        lista.textContent = 'Erro ao buscar estoque.';
+    }
+}
+
+async function pesquisarEstoqueId(estoques) {
+    const tbody = document.querySelector('#estoques-container');
+    const row = document.createElement('tr');
+    row.innerHTML = `
+    <th scope="row">${estoques.idEstoque}</th>
+    <td>${estoques.nome}</td>
+    <td>${estoques.capacidade}</td>
+    <td>
+        <ion-icon name="create-outline" class="button-edit" data-id="${estoques.idEstoque}" onclick="editarEstoque(this)">Editar</ion-icon>
+        <ion-icon name="trash" class="button-delete" data-id='${estoques.idEstoque}' onclick="excluirEstoque(this)">Apagar</ion-icon>
+    </td>`;
+    tbody.appendChild(row);
+}
+
+async function pesquisarEstoqueNome(estoques) {
+    const tbody = document.querySelector('#estoques-container');
+    estoques.forEach(estoque => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+        <th scope="row">${estoque.idEstoque}</th>
+        <td>${estoque.nome}</td>
+        <td>${estoque.capacidade}</td>
+        <td>
+            <ion-icon name="create-outline" class="button-edit" data-id="${estoque.idEstoque}" onclick="editarEstoque(this)">Editar</ion-icon>
+            <ion-icon name="trash" class="button-delete" data-id='${estoque.idEstoque}' onclick="excluirEstoque(this)">Apagar</ion-icon>
+        </td>`;
+        tbody.appendChild(row);
+    });
+}
+
+if (window.location.pathname.includes('listagemEstoque.html')) {
+    window.onload = fetchEstoques;
+}
 
 
 

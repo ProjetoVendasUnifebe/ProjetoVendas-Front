@@ -89,27 +89,34 @@
 
         <div class="containerProduto">
             <h1 class="subtituloProduto">Vendas</h1>
-            <label for="pesquisaProduto">Vendas por Vendas:</label>
+            <label for="pesquisaVendas">Deseja pesquisar venda por:</label>
+            <select id="filtroVenda" class="inputFiltro">
+                <option value="id">ID</option>
+                <option value="data">Data de Venda</option> 
+            </select>
 
             <ul>
                 <!-- Campo de pesquisa único para ID ou nome com Combobox -->
-                <div style="display: flex; align-items: center;">
+                <div style="display: flex; align-items: center;" id="ola">
                     <input type="text" id="pesquisaVenda" name="Pesquisa" placeholder="Pesquise pelo ID da venda" class="inputPesquisa">
-                    <select id="filtroVenda" class="inputFiltro">
-                        <option value="id">ID</option>
-                        <option value="data">Data de Venda</option>
-                    </select>
                     <input type="button" id="searchButton" value="Buscar" class="Btncad" onclick="pesquisarVenda()">
 
-                    <form action="" name="FormData" style="display:none;">
-
-                    <input type="datetime" id="dataInicio" name="pesquisa" placeholder="Pesquise pela data inicio de venda" class="inputPesquisa" onclick="pesquisarVendaData()">
-                    <input type="datetime" id="dataFim" name="pesquisa" placeholder="Pesquise pela data fim de venda" class="inputPesquisa" onclick="pesquisarVendaData()">
-                    <input type="button" id="searchButton" value="Buscar" class="Btncad" onclick="pesquisarVendaData()">
-
-                </form>
-
                 </div>
+
+                <div class="divData">
+                    <form action="" id="formData" style="display:none;">
+
+                    <label for="dataInicio">Início</label>   
+                    <input type="date" id="dataInicio" name="pesquisa" class="inputData" onclick="pesquisarVendaData()">
+
+                    <label for="dataFim">Fim</label>   
+                    <input type="date" id="dataFim" name="pesquisa"  class="inputData" onclick="pesquisarVendaData()">
+
+                    <input type="button" id="searchButton" value="Buscar" class="Btncad" onclick="pesquisarVendaData()">
+                    </form>
+                </div>   
+                
+
             </ul>
 
             <ul><a href="../Cadastros/cadastrarVendas.html"><input type="button" value="Nova Venda" class="Btnovo"></a></ul>
@@ -181,8 +188,34 @@
         <script src="/assets/js/ControledeSessao.js"></script>
         <script src="/assets/js/ApenasSessao.js"></script>
 
-        
 
+
+        <script>
+            // Função para mostrar ou esconder o formData com base na opção selecionada
+            function toggleFormData() {
+                const filtroVenda = document.getElementById('filtroVenda').value;  
+                const formData = document.getElementById('formData');  
+            
+                if (filtroVenda === 'data') {
+                    formData.style.display = 'block';  
+                    ola.style.display = 'none'
+                } else {
+                    formData.style.display = 'none';  
+                    ola.style.display = 'block'
+                }
+            }
+
+                
+                document.addEventListener('DOMContentLoaded', function() {
+
+                
+                toggleFormData();
+            
+                
+                document.getElementById('filtroVenda').addEventListener('change', toggleFormData);
+            });
+
+        </script>
     </body>
 
 </html>
