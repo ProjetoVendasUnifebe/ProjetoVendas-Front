@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- ===== CSS ===== -->
+        <link rel="stylesheet" href="assets/css/styles.css">
+        <link rel="icon" type="image/x-icon" href="assets/img/file.ico">
+        <title>Relatórios</title>
+    </head>
+    <body class="body-telas body-roxo" id="body-pd">
+        <div class="l-navbar" id="navbar">
+            <nav class="nav">
+                <div>
+                    <div class="nav__brand">
+                        <ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
+                        <a href="../index.html" class="nav__logo">Comercialize</a>
+                    </div>
+                    <div class="nav__list">
+                        <a href="../index.html" class="nav__link active">
+                            <ion-icon name="home-outline" class="nav__icon"></ion-icon>
+                            <span class="nav__name">Dashboard</span>
+                        </a>
+                        <a href="#" class="nav__link">
+                            <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
+                            <span class="nav__name">Messenger</span>
+                        </a>
+    
+                        <div class="nav__link collapse collapse__link">
+                            <ion-icon name="folder-outline" class="nav__icon"></ion-icon>
+                            <span class="nav__name">Cadastros</span>
+    
+                            <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
+    
+                            <ul class="collapse__menu">
+                                <a href="../Cadastros/cadastrarCliente.html" class="collapse__sublink">Cliente</a>
+                                <a href="../Cadastros/cadastrarProduto.html" class="collapse__sublink">Produto</a>
+                                <a href="../Cadastros/cadastrarUsuario.html" class="collapse__sublink">Usuário</a>
+                                <a href="../Cadastros/cadastrarEstoque.html" class="collapse__sublink">Estoque</a>
+                                <a href="../Cadastros/cadastrarEstoqueProduto.html" class="collapse__sublink">Estoque
+                                    Produto</a>
+                                <a href="../Cadastros/cadastrarVendas.html" class="collapse__sublink">Vendas</a>
+                                <a href="../Cadastros/cadastrarItensVendidos.html" class="collapse__sublink">Itens por
+                                    venda</a>
+                            </ul>
+                        </div>
+    
+                        <div class="nav__link collapse collapse__link">
+                            <ion-icon name="folder-outline" class="nav__icon"></ion-icon>
+                            <span class="nav__name">Listagens</span>
+    
+                            <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
+    
+                            <ul class="collapse__menu">
+                                <a href="../Listas/listagemCliente.html" class="collapse__sublink">Cliente</a>
+                                <a href="../Listas/ListaProduto.html" class="collapse__sublink">Produto</a>
+                                <a href="../Listas/listagemUsuario.html" class="collapse__sublink">Usuário</a>
+                                <a href="../Listas/listagemEstoque.html" class="collapse__sublink">Estoque</a>
+                                <a href="../Listas/listagemEstoqueProduto.html" class="collapse__sublink">Estoque
+                                    Produto</a>
+                                <a href="../Listas/listagemVendas.html" class="collapse__sublink">Vendas</a>
+                                <a href="../Listas/listagemItensVendidos.html" class="collapse__sublink">Itens por venda</a>
+                            </ul>
+                        </div>
+    
+                        <a href="#" class="nav__link">
+                            <ion-icon name="pie-chart-outline" class="nav__icon"></ion-icon>
+                            <span class="nav__name">Analytics</span>
+                        </a>
+                        <div class="nav__link collapse">
+                            <ion-icon name="people-outline" class="nav__icon"></ion-icon>
+                            <span class="nav__name">Team</span>
+    
+                            <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
+    
+                            <ul class="collapse__menu">
+                                <a href="#" class="collapse__sublink">Data</a>
+                                <a href="#" class="collapse__sublink">Group</a>
+                                <a href="#" class="collapse__sublink">Members</a>
+                            </ul>
+                        </div>
+                        <a href="#" class="nav__link">
+                            <ion-icon name="settings-outline" class="nav__icon"></ion-icon>
+                            <span class="nav__name">Configurações</span>
+                        </a>
+                    </div>
+                </div>
+    
+                <a href="../login.html" class="nav__link">
+                    <ion-icon name="log-out-outline" class="nav__icon"></ion-icon>
+                    <span class="nav__name">Sair</span>
+                </a>
+            </nav>
+        </div>
+
+        <div class="paiDeTodos">
+        <div id="paipesquisa">
+                <div class="containerProduto">
+                    <h1 class="subtituloProduto">Relatórios</h1>
+                    <label for="pesquisaVendas">Relatório:</label>
+                    <select id="filtro" class="inputFiltro">
+                        <option value="1">Cliente/Compras</option>
+                        <option value="2">Produtos Vendidos</option>
+                        <option value="3">Faturamento Mensal</option> 
+                        <option value="4">Vendas</option>  
+                    </select>
+                    <input type="button" id="searchButton" value="Buscar" class="Btncad" onclick="buscarRelatorios()">
+                </div>
+            
+                        <div class="divData">
+                            <form action="" id="formRelatorio" >
+                            
+                            <label for="nome">Nome</label>   
+                            <input type="text" id="nome" name="pesquisa" class="inputData">
+                            
+                            <label for="ordenacao">Ordenação</label>   
+                            <input type="number" id="ordenacao" name="pesquisa"  class="inputNumber">
+                            
+                            </form>
+                        
+                        
+
+                            <form action="" id="formRelatorio2">
+                            
+                                <label for="mes">Mês</label>   
+                                <input type="number" id="mes" name="pesquisa" class="inputNumber">
+                            
+                                <label for="ano">Ano</label>   
+                                <input type="number" id="ano" name="pesquisa"  class="inputNumber">
+                            
+                                </form>
+                        </div>
+                    
+        </div>
+
+            <div class="paiCanva">
+                    <canvas id="graficoFaturamento"></canvas>
+            </div>
+        </div> 
+        <!-- fim da div pai de todos -->
+            
+
+        <!-- ===== IONICONS ===== -->
+        <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
+             
+        <!-- ===== MAIN JS ===== -->
+        <script src="assets/js/main.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="assets/js/requisicoes/relatorio.js"></script> 
+
+        <!-- Toastify CSS -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+        <!-- Toastify JS -->
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+        <script>
+            // Função para mostrar ou esconder o formData com base na opção selecionada
+                    function toggleFormData() {
+                    const filtro = parseInt(document.getElementById('filtro').value);  // Obtém o valor da opção selecionada e converte para número
+                    const formRelatorio = document.getElementById('formRelatorio');  // Obtém o formRelatorio
+                    const formRelatorio2 = document.getElementById('formRelatorio2');  // Obtém o formRelatorio2
+                    
+                        // Inicializa ambos os formulários como ocultos
+                        formRelatorio.style.display = 'none';
+                        formRelatorio2.style.display = 'none';
+
+                        if (filtro === 1 || filtro === 2) {
+                            formRelatorio.style.display = 'flex';   // Exibe formRelatorio
+                            formRelatorio2.style.display = 'none';  // Exibe formRelatorio2
+                        } else if (filtro === 3) {
+                            formRelatorio.style.display = 'none';    // Oculta formRelatorio
+                            formRelatorio2.style.display = 'flex';   // Oculta formRelatorio2
+                        }
+                    }
+                
+                    // Chama a função quando a página for carregada para garantir a visibilidade do formRelatorio
+                    document.addEventListener('DOMContentLoaded', function() {
+                        // Chama a função uma vez para garantir que o formulário esteja oculto ou visível com base na seleção inicial
+                        toggleFormData();
+                    
+                        // Configura o evento de mudança no select para chamar a função sempre que a opção mudar
+                        document.getElementById('filtro').addEventListener('change', toggleFormData);
+                    });
+
+        </script>
+    </body>
+</html>
