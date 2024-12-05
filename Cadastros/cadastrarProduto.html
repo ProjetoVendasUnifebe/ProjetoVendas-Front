@@ -3,11 +3,11 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+        
         <!-- ===== CSS ===== -->
         <link rel="stylesheet" href="../assets/css/styles.css">
         <link rel="icon" type="image/x-icon" href="assets/img/file.ico">
-        
+        <script src="/assets/js/ApenasSessao.js"></script>
         <title>Cadastro de Produto</title>
     </head>
     <body class="body-telas" id="body-pd">
@@ -64,7 +64,7 @@
                     </div>
                 </div>
 
-                <a href="login.html" class="nav__link">
+                <a href="../login.html" class="nav__link" onclick="sessaoExpirada()">
                     <ion-icon name="log-out-outline" class="nav__icon"></ion-icon>
                     <span class="nav__name">Sair</span>
                 </a>
@@ -87,7 +87,7 @@
                     <textarea name="descricaoProduto" id="descricaoProduto" placeholder="Descrição" required></textarea>
                 </div>
                 <div class="Botões">
-                    <button type="submit" class="Btncad">Cadastrar</button>
+                    <button type="submit" class="Btncad" >Cadastrar</button>
                     <button type="reset" class="Btnexc">Descartar</button>
                 </div>
             </form>

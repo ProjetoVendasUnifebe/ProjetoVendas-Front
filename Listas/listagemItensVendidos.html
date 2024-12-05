@@ -79,7 +79,7 @@
                     </div>
                 </div>
 
-                <a href="../login.html" class="nav__link">
+                <a href="../login.html" class="nav__link" onclick="sessaoExpirada()">
                     <ion-icon name="log-out-outline" class="nav__icon"></ion-icon>
                     <span class="nav__name">Sair</span>
                 </a>
@@ -130,7 +130,7 @@
                                 <input type="number" name="quantidade" style="border-radius: 10px;" id="quantidade" placeholder="Quantidade" required>
                             </div>
                         </div>
-                        <button type="button" style="margin-top: 10px;" id="salvarItemVendidoEdicao" class="btn">Salvar</button>
+                        <button type="button" style="margin-top: 10px;" id="salvarItemVendidoEdicao" class="btn" onclick="verificarSessao()">Salvar</button>
                     </div>
                 </form>
             </div>
@@ -140,6 +140,8 @@
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
         <script src="../assets/js/main.js"></script>
         <script src="../assets/js/autocomplete.js"></script>
-        <script src="../assets/js/requisicoes/cadastrarItensVendidos.js"></script>    
+        <script src="../assets/js/requisicoes/cadastrarItensVendidos.js"></script>   
+        <script src="/assets/js/ControledeSessao.js"></script> 
+        <script src="/assets/js/ApenasSessao.js"></script>
     </body>
 </html>
