@@ -194,7 +194,7 @@ async function criarGraficoVenda(json) {
    
     const canva = document.getElementById('graficoFaturamento').getContext('2d');
     grafico = new Chart(canva, {
-        type: 'bar', // Pode ser 'line', 'pie', etc.
+        type: 'bar', 
         data: {
             labels: DataNomeCliente, // Legendas no eixo X
             datasets: [{
@@ -240,11 +240,11 @@ async function criarGraficoFaturamento(json) {
    }
    
     grafico = new Chart(canva, {
-        type: 'bar', // Pode ser 'line', 'pie', etc.
+        type: 'bar', 
         data: {
             labels: anoMes, // Legendas no eixo X
             datasets: [{
-                label: 'Valor da Venda',
+                label: 'Faturamento',
                 data: faturamento, // Dados no eixo Y
                 backgroundColor: [
                     'rgba(75, 192, 192, 0.2)',
@@ -285,11 +285,11 @@ async function criarGraficoProduto(json){
    }
    
     grafico = new Chart(canva, {
-        type: 'bar', // Pode ser 'line', 'pie', etc.
+        type: 'bar', 
         data: {
             labels: produto, // Legendas no eixo X
             datasets: [{
-                label: 'Valor da Venda',
+                label: 'Qtd. Vendida',
                 data: faturamento, // Dados no eixo Y
                 backgroundColor: [
                     'rgba(75, 192, 192, 0.2)',
@@ -330,7 +330,7 @@ async function criarGraficoCliente(json) {
    }
    
     grafico = new Chart(canva, {
-        type: 'bar', // Pode ser 'line', 'pie', etc.
+        type: 'bar',
         data: {
             labels: cliente, // Legendas no eixo X
             datasets: [{
