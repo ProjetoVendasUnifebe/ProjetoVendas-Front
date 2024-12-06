@@ -87,24 +87,28 @@ async function editarUsuario(element) {
     const loginInput = document.getElementById('loginUsuario');
     const ehAdmInput = document.getElementById('ehAdmUsuario');
 
-    if (usuario.ehAdm == 0) {
-        ehAdmInput.disabled = true;
-        ehAdmInput.onclick = toast('error', 'Você não tem permissão para editar este campo.');
-    }
-
     modal.style.display = 'block';
 
     try {
         const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Usuario/buscar-usuario-por-id/${id}`);
         if (!response.ok) {
             const errorMessage = await response.text();
-            throw new Error(`Erro ao buscar usuário: ${response.status} - ${errorMessage}`);
+            console.error(`Erro ao buscar usuário: ${response.status} - ${errorMessage}`);
+            toast('error', 'Erro ao buscar usuário.');
         }
 
-        const usuario = await response.json();
-        nomeInput.value = usuario.nomeUsuario || '';
-        loginInput.value = usuario.login || '';
-        ehAdmInput.value = usuario.ehAdm ? '1' : '0';
+        if (usuario.ehAdm !== 1) {
+            let ehAdm = document.getElementById('ehAdmUsuario')
+            let ehAdmLabel = document.getElementById('ehAdmUsuarioLabel')
+            ehAdm.value = 0;
+            ehAdm.style.display = 'none';
+            ehAdmLabel.style.display = 'none';
+        }
+
+        const usuarioSelecionado = await response.json();
+        nomeInput.value = usuarioSelecionado.nomeUsuario || '';
+        loginInput.value = usuarioSelecionado.login || '';
+        ehAdmInput.value = usuarioSelecionado.ehAdm ? '1' : '3';
 
     } catch (error) {
         console.error('Erro ao buscar usuário:', error);
@@ -117,7 +121,12 @@ async function editarUsuario(element) {
     salvarEdicaoButton.onclick = async () => {
         const nomeUsuario = nomeInput.value.trim();
         const login = loginInput.value.trim();
-        const ehAdm = parseInt(ehAdmInput.value);
+        const ehAdm = ehAdmInput.value === null ? 3 : parseInt(ehAdmInput.value);
+
+        if (!nomeUsuario && !login && !ehAdm) {
+            toast("error", 'Por favor, altere algum dos campos.');
+            return;
+        }
 
         try {
             const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Usuario/atualizar-usuario`, {
@@ -137,11 +146,11 @@ async function editarUsuario(element) {
                 const errorMessage = await response.text();
                 console.error(`Erro ao editar usuário: ${response.status} - ${errorMessage}`);
                 toast('error', 'Erro ao editar usuário.');
+            } else {
+                toast('success', 'Usuário editado com sucesso!');
+                fetchUsuarios();
+                modal.style.display = 'none';
             }
-
-            toast('success', 'Usuário editado com sucesso!');
-            fetchUsuarios();
-            modal.style.display = 'none';
 
         } catch (error) {
             console.error('Erro ao editar usuário:', error);
@@ -290,7 +299,8 @@ async function fetchUsuarios() {
 
         if (!response.ok) {
             const errorMessage = await response.text();
-            throw new Error(`Network response was not ok: ${response.status} - ${errorMessage}`);
+            console.error(`Network response was not ok: ${response.status} - ${errorMessage}`);
+            toast('error', 'Erro ao buscar usuários.');
         }
 
         const usuarios = await response.json();
@@ -315,6 +325,7 @@ async function fetchUsuarios() {
             });
         } else {
             console.error('A resposta não é um array:', usuarios);
+            toast('error', 'Erro ao buscar usuários.');
         }
     } catch (error) {
         console.error('Erro ao buscar usuários:', error);
@@ -335,5 +346,18 @@ if (window.location.pathname.includes('listagemUsuario.html')) {
 }
 
 if (window.location.pathname.includes('listagemUsuario.html')) {
-    window.onload = fetchUsuarios;
+    document.addEventListener('DOMContentLoaded', fetchUsuarios)
 }
+
+
+function verificaPermissao() {
+    const usuario = JSON.parse(sessionStorage.getItem("DadosUsuario"));
+    if (usuario.ehAdm !== 1) {
+        let ehAdm = document.getElementById('ehAdm')
+        ehAdm.disabled = true;
+        let ehAdmEditar = document.getElementById('ehAdmUsuario')
+        ehAdmEditar.style.display = 'none';
+    }
+}
+
+window.onload = verificaPermissao;
