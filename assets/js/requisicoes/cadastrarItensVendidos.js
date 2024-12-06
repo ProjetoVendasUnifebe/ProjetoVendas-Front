@@ -126,15 +126,15 @@ async function cadastrarItemVendido() {
 
         if (response.ok) {
             const data = await response.json();
-            alert('Cadastro realizado com sucesso!');
-            window.location.href = "../Listas/listagemItensVendido.html";
+            toast('success','Cadastro realizado com sucesso!');
+            window.location.href = "../Listas/listagemItensVendidos.html";
         } else {
             console.log('Erro ao cadastrar item vendido:', response.statusText);
-            alert('Erro ao cadastrar item vendido. Tente novamente.');
+            toast('error','Erro ao cadastrar item vendido. Tente novamente.');
         }
     } catch (error) {
         console.log('Erro na requisição:', error);
-        alert('Erro na requisição. Tente novamente.');
+        toast('error','Erro na requisição. Tente novamente.');
     }
 }
 
@@ -168,7 +168,7 @@ async function fetchItensVendidos() {
         }
     } catch (error) {
         console.error('Erro ao buscar itens vendidos:', error);
-        alert('Erro ao carregar itens vendidos. Tente novamente mais tarde.');
+        toast('error','Erro ao carregar itens vendidos. Tente novamente mais tarde.');
     }
 }
 
@@ -214,7 +214,7 @@ async function fetchVendaByID(id) {
     try {
         const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Venda/buscar-venda-por-id/${id}`);
         if (!response.ok) {
-            throw new Error(`Erro ao buscar venda: ${response.statusText}`);
+            console.error(`Erro ao buscar venda: ${response.statusText}`);
         }
         return await response.json();
     } catch (error) {
@@ -226,7 +226,7 @@ async function fetchProdutoByID(id) {
     try {
         const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Produto/buscar-produto-por-id/${id}`);
         if (!response.ok) {
-            throw new Error(`Erro ao buscar produto: ${response.statusText}`);
+            console.error(`Erro ao buscar produto: ${response.statusText}`);
         }
         return await response.json();
     } catch (error) {
@@ -249,7 +249,7 @@ async function editarItemVendido(element) {
         const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/ItensVendidos/buscar-itens-vendidos-por-id/${id}`);
         if (!response.ok) {
             const errorMessage = await response.text();
-            throw new Error(`Erro ao buscar item vendido: ${response.status} - ${errorMessage}`);
+            console.error(`Erro ao buscar item vendido: ${response.status} - ${errorMessage}`);
         }
 
         const itemVendido = await response.json();
@@ -261,7 +261,7 @@ async function editarItemVendido(element) {
 
     } catch (error) {
         console.error('Erro ao buscar item vendido:', error);
-        alert('Erro ao buscar os dados do item vendido. Tente novamente.');
+        toast('error','Erro ao buscar os dados do item vendido. Tente novamente.');
         modal.style.display = 'none';
         return;
     }
@@ -273,7 +273,7 @@ async function editarItemVendido(element) {
         const quantidade = quantidadeInput.value.trim();
 
         if (!vendaValue || !produtoValue || !quantidade) {
-            alert('Por favor, preencha todos os campos.');
+            toast('error','Por favor, preencha todos os campos.');
             return;
         }
 
@@ -296,14 +296,14 @@ async function editarItemVendido(element) {
 
             if (!response.ok) {
                 const errorMessage = await response.text();
-                throw new Error(`Erro ao editar item vendido: ${response.status} - ${errorMessage}`);
+                console.error(`Erro ao editar item vendido: ${response.status} - ${errorMessage}`);
             }
-            alert('Item vendido editado com sucesso!');
+            toast('success','Item vendido editado com sucesso!');
             fetchItensVendidos();
             modal.style.display = 'none';
         } catch (error) {
             console.error('Erro ao editar item vendido:', error);
-            alert('Erro ao editar item vendido. Tente novamente.');
+            toast('error','Erro ao editar item vendido. Tente novamente.');
         }
     };
 }
@@ -322,7 +322,7 @@ async function excluirItemVendido(element) {
 
         if (!response.ok) {
             const errorMessage = await response.text();
-            throw new Error(`Erro ao excluir item vendido: ${response.status} - ${errorMessage}`);
+           console.error(`Erro ao excluir item vendido: ${response.status} - ${errorMessage}`);
         }
         // Toastify({
         //     text: "Item vendido excluído com sucesso!",
@@ -331,12 +331,12 @@ async function excluirItemVendido(element) {
         //       background: "linear-gradient(to right,  #711e92, #5b087c)",
         //     }
         //   }).showToast();
-        alert('Item vendido excluído com sucesso!');
+        toast('success','Item vendido excluído com sucesso!');
         fetchItensVendidos();
     }
     catch (error) {
         console.error('Erro ao excluir item vendido:', error);
-        alert('Erro ao excluir item vendido. Tente novamente.');
+        toast('error','Erro ao excluir item vendido. Tente novamente.');
     }
 }
 
@@ -355,7 +355,7 @@ async function pesquisarEstoque() {
         if (!isNaN(pesquisaInput)) {
             url = `https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/ItensVendidos/buscar-itens-vendidos-por-id/${pesquisaInput}`;
         } else {
-            alert('Por favor, insira um ID válido.');
+            toast('error','Por favor, insira um ID válido.');
             return;
         }
     }
@@ -363,7 +363,7 @@ async function pesquisarEstoque() {
     try {
         const resposta = await fetch(url);
         if (!resposta.ok) {
-            throw new Error(`Erro ao acessar API: ${resposta.status}`);
+            console.error(`Erro ao acessar API: ${resposta.status}`);
         }
 
         const itensVendidos = await resposta.json();
@@ -371,7 +371,7 @@ async function pesquisarEstoque() {
         tbody.innerHTML = '';
 
         if (!itensVendidos || itensVendidos.length === 0) {
-            alert('Nenhum item vendido encontrado.');
+            toast('error','Nenhum item vendido encontrado.');
             return;
         }
 
@@ -391,7 +391,7 @@ async function pesquisarEstoque() {
         substituirIDPorNomeProduto();
     } catch (erro) {
         console.error('Erro ao buscar item vendido:', erro);
-        alert('Erro ao buscar item vendido.');
+        toast('error','Erro ao buscar item vendido.');
     }
 }
 
@@ -399,3 +399,31 @@ window.onload = iniciandoAutocompletes;
 if (window.location.pathname.includes('listagemItensVendidos.html')) {
     window.onload = fetchItensVendidos;
 }   
+/===== TOAST  =====/
+function toast(tipoToast, mensagem) {
+  switch (tipoToast) {
+    case "success":
+
+      Toastify({
+        text: mensagem,
+        className: "success",
+        style: {
+          background: "linear-gradient(to right,  #711e92, #5b087c)",
+        }
+      }).showToast();
+
+      break;
+    case "error":
+
+      Toastify({
+        text: mensagem,
+        className: "error",
+        style: {
+          background: "linear-gradient(to right, #ff0000, #b30000, #800000)"
+        }
+      }).showToast();
+
+      break;
+  }
+
+}
