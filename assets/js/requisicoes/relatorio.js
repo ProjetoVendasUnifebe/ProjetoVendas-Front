@@ -4,34 +4,34 @@ let grafico = null;
 
 async function buscarRelatorios() {
     const filtro = parseInt(document.getElementById('filtro').value);
-        switch (filtro) {
+    switch (filtro) {
 
-            case 1: 
-                buscarClienteCompra();
-                break;
+        case 1:
+            buscarClienteCompra();
+            break;
 
-            case 2: 
-                buscarProdutosVendidos();
-                break;
+        case 2:
+            buscarProdutosVendidos();
+            break;
 
-            case 3: 
-                buscarFaturamento();
-                break;
+        case 3:
+            buscarFaturamento();
+            break;
 
-            case 4: 
-                buscarVendas();
-                break;
-            
-        }
+        case 4:
+            buscarVendas();
+            break;
+
+    }
 }
 
 async function buscarClienteCompra() {
 
-    const ordenacao =  document.getElementById('ordenacao').value.trim();
-    const nome =  document.getElementById('nome').value.trim();
+    const ordenacao = document.getElementById('ordenacao').value.trim();
+    const nome = document.getElementById('nome').value.trim();
     let urlClienteCompra = ''
     let mostrouMensagem = false
- 
+
     if (ordenacao && nome) {
         urlClienteCompra += url + `buscar-clientes-com-compras?ordenacao=${ordenacao}&nomeCliente=${nome}`
     } else if (ordenacao && !nome) {
@@ -41,36 +41,36 @@ async function buscarClienteCompra() {
     } else {
         urlClienteCompra += url + `buscar-clientes-com-compras`
     }
-    
+
     try {
         const resposta = await fetch(urlClienteCompra);
-    
+
         if (!resposta.ok) {
             toast("error", "Erro de requisição");
             mostrouMensagem = true
         }
-    
+
         const Cliente = await resposta.json();
-    
-    
+
+
         criarGraficoCliente(Cliente);
-    
+
     } catch (erro) {
 
-        if (!mostrouMensagem){
+        if (!mostrouMensagem) {
             toast("error", "Cliente não existe");
         }
-        
+
         if (grafico) {
             grafico.destroy();
         }
-    }    
+    }
 
 }
 async function buscarProdutosVendidos() {
-    
-    const ordenacao =  document.getElementById('ordenacao').value.trim();
-    const nome =  document.getElementById('nome').value.trim();
+
+    const ordenacao = document.getElementById('ordenacao').value.trim();
+    const nome = document.getElementById('nome').value.trim();
     let urlProduto = ''
     let mostrouMensagem = false
 
@@ -86,33 +86,33 @@ async function buscarProdutosVendidos() {
 
     try {
         const resposta = await fetch(urlProduto);
-    
+
         if (!resposta.ok) {
             toast("error", "Erro de requisição");
             mostrouMensagem = true
         }
-    
+
         const Produto = await resposta.json();
-    
-    
+
+
         criarGraficoProduto(Produto);
-    
+
     } catch (erro) {
 
-        if (!mostrouMensagem){
+        if (!mostrouMensagem) {
             toast("error", "Produto não existe");
         }
-        
+
         if (grafico) {
             grafico.destroy();
         }
-    }    
-    
+    }
+
 }
 async function buscarFaturamento() {
-    
-    const mes =  document.getElementById('mes').value.trim();
-    const ano =  document.getElementById('ano').value.trim();
+
+    const mes = document.getElementById('mes').value.trim();
+    const ano = document.getElementById('ano').value.trim();
     let urlFaturamento = ''
     let mostrouMensagem = false
 
@@ -128,73 +128,73 @@ async function buscarFaturamento() {
 
     try {
         const resposta = await fetch(urlFaturamento);
-    
+
         if (!resposta.ok) {
             toast("error", "Erro de requisição");
             mostrouMensagem = true
         }
-    
+
         const Faturamento = await resposta.json();
-    
-    
+
+
         criarGraficoFaturamento(Faturamento);
-    
+
     } catch (erro) {
 
-        if (!mostrouMensagem){
+        if (!mostrouMensagem) {
             toast("error", "Ano/mês inválido");
         }
-        
+
         if (grafico) {
             grafico.destroy();
         }
-    }    
+    }
 
 
 }
 async function buscarVendas() {
-    
+
     const urlVendas = url + 'buscar-vendas-finalizadas'
     let mostrouMensagem = false
     try {
         const resposta = await fetch(urlVendas);
-    
+
         if (!resposta.ok) {
             toast("error", "Erro de requisição");
             mostrouMensagem = true
         }
-    
+
         const Vendas = await resposta.json();
-    
-    
+
+
         criarGraficoVenda(Vendas);
-    
+
     } catch (erro) {
 
-        if (!mostrouMensagem){
+        if (!mostrouMensagem) {
             toast("error", "Erro de requisição");
         }
-        
+
         if (grafico) {
             grafico.destroy();
         }
-    }    
+    }
 
 }
 
 async function criarGraficoVenda(json) {
 
- 
-    const DataNomeCliente = json.map(item => item.dataVenda); 
-    const valorDaVenda = json.map(item => item.valorDaVenda); 
+
+    const DataNomeCliente = json.map(item => item.dataVenda);
+    const valorDaVenda = json.map(item => item.valorDaVenda);
 
     if (grafico) {
         grafico.destroy()
-   }
-   
+    }
+
     const canva = document.getElementById('graficoFaturamento').getContext('2d');
     grafico = new Chart(canva, {
-        type: 'bar', // Pode ser 'line', 'pie', etc.
+        type: 'bar',
         data: {
             labels: DataNomeCliente, // Legendas no eixo X
             datasets: [{
@@ -232,15 +232,15 @@ async function criarGraficoVenda(json) {
 async function criarGraficoFaturamento(json) {
 
     const canva = document.getElementById('graficoFaturamento').getContext('2d');
-    const anoMes = json.map(item => `${item.ano}/${item.mes}`); 
-    const faturamento = json.map(item => item.faturamento); 
+    const anoMes = json.map(item => `${item.ano}/${item.mes}`);
+    const faturamento = json.map(item => item.faturamento);
 
-   if (grafico) {
+    if (grafico) {
         grafico.destroy()
-   }
-   
+    }
+
     grafico = new Chart(canva, {
-        type: 'bar', // Pode ser 'line', 'pie', etc.
+        type: 'bar',
         data: {
             labels: anoMes, // Legendas no eixo X
             datasets: [{
@@ -274,18 +274,18 @@ async function criarGraficoFaturamento(json) {
 
 }
 
-async function criarGraficoProduto(json){
+async function criarGraficoProduto(json) {
 
     const canva = document.getElementById('graficoFaturamento').getContext('2d');
-    const produto = json.map(item => item.nomeProduto); 
-    const faturamento = json.map(item => item.valorTotal); 
+    const produto = json.map(item => item.nomeProduto);
+    const faturamento = json.map(item => item.valorTotal);
 
-   if (grafico) {
+    if (grafico) {
         grafico.destroy()
-   }
-   
+    }
+
     grafico = new Chart(canva, {
-        type: 'bar', // Pode ser 'line', 'pie', etc.
+        type: 'bar',
         data: {
             labels: produto, // Legendas no eixo X
             datasets: [{
@@ -320,17 +320,17 @@ async function criarGraficoProduto(json){
 }
 
 async function criarGraficoCliente(json) {
-    
-    const canva = document.getElementById('graficoFaturamento').getContext('2d');
-    const cliente = json.map(item => item.nomeCliente); 
-    const numeroDeCompras = json.map(item => item.numeroDeCompras); 
 
-   if (grafico) {
+    const canva = document.getElementById('graficoFaturamento').getContext('2d');
+    const cliente = json.map(item => item.nomeCliente);
+    const numeroDeCompras = json.map(item => item.numeroDeCompras);
+
+    if (grafico) {
         grafico.destroy()
-   }
-   
+    }
+
     grafico = new Chart(canva, {
-        type: 'bar', // Pode ser 'line', 'pie', etc.
+        type: 'bar',
         data: {
             labels: cliente, // Legendas no eixo X
             datasets: [{
@@ -365,29 +365,41 @@ async function criarGraficoCliente(json) {
 
 // /===== TOAST  =====/
 function toast(tipoToast, mensagem) {
-  switch (tipoToast) {
-    case "success":
+    switch (tipoToast) {
+        case "success":
 
-      Toastify({
-        text: mensagem,
-        className: "success",
-        style: {
-          background: "linear-gradient(to right,  #711e92, #5b087c)",
-        }
-      }).showToast();
+            Toastify({
+                text: mensagem,
+                className: "success",
+                style: {
+                    background: "linear-gradient(to right,  #711e92, #5b087c)",
+                }
+            }).showToast();
 
-      break;
-    case "error":
+            break;
+        case "error":
 
-      Toastify({
-        text: mensagem,
-        className: "error",
-        style: {
-          background: "linear-gradient(to right, #ff0000, #b30000, #800000)"
-        }
-      }).showToast();
+            Toastify({
+                text: mensagem,
+                className: "error",
+                style: {
+                    background: "linear-gradient(to right, #ff0000, #b30000, #800000)"
+                }
+            }).showToast();
 
-      break;
-  }
+            break;
+    }
 
 }
+
+function verificaPermissao() {
+    const usuario = JSON.parse(sessionStorage.getItem("DadosUsuario"));
+    if (usuario.ehAdm !== 1) {
+        let searchButton = document.getElementById('searchButton')
+        searchButton.onclick = function () {
+            toast("error", "Você não tem permissão para acessar aos relatórios");
+        }
+    }
+}
+
+window.onload = verificaPermissao;

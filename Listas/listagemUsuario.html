@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,17 +28,10 @@
                         <ion-icon name="home-outline" class="nav__icon"></ion-icon>
                         <span class="nav__name">Dashboard</span>
                     </a>
-                    <a href="#" class="nav__link">
-                        <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
-                        <span class="nav__name">Messenger</span>
-                    </a>
-
                     <div class="nav__link collapse collapse__link">
                         <ion-icon name="folder-outline" class="nav__icon"></ion-icon>
                         <span class="nav__name">Cadastros</span>
-
                         <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
-
                         <ul class="collapse__menu">
                             <a href="../Cadastros/cadastrarCliente.html" class="collapse__sublink">Cliente</a>
                             <a href="../Cadastros/cadastrarProduto.html" class="collapse__sublink">Produto</a>
@@ -49,17 +43,15 @@
                             <a href="../Cadastros/cadastrarItensVendidos.html" class="collapse__sublink">Itens por
                                 venda</a>
                         </ul>
-                    </div>
 
+                    </div>
                     <div class="nav__link collapse collapse__link">
                         <ion-icon name="folder-outline" class="nav__icon"></ion-icon>
                         <span class="nav__name">Listagens</span>
-
                         <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
-
                         <ul class="collapse__menu">
                             <a href="../Listas/listagemCliente.html" class="collapse__sublink">Cliente</a>
-                            <a href="../Listas/ListaProduto.html" class="collapse__sublink">Produto</a>
+                            <a href="../Listas/listagemProduto.html" class="collapse__sublink">Produto</a>
                             <a href="../Listas/listagemUsuario.html" class="collapse__sublink">Usuário</a>
                             <a href="../Listas/listagemEstoque.html" class="collapse__sublink">Estoque</a>
                             <a href="../Listas/listagemEstoqueProduto.html" class="collapse__sublink">Estoque
@@ -68,30 +60,16 @@
                             <a href="../Listas/listagemItensVendidos.html" class="collapse__sublink">Itens por venda</a>
                         </ul>
                     </div>
-
-                    <a href="#" class="nav__link">
+                    <a href="../relatorios.html" class="nav__link">
                         <ion-icon name="pie-chart-outline" class="nav__icon"></ion-icon>
-                        <span class="nav__name">Analytics</span>
+                        <span class="nav__name">Relatórios</span>
                     </a>
-                    <div class="nav__link collapse">
-                        <ion-icon name="people-outline" class="nav__icon"></ion-icon>
-                        <span class="nav__name">Team</span>
-
-                        <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
-
-                        <ul class="collapse__menu">
-                            <a href="#" class="collapse__sublink">Data</a>
-                            <a href="#" class="collapse__sublink">Group</a>
-                            <a href="#" class="collapse__sublink">Members</a>
-                        </ul>
-                    </div>
                     <a href="#" class="nav__link">
                         <ion-icon name="settings-outline" class="nav__icon"></ion-icon>
                         <span class="nav__name">Configurações</span>
                     </a>
                 </div>
             </div>
-
             <a href="../login.html" class="nav__link">
                 <ion-icon name="log-out-outline" class="nav__icon"></ion-icon>
                 <span class="nav__name">Sair</span>
@@ -149,7 +127,7 @@
                     <input type="text" id="nomeUsuario" name="nomeUsuario" required>
                     <label for="loginUsuario">Login:</label>
                     <input type="text" id="loginUsuario" name="loginUsuario" required>
-                    <div class="form-group form-actions">
+                    <div class="form-group form-actions" id="ehAdmDIV">
                         <label id="ehAdmUsuarioLabel" for="ehAdmUsuario">Administrador:</label>
                         <select id="ehAdmUsuario" name="ehAdmUsuario">
                             <option value=1>Sim</option>
@@ -157,7 +135,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <button type="button" id="salvarEdicao" class="btn">Salvar</button>
+                        <button type="button" id="salvarEdicao" class="btn" onclick="verificarSessao()">Salvar</button>
                     </div>
             </form>
         </div>
@@ -167,6 +145,8 @@
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/requisicoes/cadastrarUsuario.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="/assets/js/ControledeSessao.js"></script>
+    <script src="/assets/js/ApenasSessao.js"></script>
 </body>
 
 </html>

@@ -453,6 +453,7 @@ textarea {
   /* color: white; */
 }
 
+
 .inputData{
   width: 35%;
 }
@@ -560,3 +561,11 @@ textarea {
   font-size: var(--normal-font-size);
   transition: .5s;
 }
+.paragrafo {
+
+  color: #ffff;
+  padding-top: 3%;
+
+}
+
+
