@@ -7,9 +7,12 @@
 
     <link rel="stylesheet" href="../assets/css/styles.css">
     <link rel="icon" type="image/x-icon" href="../assets/img/file.ico">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script type="module" src="../assets/js/scripts.js"></script>
     <script src = "/assets/js/ControledeSessao.js"></script>
     <script src="/assets/js/ApenasSessao.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
     <title>Cadastro de Cliente</title>
 </head>
 
@@ -122,7 +125,7 @@
                     <option value="N">Não Declarado</option>
                 </select>
                 <label for="Numero">Número:</label>
-                <input type="text" id="num" name="Numero" placeholder="numero">
+                <input type="text" id="num" name="Numero" placeholder="Número">
             </div>
             <div class="formd">
                 <label for="pais">País:</label>
@@ -208,17 +211,17 @@
                     if (response.ok) {
                         return response.json();
                     } else {
-                        throw new Error(`Endereco invalido. Insira um endereço válido! Status: ${response.status}`);
+                       console.error(`Endereco invalido. Insira um endereço válido! Status: ${response.status}`);
                     }
                 })
                 .then(data => {
                     console.log('Endereço validado com sucesso.', data);
                     cadastrarCliente(data)
-                    alert("Endereço validado com sucesso.");
+                    toast("success","Endereço validado com sucesso.");
                 })
                 .catch(error => {
                     console.error('Erro:', error);
-                    alert("Ocorreu um erro ao tentar validar o endereço.");
+                    toast("error","Ocorreu um erro ao tentar validar o endereço.");
                 });
         })
 
@@ -256,18 +259,48 @@
                     if (response.ok) {
                         return response.json();
                     } else {
-                        throw new Error(`Erro ao cadastrar Cliente. Status: ${response.status}`);
+                        console.error(`Erro ao cadastrar Cliente. Status: ${response.status}`);
                     }
                 })
                 .then(data => {
                     console.log('Cliente cadastrado com sucesso:', data);
-                    alert("Cliente cadastrado com sucesso!");
+                    toast("success","Cliente cadastrado com sucesso!");
                 })
                 .catch(error => {
                     console.error('Erro:', error);
-                    alert("Ocorreu um erro ao tentar cadastrar o Cliente.");
+                    toast("error","Ocorreu um erro ao tentar cadastrar o Cliente.");
                 });
         }
+
+
+        /===== TOAST  =====/
+function toast(tipoToast, mensagem) {
+  switch (tipoToast) {
+    case "success":
+
+      Toastify({
+        text: mensagem,
+        className: "success",
+        style: {
+          background: "linear-gradient(to right,  #711e92, #5b087c)",
+        }
+      }).showToast();
+
+      break;
+    case "error":
+
+      Toastify({
+        text: mensagem,
+        className: "error",
+        style: {
+          background: "linear-gradient(to right, #ff0000, #b30000, #800000)"
+        }
+      }).showToast();
+
+      break;
+  }
+
+}
     </script>
 
 </body>
