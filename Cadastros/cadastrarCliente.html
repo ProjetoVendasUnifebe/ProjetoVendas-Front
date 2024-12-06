@@ -5,10 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- ===== CSS ===== -->
     <link rel="stylesheet" href="../assets/css/styles.css">
     <link rel="icon" type="image/x-icon" href="../assets/img/file.ico">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script type="module" src="../assets/js/scripts.js"></script>
+    <script src = "/assets/js/ControledeSessao.js"></script>
+    <script src="/assets/js/ApenasSessao.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
     <title>Cadastro de Cliente</title>
 </head>
@@ -19,55 +22,53 @@
             <div>
                 <div class="nav__brand">
                     <ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
-                    <a href="index.html" class="nav__logo">Comercialize</a>
+                    <a href="../index.html" class="nav__logo">Comercialize</a>
                 </div>
                 <div class="nav__list">
-                    <a href="index.html" class="nav__link active">
+                    <a href="../index.html" class="nav__link active">
                         <ion-icon name="home-outline" class="nav__icon"></ion-icon>
                         <span class="nav__name">Dashboard</span>
                     </a>
-                    <a href="#" class="nav__link">
-                        <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
-                        <span class="nav__name">Messenger</span>
-                    </a>
-
-                    <div class="nav__link collapse">
+                    <div class="nav__link collapse collapse__link">
                         <ion-icon name="folder-outline" class="nav__icon"></ion-icon>
                         <span class="nav__name">Cadastros</span>
-
                         <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
-
                         <ul class="collapse__menu">
-                            <a href="cadastrarCliente.html" class="collapse__sublink">Cliente</a>
-                            <a href="cadastrarProduto.html" class="collapse__sublink">Produto</a>
-                            <a href="cadastrarUsuario.html" class="collapse__sublink">Usuário</a>
+                            <a href="../Cadastros/cadastrarCliente.html" class="collapse__sublink">Cliente</a>
+                            <a href="../Cadastros/cadastrarProduto.html" class="collapse__sublink">Produto</a>
+                            <a href="../Cadastros/cadastrarUsuario.html" class="collapse__sublink">Usuário</a>
+                            <a href="../Cadastros/cadastrarEstoque.html" class="collapse__sublink">Estoque</a>
+                            <a href="../Cadastros/cadastrarEstoqueProduto.html" class="collapse__sublink">Estoque Produto</a>
+                            <a href="../Cadastros/cadastrarVendas.html" class="collapse__sublink">Vendas</a>
+                            <a href="../Cadastros/cadastrarItensVendidos.html" class="collapse__sublink">Itens por venda</a>
+                        </ul>
+
+                    </div>
+                    <div class="nav__link collapse collapse__link">
+                        <ion-icon name="folder-outline" class="nav__icon"></ion-icon>
+                        <span class="nav__name">Listagens</span>
+                        <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
+                        <ul class="collapse__menu">
+                            <a href="../Listas/listagemCliente.html" class="collapse__sublink">Cliente</a>
+                            <a href="../Listas/listagemProduto.html" class="collapse__sublink">Produto</a>
+                            <a href="../Listas/listagemUsuario.html" class="collapse__sublink">Usuário</a>
+                            <a href="../Listas/listagemEstoque.html" class="collapse__sublink">Estoque</a>
+                            <a href="../Listas/listagemEstoqueProduto.html" class="collapse__sublink">Estoque Produto</a>
+                            <a href="../Listas/listagemVendas.html" class="collapse__sublink">Vendas</a>
+                            <a href="../Listas/listagemItensVendidos.html" class="collapse__sublink">Itens por venda</a>
                         </ul>
                     </div>
-
-                    <a href="#" class="nav__link">
+                    <a href="../relatorios.html" class="nav__link">
                         <ion-icon name="pie-chart-outline" class="nav__icon"></ion-icon>
-                        <span class="nav__name">Analytics</span>
+                        <span class="nav__name">Relatórios</span>
                     </a>
-                    <div class="nav__link collapse">
-                        <ion-icon name="people-outline" class="nav__icon"></ion-icon>
-                        <span class="nav__name">Team</span>
-
-                        <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
-
-                        <ul class="collapse__menu">
-                            <a href="#" class="collapse__sublink">Data</a>
-                            <a href="#" class="collapse__sublink">Group</a>
-                            <a href="#" class="collapse__sublink">Members</a>
-                        </ul>
-                    </div>
                     <a href="#" class="nav__link">
                         <ion-icon name="settings-outline" class="nav__icon"></ion-icon>
                         <span class="nav__name">Configurações</span>
                     </a>
                 </div>
             </div>
-
-            <a href="login.html" class="nav__link">
+            <a href="../login.html" class="nav__link">
                 <ion-icon name="log-out-outline" class="nav__icon"></ion-icon>
                 <span class="nav__name">Sair</span>
             </a>
@@ -98,7 +99,7 @@
                     <option value="N">Não Declarado</option>
                 </select>
                 <label for="Numero">Número:</label>
-                <input type="text" id="num" name="Numero" placeholder="numero">
+                <input type="text" id="num" name="Numero" placeholder="Número">
             </div>
             <div class="formd">
                 <label for="pais">País:</label>
@@ -139,8 +140,8 @@
     <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
 
     <!-- ===== MAIN JS ===== -->
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/scripts.js"></script>
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/scripts.js"></script>
     <script>
         //Inicio de config do botão do form do tipo "Submit" e definindo o event, refencia o formulario e adiciona o evento Default
         document.getElementById("Cadastroform").addEventListener("submit", (event) => {
@@ -184,24 +185,24 @@
                     if (response.ok) {
                         return response.json();
                     } else {
-                        throw new Error(`Endereco invalido. Insira um endereço válido! Status: ${response.status}`);
+                       console.error(`Endereco invalido. Insira um endereço válido! Status: ${response.status}`);
                     }
                 })
                 .then(data => {
                     console.log('Endereço validado com sucesso.', data);
                     cadastrarCliente(data)
-                    alert("Endereço validado com sucesso.");
+                    toast("success","Endereço validado com sucesso.");
                 })
                 .catch(error => {
                     console.error('Erro:', error);
-                    alert("Ocorreu um erro ao tentar validar o endereço.");
+                    toast("error","Ocorreu um erro ao tentar validar o endereço.");
                 });
         })
 
         function cadastrarCliente(idEndereco) {
-                //Define a segunda url para o consumo da segunda API
+            //Define a segunda url para o consumo da segunda API
             const url2 = 'https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Cliente/adicionar-cliente'
- //pega os valores do formulario
+                //pega os valores do formulario
             const Nome = document.getElementById("name").value;
             const Cpf = document.getElementById("cpf").value;
             const Email = document.getElementById("email").value;
@@ -232,19 +233,49 @@
                     if (response.ok) {
                         return response.json();
                     } else {
-                        throw new Error(`Erro ao cadastrar Cliente. Status: ${response.status}`);
+                        console.error(`Erro ao cadastrar Cliente. Status: ${response.status}`);
                     }
                 })
                 .then(data => {
                     console.log('Cliente cadastrado com sucesso:', data);
-                    alert("Cliente cadastrado com sucesso!");
+                    toast("success","Cliente cadastrado com sucesso!");
                 })
                 .catch(error => {
                     console.error('Erro:', error);
-                    alert("Ocorreu um erro ao tentar cadastrar o Cliente.");
+                    toast("error","Ocorreu um erro ao tentar cadastrar o Cliente.");
                 });
         }
-      </script>
+
+
+        /===== TOAST  =====/
+function toast(tipoToast, mensagem) {
+  switch (tipoToast) {
+    case "success":
+
+      Toastify({
+        text: mensagem,
+        className: "success",
+        style: {
+          background: "linear-gradient(to right,  #711e92, #5b087c)",
+        }
+      }).showToast();
+
+      break;
+    case "error":
+
+      Toastify({
+        text: mensagem,
+        className: "error",
+        style: {
+          background: "linear-gradient(to right, #ff0000, #b30000, #800000)"
+        }
+      }).showToast();
+
+      break;
+  }
+
+}
+    </script>
 
 </body>
 

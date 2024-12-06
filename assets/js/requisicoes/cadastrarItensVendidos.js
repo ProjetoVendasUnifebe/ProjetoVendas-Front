@@ -1,7 +1,7 @@
 function autocomplete(input, data) {
     let currentFocus;
 
-    input.addEventListener("input", function(e) {
+    input.addEventListener("input", function (e) {
         let list, item, val = this.value;
         closeAllLists();
         if (!val) return false;
@@ -16,7 +16,7 @@ function autocomplete(input, data) {
             if (data[i].toLowerCase().includes(val.toLowerCase())) {
                 item = document.createElement("div");
                 item.innerHTML = data[i];
-                item.addEventListener("click", function(e) {
+                item.addEventListener("click", function (e) {
                     input.value = this.innerText;
                     closeAllLists();
                 });
@@ -25,7 +25,7 @@ function autocomplete(input, data) {
         }
     });
 
-    input.addEventListener("keydown", function(e) {
+    input.addEventListener("keydown", function (e) {
         let list = document.getElementById(this.id + "-autocomplete-list");
         if (list) list = list.getElementsByTagName("div");
         if (e.keyCode === 40) {
@@ -65,7 +65,7 @@ function autocomplete(input, data) {
         }
     }
 
-    document.addEventListener("click", function(e) {
+    document.addEventListener("click", function (e) {
         closeAllLists(e.target);
     });
 }
@@ -96,7 +96,7 @@ async function iniciandoAutocompletes() {
     const vendas = await fetchVendas();
     autocomplete(document.getElementById("autocompleteVenda"), vendas);
 
-    const produtos = await fetchProdutos(); 
+    const produtos = await fetchProdutos();
     autocomplete(document.getElementById('autocompleteProduto'), produtos);
 }
 
@@ -126,15 +126,15 @@ async function cadastrarItemVendido() {
 
         if (response.ok) {
             const data = await response.json();
-            alert('Cadastro realizado com sucesso!');
-            window.location.href = "../Listas/listagemItensVendido.html";
+            toast('success','Cadastro realizado com sucesso!');
+            window.location.href = "../Listas/listagemItensVendidos.html";
         } else {
             console.log('Erro ao cadastrar item vendido:', response.statusText);
-            alert('Erro ao cadastrar item vendido. Tente novamente.');
+            toast('error','Erro ao cadastrar item vendido. Tente novamente.');
         }
     } catch (error) {
         console.log('Erro na requisição:', error);
-        alert('Erro na requisição. Tente novamente.');
+        toast('error','Erro na requisição. Tente novamente.');
     }
 }
 
@@ -168,19 +168,19 @@ async function fetchItensVendidos() {
         }
     } catch (error) {
         console.error('Erro ao buscar itens vendidos:', error);
-        alert('Erro ao carregar itens vendidos. Tente novamente mais tarde.');
+        toast('error','Erro ao carregar itens vendidos. Tente novamente mais tarde.');
     }
 }
 
 if (window.location.pathname.includes('listagemItensVendidos.html')) {//IF necessário para a página rodar(depois separar em arquivos diferentes)
     document.getElementById('closeModal').onclick = function () {
         document.getElementById('editarItemVendidoModal').style.display = 'none';
-    }    
+    }
 }
 
 async function substituirIDPorNomeVenda() {
     const linhasTabela = document.querySelectorAll('#itens-vendidos-container tr');
-    
+
     for (let linha of linhasTabela) {
         const celulaVenda = linha.querySelector('td:nth-child(2)');
         const idVenda = celulaVenda.textContent.trim();
@@ -196,7 +196,7 @@ async function substituirIDPorNomeVenda() {
 
 async function substituirIDPorNomeProduto() {
     const linhasTabela = document.querySelectorAll('#itens-vendidos-container tr');
-    
+
     for (let linha of linhasTabela) {
         const celulaProduto = linha.querySelector('td:nth-child(3)');
         const idProduto = celulaProduto.textContent.trim();
@@ -214,7 +214,7 @@ async function fetchVendaByID(id) {
     try {
         const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Venda/buscar-venda-por-id/${id}`);
         if (!response.ok) {
-            throw new Error(`Erro ao buscar venda: ${response.statusText}`);
+            console.error(`Erro ao buscar venda: ${response.statusText}`);
         }
         return await response.json();
     } catch (error) {
@@ -226,7 +226,7 @@ async function fetchProdutoByID(id) {
     try {
         const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Produto/buscar-produto-por-id/${id}`);
         if (!response.ok) {
-            throw new Error(`Erro ao buscar produto: ${response.statusText}`);
+            console.error(`Erro ao buscar produto: ${response.statusText}`);
         }
         return await response.json();
     } catch (error) {
@@ -249,7 +249,7 @@ async function editarItemVendido(element) {
         const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/ItensVendidos/buscar-itens-vendidos-por-id/${id}`);
         if (!response.ok) {
             const errorMessage = await response.text();
-            throw new Error(`Erro ao buscar item vendido: ${response.status} - ${errorMessage}`);
+            console.error(`Erro ao buscar item vendido: ${response.status} - ${errorMessage}`);
         }
 
         const itemVendido = await response.json();
@@ -261,7 +261,7 @@ async function editarItemVendido(element) {
 
     } catch (error) {
         console.error('Erro ao buscar item vendido:', error);
-        alert('Erro ao buscar os dados do item vendido. Tente novamente.');
+        toast('error','Erro ao buscar os dados do item vendido. Tente novamente.');
         modal.style.display = 'none';
         return;
     }
@@ -273,7 +273,7 @@ async function editarItemVendido(element) {
         const quantidade = quantidadeInput.value.trim();
 
         if (!vendaValue || !produtoValue || !quantidade) {
-            alert('Por favor, preencha todos os campos.');
+            toast('error','Por favor, preencha todos os campos.');
             return;
         }
 
@@ -296,21 +296,14 @@ async function editarItemVendido(element) {
 
             if (!response.ok) {
                 const errorMessage = await response.text();
-                throw new Error(`Erro ao editar item vendido: ${response.status} - ${errorMessage}`);
+                console.error(`Erro ao editar item vendido: ${response.status} - ${errorMessage}`);
             }
-            // Toastify({
-            //     text: "Item vendido editado com sucesso!",
-            //     className: "info",
-            //     style: {
-            //       background: "linear-gradient(to right,  #711e92, #5b087c)",
-            //     }
-            //   }).showToast();
-            alert('Item vendido editado com sucesso!');
+            toast('success','Item vendido editado com sucesso!');
             fetchItensVendidos();
             modal.style.display = 'none';
         } catch (error) {
             console.error('Erro ao editar item vendido:', error);
-            alert('Erro ao editar item vendido. Tente novamente.');
+            toast('error','Erro ao editar item vendido. Tente novamente.');
         }
     };
 }
@@ -329,7 +322,7 @@ async function excluirItemVendido(element) {
 
         if (!response.ok) {
             const errorMessage = await response.text();
-            throw new Error(`Erro ao excluir item vendido: ${response.status} - ${errorMessage}`);
+           console.error(`Erro ao excluir item vendido: ${response.status} - ${errorMessage}`);
         }
         // Toastify({
         //     text: "Item vendido excluído com sucesso!",
@@ -338,12 +331,67 @@ async function excluirItemVendido(element) {
         //       background: "linear-gradient(to right,  #711e92, #5b087c)",
         //     }
         //   }).showToast();
-        alert('Item vendido excluído com sucesso!');
+        toast('success','Item vendido excluído com sucesso!');
         fetchItensVendidos();
     }
     catch (error) {
         console.error('Erro ao excluir item vendido:', error);
-        alert('Erro ao excluir item vendido. Tente novamente.');
+        toast('error','Erro ao excluir item vendido. Tente novamente.');
+    }
+}
+
+async function pesquisarEstoque() {
+    const pesquisaInput = document.getElementById('pesquisaEstoque').value.trim();
+    const filtro = document.getElementById('filtroEstoque').value;
+
+    if (!pesquisaInput) {
+        fetchItensVendidos();
+        return;
+    }
+
+    let url;
+
+    if (filtro === 'id') {
+        if (!isNaN(pesquisaInput)) {
+            url = `https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/ItensVendidos/buscar-itens-vendidos-por-id/${pesquisaInput}`;
+        } else {
+            toast('error','Por favor, insira um ID válido.');
+            return;
+        }
+    }
+
+    try {
+        const resposta = await fetch(url);
+        if (!resposta.ok) {
+            console.error(`Erro ao acessar API: ${resposta.status}`);
+        }
+
+        const itensVendidos = await resposta.json();
+        const tbody = document.querySelector('#itens-vendidos-container');
+        tbody.innerHTML = '';
+
+        if (!itensVendidos || itensVendidos.length === 0) {
+            toast('error','Nenhum item vendido encontrado.');
+            return;
+        }
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <th scope="row">${itensVendidos.idItensVendidos}</th>
+            <td>${itensVendidos.idVenda}</td>
+            <td>${itensVendidos.idProduto}</td>
+            <td>${itensVendidos.qtdVendida}</td>
+            <td>
+                <ion-icon name="create-outline" class="button-edit" data-id="${itensVendidos.idItensVendidos}" onclick="editarItemVendido(this)">Editar</ion-icon>
+                <ion-icon name="trash" class="button-delete" data-id="${itensVendidos.idItensVendidos}" onclick="excluirItemVendido(this)">Apagar</ion-icon>
+            </td>`;
+        tbody.appendChild(row);
+
+        substituirIDPorNomeVenda();
+        substituirIDPorNomeProduto();
+    } catch (erro) {
+        console.error('Erro ao buscar item vendido:', erro);
+        toast('error','Erro ao buscar item vendido.');
     }
 }
 
@@ -351,3 +399,31 @@ window.onload = iniciandoAutocompletes;
 if (window.location.pathname.includes('listagemItensVendidos.html')) {
     window.onload = fetchItensVendidos;
 }   
+/===== TOAST  =====/
+function toast(tipoToast, mensagem) {
+  switch (tipoToast) {
+    case "success":
+
+      Toastify({
+        text: mensagem,
+        className: "success",
+        style: {
+          background: "linear-gradient(to right,  #711e92, #5b087c)",
+        }
+      }).showToast();
+
+      break;
+    case "error":
+
+      Toastify({
+        text: mensagem,
+        className: "error",
+        style: {
+          background: "linear-gradient(to right, #ff0000, #b30000, #800000)"
+        }
+      }).showToast();
+
+      break;
+  }
+
+}

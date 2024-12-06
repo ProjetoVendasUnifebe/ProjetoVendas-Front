@@ -1,47 +1,46 @@
-// Função para mostrar ou esconder o formData com base na opção selecionada
-function toggleFormData() {
-    const filtroVenda = document.getElementById('filtroVenda').value;  // Obtém o valor da opção selecionada
-    const formData = document.getElementById('formData');  // Obtém o formData
-
-    if (filtroVenda === 'data') {
-        formData.style.display = 'block';  // Exibe o formData se a opção for "data"
-    } else {
-        formData.style.display = 'none';  // Oculta o formData se a opção for "id"
-    }
-}
-
-// Chama a função `toggleFormData` sempre que a opção selecionada no filtroVenda mudar
-document.getElementById('filtroVenda').addEventListener('change', toggleFormData);
-
-
-
-
-
 
 const baseUrl = 'https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Venda';
 
 const lista = document.getElementById('lista-produtos');
 // Função para listar todos os produtos
+
+    function formatarData(data){
+
+        // Convertendo a data para o formato brasileiro
+            let dataFormatada = new Date(data).toLocaleDateString("pt-BR");
+
+            
+            let horaFormatada = new Date(data).toLocaleTimeString("pt-BR", {
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit'
+            });
+
+            return dataFormatada + ' ' + horaFormatada
+    }
+
 async function ListaVenda() {
     try {
         const resposta = await fetch(`${baseUrl}/buscar-todas-vendas`);
         if (!resposta.ok) {
-            throw new Error(`Erro ao acessar API: ${resposta.status}`);
+            console.error(`Erro ao acessar API: ${resposta.status}`);
+            toast("error", "Erro de requisição");
         }
         const vendas = await resposta.json();
         const tbody = document.querySelector('#vendas-container')
 
         tbody.innerHTML = '';
+       
 
         if (Array.isArray(vendas)) {
             vendas.forEach(venda => {
-                const row = document.createElement('tr');
+                const row = document.createElement('tr');                
                 row.innerHTML = `
                     <th scope="row">${venda.idVenda}</th>
                     <td>${venda.idUsuario}</td>
                     <td>${venda.idCliente}</td>
                     <td>${venda.valor}</td>
-                    <td>${venda.data_venda}</td>
+                    <td>${formatarData(venda.data_venda)}</td>
                     <td>${venda.forma_pagamento}</td>
                     <td>
                         <ion-icon name="create-outline" class="button-edit" data-id="${venda.idVenda}" onclick="editarVenda(this)">Editar</ion-icon>
@@ -69,13 +68,14 @@ async function pesquisarVenda() {
         return;
     }
 
-    // Construir URL para buscar a venda pelo ID
+    
     const url = `${baseUrl}/buscar-venda-por-id/${pesquisaInput}`;
 
     try {
         const resposta = await fetch(url);
         if (!resposta.ok) {
-            throw new Error(`Erro ao acessar API: ${resposta.status}`);
+            console.error(`Erro ao acessar API: ${resposta.status}`);
+            toast("error", "Erro de requisição");
         }
 
         const venda = await resposta.json();
@@ -96,7 +96,7 @@ async function pesquisarVenda() {
             <td>${venda.idUsuario}</td>
             <td>${venda.idCliente}</td>
             <td>${venda.valor}</td>
-            <td>${venda.data_venda}</td>
+            <td>${formatarData(venda.data_venda)}</td>
             <td>${venda.forma_pagamento}</td>
             <td>
                 <ion-icon name="create-outline" class="button-edit" data-id="${venda.idVenda}" onclick="editarVenda(this)">Editar</ion-icon>
@@ -116,47 +116,49 @@ ListaVenda();
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 async function pesquisarVendaData() {
-    //const pesquisaInput = document.getElementById('pesquisadata').value.trim();
+    
 
     const dataInicioInput = document.getElementById('dataInicio').value.trim();
     const dataFimInput = document.getElementById('dataFim').value.trim();
 
-     // Se ambos os campos estiverem vazios, busca todas as vendas
+     
      if (!dataInicioInput && !dataFimInput) {
         ListaVenda();
         return;
     }
 
-    // Construir URL para buscar a venda pelo ID
+    
     let url = `${baseUrl}/buscar-vendas-por-data`;
 
-     // Se ambos os campos de data forem preenchidos, inclui ambos na URL
+     
      if (dataInicioInput && dataFimInput) {
         url += `?dataInicio=${dataInicioInput}&dataFim=${dataFimInput}`;
     } else if (dataInicioInput) {
-        // Se somente a data de início for fornecida
+        
         url += `?dataInicio=${dataInicioInput}`;
     } else if (dataFimInput) {
-        // Se somente a data de fim for fornecida
+        
         url += `?dataFim=${dataFimInput}`;
     }
 
     try {
         const resposta = await fetch(url);
         if (!resposta.ok) {
-            throw new Error(`Erro ao acessar API: ${resposta.status}`);
+            console.error(`Erro ao acessar API: ${resposta.status}`);
+            toast("error", "Erro de requisição");
         }
 
         const vendas = await resposta.json();
         const tbody = document.querySelector('#vendas-container');
         
-        tbody.innerHTML = ''; // Limpar lista antes de preencher
+        tbody.innerHTML = ''; 
 
         // Verificar se alguma venda foi encontrada
         if (!vendas || vendas.length === 0) {
             tbody.textContent = 'Nenhuma venda encontrada.';
             return;
         }
+        
 
         // Exibir vendas
         vendas.forEach(venda => {
@@ -166,7 +168,7 @@ async function pesquisarVendaData() {
                 <td>${venda.idUsuario}</td>
                 <td>${venda.idCliente}</td>
                 <td>${venda.valor}</td>
-                <td>${venda.data_venda}</td>
+                <td>${formatarData(venda.data_venda)}</td>
                 <td>${venda.forma_pagamento}</td>
                 <td>
                     <ion-icon name="create-outline" class="button-edit" data-id="${venda.idVenda}" onclick="editarVenda(this)">Editar</ion-icon>
@@ -181,15 +183,17 @@ async function pesquisarVendaData() {
     }
 }
 
-// Carregar todos os produtos inicialmente
+
 ListaVenda();
+
+    
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 async function editarVenda(element) {
 
 let id = element.getAttribute('data-id');
-// Abre o modal para editar o usuário
+
 const modal = document.getElementById('editarVendaModal');
 const IdUsuarioInput = document.getElementById('IdUsuario');
 const IdClienteInput = document.getElementById('IdCliente');
@@ -198,16 +202,17 @@ const forma_pagamentoInput = document.getElementById('forma_pagamento');
 const ValorInput = document.getElementById('Valor');
 
 
-// Mostra o modal
+
 modal.style.display = 'block';
 
-// Preenche os campos com os dados da venda selecionado
+
 console.log(id)
 try {
     const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Venda/buscar-venda-por-id/${id}`);
     if (!response.ok) {
         const errorMessage = await response.text();
-        throw new Error(`Erro ao buscar venda: ${response.status} - ${errorMessage}`);
+        console.error(`Erro ao buscar venda: ${response.status} - ${errorMessage}`);
+        toast("error", "Erro de requisição");
     }
 
     const venda = await response.json();
@@ -219,12 +224,12 @@ try {
    
 } catch (error) {
     console.error('Erro ao buscar Venda:', error);
-    alert('Erro ao buscar os dados da Venda. Tente novamente.');
+    toast("error", "Erro ao buscar os dados da Venda. Tente novamente.");
     modal.style.display = 'none';
     return;
 }
 
-// Remove event listener duplicado antes de adicionar novamente
+
 const salvarEdicaoButton = document.getElementById('salvarEdicao');
 salvarEdicaoButton.onclick = async () => {
     const IdUsuario = IdUsuarioInput.value.trim();
@@ -252,16 +257,16 @@ salvarEdicaoButton.onclick = async () => {
 
         if (!response.ok) {
             const errorMessage = await response.text();
-            throw new Error(`Erro ao editar Venda: ${response.status} - ${errorMessage}`);
+            console.error(`Erro ao editar Venda: ${response.status} - ${errorMessage}`);
         }
 
-        alert('Venda editada com sucesso!');
-        ListaVenda(); // Atualiza a lista de usuários
-        modal.style.display = 'none'; // Fecha o modal após sucesso
-
+        
+        toast("success", "Venda editada com sucesso!");
+        ListaVenda(); 
+        modal.style.display = 'none'; 
     } catch (error) {
         console.error('Erro ao editar a Venda:', error);
-        alert('Você precisa alterar todos os dados para editar o produto.');
+        toast("error", "Erro ao editar a Venda");
     }
 };
 
@@ -274,14 +279,14 @@ salvarEdicaoButton.onclick = async () => {
 async function excluirVenda(element) {
     let id = element.getAttribute('data-id');
 
-    // Confirmação antes de excluir o usuário
+    
     const confirmacao = confirm("Tem certeza que deseja excluir esta venda?");
     if (!confirmacao) {
         return;
     }
 
     try {
-        // Realiza a requisição DELETE para a API
+        
         const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Venda/remover-venda/${id}`, {
             method: 'DELETE',
         });
@@ -291,16 +296,44 @@ async function excluirVenda(element) {
             throw new Error(`Erro ao excluir venda: ${response.status} - ${errorMessage}`);
         }
 
-        alert('venda excluída com sucesso!');
+        toast("success", "venda excluída com sucesso!");
        
 
     } catch (error) {
         console.error('Erro ao excluir venda:', error);
-        alert('Erro ao excluir a venda. Tente novamente.');
+        toast("error", "Erro ao excluir a venda. Tente novamente.");
     }
 
-    ListaProduto(); // Atualiza a lista de usuários na interface
+    ListaProduto(); 
 }
 
+// /===== TOAST  =====/
+function toast(tipoToast, mensagem) {
+    switch (tipoToast) {
+      case "success":
+  
+        Toastify({
+          text: mensagem,
+          className: "success",
+          style: {
+            background: "linear-gradient(to right,  #711e92, #5b087c)",
+          }
+        }).showToast();
+  
+        break;
+      case "error":
+  
+        Toastify({
+          text: mensagem,
+          className: "error",
+          style: {
+            background: "linear-gradient(to right, #ff0000, #b30000, #800000)"
+          }
+        }).showToast();
+  
+        break;
+    }
+  
+  }
         
  

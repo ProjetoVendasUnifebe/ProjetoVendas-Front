@@ -1,7 +1,7 @@
 function autocomplete(input, data) {
     let currentFocus;
 
-    input.addEventListener("input", function(e) {
+    input.addEventListener("input", function (e) {
         let list, item, val = this.value;
         closeAllLists();
         if (!val) return false;
@@ -16,7 +16,7 @@ function autocomplete(input, data) {
             if (data[i].toLowerCase().includes(val.toLowerCase())) {
                 item = document.createElement("div");
                 item.innerHTML = data[i];
-                item.addEventListener("click", function(e) {
+                item.addEventListener("click", function (e) {
                     input.value = this.innerText;
                     closeAllLists();
                 });
@@ -25,7 +25,7 @@ function autocomplete(input, data) {
         }
     });
 
-    input.addEventListener("keydown", function(e) {
+    input.addEventListener("keydown", function (e) {
         let list = document.getElementById(this.id + "-autocomplete-list");
         if (list) list = list.getElementsByTagName("div");
         if (e.keyCode === 40) {
@@ -65,7 +65,7 @@ function autocomplete(input, data) {
         }
     }
 
-    document.addEventListener("click", function(e) {
+    document.addEventListener("click", function (e) {
         closeAllLists(e.target);
     });
 }
@@ -75,8 +75,8 @@ async function fetchEstoqueProdutos() {
         const response = await fetch('https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Estoque_Produto/buscar-todos-estoque-produto');
 
         if (!response.ok) {
-            const errorMessage = await response.text(); 
-            throw new Error(`Erro ao buscar estoques: ${response.status} - ${errorMessage}`);
+            const errorMessage = await response.text();
+            console.error(`Erro ao buscar estoques: ${response.status} - ${errorMessage}`);
         }
 
         const estoques_produtos = await response.json();
@@ -105,13 +105,13 @@ async function fetchEstoqueProdutos() {
         }
     } catch (error) {
         console.error('Erro ao buscar estoques:', error);
-        alert('Erro ao carregar estoques. Tente novamente mais tarde.');
+        toast('error','Erro ao carregar estoques. Tente novamente mais tarde.');
     }
 }
 if (window.location.pathname.includes('listagemEstoqueProduto.html')) {//IF necessário para a página rodar(depois separar em arquivos diferentes)
     document.getElementById('closeModal').onclick = function () {
         document.getElementById('editarEstoqueProdutoModal').style.display = 'none';
-    }    
+    }
 }
 
 window.onclick = function (event) {
@@ -125,18 +125,18 @@ async function fetchEstoqueByID(id) {
         const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Estoque/buscar-estoque-por-id/${id}`);
         if (!response.ok) {
             const errorMessage = await response.text();
-            throw new Error(`Erro ao buscar estoque: ${response.status} - ${errorMessage}`);
+            console.error(`Erro ao buscar estoque: ${response.status} - ${errorMessage}`);
         }
         return await response.json();
     } catch (error) {
         console.error('Erro ao buscar estoque:', error);
-        alert('Erro ao buscar estoque. Tente novamente.');
+        toast('error','Erro ao buscar estoque. Tente novamente.');
     }
 }
 
 async function substituirIDPorNomeEstoque() {
     const linhasTabela = document.querySelectorAll('#estoque-produto-container tr');
-    
+
     for (let linha of linhasTabela) {
         const celulaEstoque = linha.querySelector('td:nth-child(2)');
         const idEstoque = celulaEstoque.textContent.trim();
@@ -144,7 +144,7 @@ async function substituirIDPorNomeEstoque() {
         if (idEstoque) {
             const dadosEstoque = await fetchEstoqueByID(idEstoque);
             if (dadosEstoque && dadosEstoque.nome) {
-                celulaEstoque.textContent = dadosEstoque.nome; 
+                celulaEstoque.textContent = dadosEstoque.nome;
             }
         }
     }
@@ -155,18 +155,18 @@ async function fetchProdutoByID(id) {
         const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Produto/buscar-produto-por-id/${id}`);
         if (!response.ok) {
             const errorMessage = await response.text();
-            throw new Error(`Erro ao buscar produto: ${response.status} - ${errorMessage}`);
+            console.error(`Erro ao buscar produto: ${response.status} - ${errorMessage}`);
         }
         return await response.json();
     } catch (error) {
         console.error('Erro ao buscar produto:', error);
-        alert('Erro ao buscar produto. Tente novamente.');
+        toast('error','Erro ao buscar produto. Tente novamente.');
     }
 }
 
 async function substituirIDPorNomeProduto() {
     const linhasTabela = document.querySelectorAll('#estoque-produto-container tr');
-    
+
     for (let linha of linhasTabela) {
         const celulaProduto = linha.querySelector('td:nth-child(3)');
         const idProduto = celulaProduto.textContent.trim();
@@ -206,7 +206,7 @@ async function iniciandoAutocompletes() {
     const stocks = await fetchStocks();
     autocomplete(document.getElementById("autocompleteEstoque"), stocks);
 
-    const products = await fetchProducts(); 
+    const products = await fetchProducts();
     autocomplete(document.getElementById('autocompleteProduto'), products);
 }
 
@@ -239,15 +239,15 @@ async function cadastrarEstoqueProduto() {
         if (response.ok) {
             const data = await response.json();
             console.log('Cadastro realizado com sucesso:', data);
-            alert('Cadastro realizado com sucesso!');
+            toast('success','Cadastro realizado com sucesso!');
             window.location.href = "../Listas/listagemEstoqueProduto.html";
         } else {
             console.log('Erro ao cadastrar estoque-produto:', response.statusText);
-            alert('Erro ao cadastrar estoque-produto. Tente novamente.');
+            toast('error','Erro ao cadastrar estoque-produto. Tente novamente.');
         }
     } catch (error) {
         console.log('Erro na requisição:', error);
-        alert('Erro na requisição. Tente novamente.');
+        toast('error','Erro na requisição. Tente novamente.');
     }
 }
 
@@ -265,7 +265,7 @@ async function editarEstoqueProduto(element) {
         const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Estoque_Produto/buscar-estoque-produto-por-id/${id}`);
         if (!response.ok) {
             const errorMessage = await response.text();
-            throw new Error(`Erro ao buscar estoque-produto: ${response.status} - ${errorMessage}`);
+            console.error(`Erro ao buscar estoque-produto: ${response.status} - ${errorMessage}`);
         }
 
         const estoqueProduto = await response.json();
@@ -277,7 +277,7 @@ async function editarEstoqueProduto(element) {
 
     } catch (error) {
         console.error('Erro ao buscar estoque-produto:', error);
-        alert('Erro ao buscar os dados do estoque-produto. Tente novamente.');
+        toast('error','Erro ao buscar os dados do estoque-produto. Tente novamente.');
         modal.style.display = 'none';
         return;
     }
@@ -290,7 +290,7 @@ async function editarEstoqueProduto(element) {
         const dataAtualizacao = new Date().toISOString();
 
         if (!estoqueValue || !produtoValue || !quantidade) {
-            alert('Por favor, preencha todos os campos.');
+            toast('error','Por favor, preencha todos os campos.');
             return;
         }
 
@@ -314,7 +314,7 @@ async function editarEstoqueProduto(element) {
 
             if (!response.ok) {
                 const errorMessage = await response.text();
-                throw new Error(`Erro ao editar estoque-produto: ${response.status} - ${errorMessage}`);
+                console.error(`Erro ao editar estoque-produto: ${response.status} - ${errorMessage}`);
             }
             // Toastify({
             //     text: "Produto no estoque cadastrado com sucesso!",
@@ -323,12 +323,12 @@ async function editarEstoqueProduto(element) {
             //       background: "linear-gradient(to right,  #711e92, #5b087c)",
             //     }
             //   }).showToast();
-            alert('Estoque-produto editado com sucesso!');
+            toast('success','Estoque-produto editado com sucesso!');
             fetchEstoqueProdutos();
             modal.style.display = 'none';
         } catch (error) {
             console.error('Erro ao editar estoque-produto:', error);
-            alert('Erro ao editar estoque-produto. Tente novamente.');
+            toast('error','Erro ao editar estoque-produto. Tente novamente.');
         }
     };
 }
@@ -348,16 +348,102 @@ async function excluirEstoque_Produto(element) {
 
         if (!response.ok) {
             const errorMessage = await response.text();
-            throw new Error(`Erro ao excluir estoque: ${response.status} - ${errorMessage}`);
+            console.error(`Erro ao excluir estoque: ${response.status} - ${errorMessage}`);
         }
 
-        alert('Produto de estoque excluído com sucesso!');
+        toast('success','Produto de estoque excluído com sucesso!');
         fetchEstoqueProdutos();
 
     } catch (error) {
         console.error('Erro ao excluir estoque:', error);
-        alert('Erro ao excluir o estoque. Tente novamente.');
+        toast('error','Erro ao excluir o estoque. Tente novamente.');
     }
+}
+
+async function pesquisarEstoque() {
+    const pesquisaInput = document.getElementById('pesquisaEstoque').value.trim();
+    const filtro = document.getElementById('filtroEstoque').value;
+
+    if (!pesquisaInput) {
+        fetchEstoqueProdutos();
+        return;
+    }
+
+    let url;
+
+    if (filtro === 'id') {
+        if (!isNaN(pesquisaInput)) {
+            url = `https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Estoque_Produto/buscar-estoque-produto-por-id/${pesquisaInput}`;
+        } else {
+            toast('error','Por favor, insira um ID válido.');
+            return;
+        }
+    } else if (filtro === 'idEstoque') {
+        url = `https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Estoque_Produto/buscar-estoque-por-id-estoque/${pesquisaInput}`;
+    } else if (filtro === 'idProduto') {
+        url = `https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Estoque_Produto/buscar-produto-por-id-produto/${pesquisaInput}`;
+    }
+
+    try {
+        const resposta = await fetch(url);
+        if (!resposta.ok) {
+            console.error(`Erro ao acessar API: ${resposta.status}`);
+        }
+
+        const estoques = await resposta.json();
+        const tbody = document.querySelector('#estoque-produto-container');
+        tbody.innerHTML = '';
+
+        if (!estoques || estoques.length === 0) {
+            toast('error','Nenhum estoque encontrado.');
+            return;
+        }
+
+        if (filtro === 'id') {
+            pesquisarEstoqueId(estoques);
+        } else {
+            pesquisarEstoqueFiltro(estoques);
+        }
+    } catch (erro) {
+        console.error('Erro ao buscar estoque:', erro);
+        toast('error','Erro ao buscar estoque.');
+    }
+}
+
+async function pesquisarEstoqueId(estoques) {
+    const tbody = document.querySelector('#estoque-produto-container');
+    const row = document.createElement('tr');
+    row.innerHTML = `
+    <th scope="row">${estoques.idEstoque_Produto}</th>
+    <td>${estoques.idEstoque}</td>
+    <td>${estoques.idProduto}</td>
+    <td>${estoques.quantidade}</td>
+    <td>
+        <ion-icon name="create-outline" class="button-edit" data-id="${estoques.idEstoque_Produto}" onclick="editarEstoqueProduto(this)">Editar</ion-icon>
+        <ion-icon name="trash" class="button-delete" data-id='${estoques.idEstoque_Produto}' onclick="excluirEstoque_Produto(this)">Apagar</ion-icon>
+    </td>`;
+    tbody.appendChild(row);
+    substituirIDPorNomeEstoque();
+    substituirIDPorNomeProduto();
+}
+
+async function pesquisarEstoqueFiltro(estoques) {
+    const tbody = document.querySelector('#estoque-produto-container');
+    estoques.forEach(estoque => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+        <th scope="row">${estoque.idEstoque_Produto}</th>
+        <td>${estoque.idEstoque}</td>
+        <td>${estoque.idProduto}</td>
+        <td>${estoque.quantidade}</td>
+        <td>
+            <ion-icon name="create-outline" class="button-edit" data-id="${estoque.idEstoque_Produto}" onclick="editarEstoqueProduto(this)">Editar</ion-icon>
+            <ion-icon name="trash" class="button-delete" data-id='${estoque.idEstoque_Produto}' onclick="excluirEstoque_Produto(this)">Apagar</ion-icon>
+        </td>`;
+        tbody.appendChild(row);
+    });
+    substituirIDPorNomeEstoque();
+    substituirIDPorNomeProduto();
 }
 
 window.onload = iniciandoAutocompletes;
@@ -365,3 +451,33 @@ if (window.location.pathname.includes('listagemEstoqueProduto.html')) {//IF nece
     window.onload = fetchEstoqueProdutos;
 }
 // window.onload = substituirIDPorNomeEstoque;
+
+
+/===== TOAST  =====/
+function toast(tipoToast, mensagem) {
+  switch (tipoToast) {
+    case "success":
+
+      Toastify({
+        text: mensagem,
+        className: "success",
+        style: {
+          background: "linear-gradient(to right,  #711e92, #5b087c)",
+        }
+      }).showToast();
+
+      break;
+    case "error":
+
+      Toastify({
+        text: mensagem,
+        className: "error",
+        style: {
+          background: "linear-gradient(to right, #ff0000, #b30000, #800000)"
+        }
+      }).showToast();
+
+      break;
+  }
+
+}
