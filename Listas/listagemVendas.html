@@ -96,7 +96,7 @@
             </select>
 
             <ul>
-                <!-- Campo de pesquisa único para ID ou nome com Combobox -->
+                
                 <div style="display: flex; align-items: center;" id="ola">
                     <input type="text" id="pesquisaVenda" name="Pesquisa" placeholder="Pesquise pelo ID da venda" class="inputPesquisa">
                     <input type="button" id="searchButton" value="Buscar" class="Btncad" onclick="pesquisarVenda()">
@@ -173,7 +173,6 @@
                             </div>
                         </form>
 
-                <!-- <ul id="lista-produtos">Carregando produtos...</ul> -->
             </div>
         </div>
 
@@ -185,6 +184,12 @@
         <script src="../assets/js/scripts.js"></script>
 
         <script src="../assets/js/requisicoes/listagemVendas.js"></script>
+
+        <!-- Toastify CSS -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+        <!-- Toastify JS -->
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
 
 
@@ -203,13 +208,8 @@
                 }
             }
 
-                
                 document.addEventListener('DOMContentLoaded', function() {
-
-                
                 toggleFormData();
-            
-                
                 document.getElementById('filtroVenda').addEventListener('change', toggleFormData);
             });
 
