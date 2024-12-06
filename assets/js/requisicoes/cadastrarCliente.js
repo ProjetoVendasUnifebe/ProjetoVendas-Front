@@ -3,7 +3,7 @@ async function fetchClientes() {
         const response = await fetch('https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Cliente/buscar-todos-clientes');
         if (!response.ok) {
             const errorMessage = await response.text();
-            throw new Error(`Erro ao buscar clientes: ${response.status} - ${errorMessage}`);
+           console.error(`Erro ao buscar clientes: ${response.status} - ${errorMessage}`);
         }
 
         const clientes = await response.json();
@@ -33,7 +33,7 @@ async function fetchClientes() {
         }
     } catch (error) {
         console.error('Erro ao buscar clientes:', error);
-        alert('Erro ao carregar clientes. Tente novamente mais tarde.');
+        toast('error','Erro ao carregar clientes. Tente novamente mais tarde.');
     }
 }
 
@@ -60,7 +60,7 @@ async function editarCliente(element) {
         const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Cliente/buscar-cliente-por-id/${id}`);
         if (!response.ok) {
             const errorMessage = await response.text();
-            throw new Error(`Erro ao buscar cliente: ${response.status} - ${errorMessage}`);
+           console.error(`Erro ao buscar cliente: ${response.status} - ${errorMessage}`);
         }
 
         const cliente = await response.json();
@@ -72,7 +72,7 @@ async function editarCliente(element) {
         enderecoInput.value = cliente.idEndereco;
     } catch (error) {
         console.error('Erro ao buscar cliente:', error);
-        alert('Erro ao carregar cliente. Tente novamente mais tarde.');
+        toast('error','Erro ao carregar cliente. Tente novamente mais tarde.');
         modal.style.display = 'none';
         return;
     }
@@ -87,7 +87,7 @@ async function editarCliente(element) {
         const endereco = enderecoInput.value.trim();
 
         if (!nome || !cpf || !email || !telefone || !sexo || !endereco) {
-            alert('Por favor, preencha todos os campos.');
+            toast('error','Por favor, preencha todos os campos.');
             return;
         }
 
@@ -110,16 +110,16 @@ async function editarCliente(element) {
 
             if (!response.ok) {
                 const errorMessage = await response.text();
-                throw new Error(`Erro ao editar cliente: ${response.status} - ${errorMessage}`);
+                console.error(`Erro ao editar cliente: ${response.status} - ${errorMessage}`);
             }
 
-            alert('Cliente editado com sucesso!');
+            toast("success",'Cliente editado com sucesso!');
             fetchClientes();
             modal.style.display = 'none';
 
         } catch (error) {
             console.error('Erro ao editar cliente:', error);
-            alert('Erro ao editar o cliente. Tente novamente.');
+            toast('error','Erro ao editar o cliente. Tente novamente.');
         }
 
     }
@@ -139,15 +139,15 @@ async function excluirCliente(element) {
 
         if (!response.ok) {
             const errorMessage = await response.text();
-            throw new Error(`Erro ao excluir cliente: ${response.status} - ${errorMessage}`);
+            console.error(`Erro ao excluir cliente: ${response.status} - ${errorMessage}`);
         }
 
-        alert('Cliente excluído com sucesso!');
+        toast('success','Cliente excluído com sucesso!');
         fetchClientes();
 
     } catch (error) {
         console.error('Erro ao excluir cliente:', error);
-        alert('Erro ao excluir o cliente. Tente novamente.');
+        toast('error','Erro ao excluir o cliente. Tente novamente.');
     }
 }
 
@@ -166,7 +166,7 @@ async function pesquisarCliente() {
         if (!isNaN(pesquisaInput)) {
             url = `https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Cliente/buscar-cliente-por-id/${pesquisaInput}`;
         } else {
-            alert('Por favor, insira um ID válido.');
+            toast('error','Por favor, insira um ID válido.');
             return;
         }
     } else if (filtro === 'nome') {
@@ -176,7 +176,7 @@ async function pesquisarCliente() {
     try {
         const resposta = await fetch(url);
         if (!resposta.ok) {
-            throw new Error(`Erro ao acessar API: ${resposta.status}`);
+            console.error(`Erro ao acessar API: ${resposta.status}`);
         }
 
         const clientes = await resposta.json();
@@ -184,7 +184,7 @@ async function pesquisarCliente() {
         tbody.innerHTML = '';
 
         if (!clientes || clientes.length === 0) {
-            alert('Nenhum cliente encontrado.');
+            toast('error','Nenhum cliente encontrado.');
             return;
         }
 
@@ -195,7 +195,7 @@ async function pesquisarCliente() {
         }
     } catch (erro) {
         console.error('Erro ao buscar cliente:', erro);
-        alert('Erro ao buscar cliente.');
+        toast('error','Erro ao buscar cliente.');
     }
 }
 

@@ -53,4 +53,31 @@ async function dadosUsuario(login) {
     return usuario;
 }
 
+/===== TOAST  =====/
+function toast(tipoToast, mensagem) {
+    switch (tipoToast) {
+        case "success":
 
+            Toastify({
+                text: mensagem,
+                className: "success",
+                style: {
+                    background: "linear-gradient(to right,  #711e92, #5b087c)",
+                }
+            }).showToast();
+
+            break;
+        case "error":
+
+            Toastify({
+                text: mensagem,
+                className: "error",
+                style: {
+                    background: "linear-gradient(to right, #ff0000, #b30000, #800000)"
+                }
+            }).showToast();
+
+            break;
+    }
+
+}

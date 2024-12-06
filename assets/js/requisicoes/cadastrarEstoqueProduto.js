@@ -76,7 +76,7 @@ async function fetchEstoqueProdutos() {
 
         if (!response.ok) {
             const errorMessage = await response.text();
-            throw new Error(`Erro ao buscar estoques: ${response.status} - ${errorMessage}`);
+            console.error(`Erro ao buscar estoques: ${response.status} - ${errorMessage}`);
         }
 
         const estoques_produtos = await response.json();
@@ -105,7 +105,7 @@ async function fetchEstoqueProdutos() {
         }
     } catch (error) {
         console.error('Erro ao buscar estoques:', error);
-        alert('Erro ao carregar estoques. Tente novamente mais tarde.');
+        toast('error','Erro ao carregar estoques. Tente novamente mais tarde.');
     }
 }
 if (window.location.pathname.includes('listagemEstoqueProduto.html')) {//IF necessário para a página rodar(depois separar em arquivos diferentes)
@@ -125,12 +125,12 @@ async function fetchEstoqueByID(id) {
         const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Estoque/buscar-estoque-por-id/${id}`);
         if (!response.ok) {
             const errorMessage = await response.text();
-            throw new Error(`Erro ao buscar estoque: ${response.status} - ${errorMessage}`);
+            console.error(`Erro ao buscar estoque: ${response.status} - ${errorMessage}`);
         }
         return await response.json();
     } catch (error) {
         console.error('Erro ao buscar estoque:', error);
-        alert('Erro ao buscar estoque. Tente novamente.');
+        toast('error','Erro ao buscar estoque. Tente novamente.');
     }
 }
 
@@ -155,12 +155,12 @@ async function fetchProdutoByID(id) {
         const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Produto/buscar-produto-por-id/${id}`);
         if (!response.ok) {
             const errorMessage = await response.text();
-            throw new Error(`Erro ao buscar produto: ${response.status} - ${errorMessage}`);
+            console.error(`Erro ao buscar produto: ${response.status} - ${errorMessage}`);
         }
         return await response.json();
     } catch (error) {
         console.error('Erro ao buscar produto:', error);
-        alert('Erro ao buscar produto. Tente novamente.');
+        toast('error','Erro ao buscar produto. Tente novamente.');
     }
 }
 
@@ -239,15 +239,15 @@ async function cadastrarEstoqueProduto() {
         if (response.ok) {
             const data = await response.json();
             console.log('Cadastro realizado com sucesso:', data);
-            alert('Cadastro realizado com sucesso!');
+            toast('success','Cadastro realizado com sucesso!');
             window.location.href = "../Listas/listagemEstoqueProduto.html";
         } else {
             console.log('Erro ao cadastrar estoque-produto:', response.statusText);
-            alert('Erro ao cadastrar estoque-produto. Tente novamente.');
+            toast('error','Erro ao cadastrar estoque-produto. Tente novamente.');
         }
     } catch (error) {
         console.log('Erro na requisição:', error);
-        alert('Erro na requisição. Tente novamente.');
+        toast('error','Erro na requisição. Tente novamente.');
     }
 }
 
@@ -265,7 +265,7 @@ async function editarEstoqueProduto(element) {
         const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Estoque_Produto/buscar-estoque-produto-por-id/${id}`);
         if (!response.ok) {
             const errorMessage = await response.text();
-            throw new Error(`Erro ao buscar estoque-produto: ${response.status} - ${errorMessage}`);
+            console.error(`Erro ao buscar estoque-produto: ${response.status} - ${errorMessage}`);
         }
 
         const estoqueProduto = await response.json();
@@ -277,7 +277,7 @@ async function editarEstoqueProduto(element) {
 
     } catch (error) {
         console.error('Erro ao buscar estoque-produto:', error);
-        alert('Erro ao buscar os dados do estoque-produto. Tente novamente.');
+        toast('error','Erro ao buscar os dados do estoque-produto. Tente novamente.');
         modal.style.display = 'none';
         return;
     }
@@ -290,7 +290,7 @@ async function editarEstoqueProduto(element) {
         const dataAtualizacao = new Date().toISOString();
 
         if (!estoqueValue || !produtoValue || !quantidade) {
-            alert('Por favor, preencha todos os campos.');
+            toast('error','Por favor, preencha todos os campos.');
             return;
         }
 
@@ -314,7 +314,7 @@ async function editarEstoqueProduto(element) {
 
             if (!response.ok) {
                 const errorMessage = await response.text();
-                throw new Error(`Erro ao editar estoque-produto: ${response.status} - ${errorMessage}`);
+                console.error(`Erro ao editar estoque-produto: ${response.status} - ${errorMessage}`);
             }
             // Toastify({
             //     text: "Produto no estoque cadastrado com sucesso!",
@@ -323,12 +323,12 @@ async function editarEstoqueProduto(element) {
             //       background: "linear-gradient(to right,  #711e92, #5b087c)",
             //     }
             //   }).showToast();
-            alert('Estoque-produto editado com sucesso!');
+            toast('success','Estoque-produto editado com sucesso!');
             fetchEstoqueProdutos();
             modal.style.display = 'none';
         } catch (error) {
             console.error('Erro ao editar estoque-produto:', error);
-            alert('Erro ao editar estoque-produto. Tente novamente.');
+            toast('error','Erro ao editar estoque-produto. Tente novamente.');
         }
     };
 }
@@ -348,15 +348,15 @@ async function excluirEstoque_Produto(element) {
 
         if (!response.ok) {
             const errorMessage = await response.text();
-            throw new Error(`Erro ao excluir estoque: ${response.status} - ${errorMessage}`);
+            console.error(`Erro ao excluir estoque: ${response.status} - ${errorMessage}`);
         }
 
-        alert('Produto de estoque excluído com sucesso!');
+        toast('success','Produto de estoque excluído com sucesso!');
         fetchEstoqueProdutos();
 
     } catch (error) {
         console.error('Erro ao excluir estoque:', error);
-        alert('Erro ao excluir o estoque. Tente novamente.');
+        toast('error','Erro ao excluir o estoque. Tente novamente.');
     }
 }
 
@@ -375,7 +375,7 @@ async function pesquisarEstoque() {
         if (!isNaN(pesquisaInput)) {
             url = `https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Estoque_Produto/buscar-estoque-produto-por-id/${pesquisaInput}`;
         } else {
-            alert('Por favor, insira um ID válido.');
+            toast('error','Por favor, insira um ID válido.');
             return;
         }
     } else if (filtro === 'idEstoque') {
@@ -387,7 +387,7 @@ async function pesquisarEstoque() {
     try {
         const resposta = await fetch(url);
         if (!resposta.ok) {
-            throw new Error(`Erro ao acessar API: ${resposta.status}`);
+            console.error(`Erro ao acessar API: ${resposta.status}`);
         }
 
         const estoques = await resposta.json();
@@ -395,7 +395,7 @@ async function pesquisarEstoque() {
         tbody.innerHTML = '';
 
         if (!estoques || estoques.length === 0) {
-            alert('Nenhum estoque encontrado.');
+            toast('error','Nenhum estoque encontrado.');
             return;
         }
 
@@ -406,7 +406,7 @@ async function pesquisarEstoque() {
         }
     } catch (erro) {
         console.error('Erro ao buscar estoque:', erro);
-        alert('Erro ao buscar estoque.');
+        toast('error','Erro ao buscar estoque.');
     }
 }
 
@@ -451,3 +451,33 @@ if (window.location.pathname.includes('listagemEstoqueProduto.html')) {//IF nece
     window.onload = fetchEstoqueProdutos;
 }
 // window.onload = substituirIDPorNomeEstoque;
+
+
+/===== TOAST  =====/
+function toast(tipoToast, mensagem) {
+  switch (tipoToast) {
+    case "success":
+
+      Toastify({
+        text: mensagem,
+        className: "success",
+        style: {
+          background: "linear-gradient(to right,  #711e92, #5b087c)",
+        }
+      }).showToast();
+
+      break;
+    case "error":
+
+      Toastify({
+        text: mensagem,
+        className: "error",
+        style: {
+          background: "linear-gradient(to right, #ff0000, #b30000, #800000)"
+        }
+      }).showToast();
+
+      break;
+  }
+
+}

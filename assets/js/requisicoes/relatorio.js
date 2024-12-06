@@ -244,7 +244,7 @@ async function criarGraficoFaturamento(json) {
         data: {
             labels: anoMes, // Legendas no eixo X
             datasets: [{
-                label: 'Valor da Venda',
+                label: 'Faturamento',
                 data: faturamento, // Dados no eixo Y
                 backgroundColor: [
                     'rgba(75, 192, 192, 0.2)',
@@ -289,7 +289,7 @@ async function criarGraficoProduto(json) {
         data: {
             labels: produto, // Legendas no eixo X
             datasets: [{
-                label: 'Valor da Venda',
+                label: 'Qtd. Vendida',
                 data: faturamento, // Dados no eixo Y
                 backgroundColor: [
                     'rgba(75, 192, 192, 0.2)',
