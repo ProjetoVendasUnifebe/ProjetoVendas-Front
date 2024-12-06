@@ -79,8 +79,8 @@
                 <div class="forme">
                     <label for="nomeProduto">Produto:</label>
                     <input type="text" id="nomeProduto" name="nomeProduto" placeholder="Produto" required>
-                    <label for="qtdProduto">Quantidade:</label>
-                    <input type="number" id="qtdProduto" name="qtdProduto" placeholder="Quantidade" required>
+                    <label for="qtdProduto">Valor:</label>
+                    <input type="number" id="qtdProduto" name="qtdProduto" placeholder="Valor" required>
                 </div>
                 <div class="formd">
                     <label for="descricaoProduto">Descrição:</label>
@@ -99,6 +99,12 @@
         <!-- ===== MAIN JS ===== -->
         <script src="../assets/js/main.js"></script>
         <script src="../assets/js/scripts.js"></script>
+
+        <!-- Toastify CSS -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+        <!-- Toastify JS -->
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     </body>
 
     <script>
@@ -128,26 +134,52 @@
             })
             .then(response => {
                 if (response.ok) {
-                    return response.json(); // Converte a resposta em JSON se for bem-sucedida
+                    return response.json(); 
                 } else {
-                    throw new Error('Erro ao cadastrar produto');
+                    console.error('Erro ao cadastrar produto');
+                    toast("error", "Erro ao cadastrar produto");
                 }
             })
             .then(data => {
                 console.log('produto cadastrado com sucesso:', data);
-                alert("produto cadastrado com sucesso!");
-                window.location.href = "../Listas/listagemProduto.html"; // Redireciona após sucesso
+                toast("success", "produto cadastrado com sucesso!");
+                window.location.href = "../Listas/listagemProduto.html"; // Redireciona para a tela de listagemProduto após o cadastro
             })
             .catch(error => {
                 console.error('Erro:', error);
-                alert("Ocorreu um erro ao tentar cadastrar o produto.");
+                toast("error", "Ocorreu um erro ao tentar cadastrar o produto.");
             });
         }
-    
-        // // Fecha o popup de aviso
-        // document.getElementById("ok-btn").addEventListener("click", function() {
-        //     document.getElementById("popup").style.display = "none";
-        // });
+
+        // /===== TOAST  =====/
+function toast(tipoToast, mensagem) {
+  switch (tipoToast) {
+    case "success":
+
+      Toastify({
+        text: mensagem,
+        className: "success",
+        style: {
+          background: "linear-gradient(to right,  #711e92, #5b087c)",
+        }
+      }).showToast();
+
+      break;
+    case "error":
+
+      Toastify({
+        text: mensagem,
+        className: "error",
+        style: {
+          background: "linear-gradient(to right, #ff0000, #b30000, #800000)"
+        }
+      }).showToast();
+
+      break;
+  }
+
+}
+
     </script>
     
 </html>

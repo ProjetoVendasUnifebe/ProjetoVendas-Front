@@ -135,7 +135,6 @@
                             </div>
                         </form>
 
-                <!-- <ul id="lista-produtos">Carregando produtos...</ul> -->
             </div>
         </div>
 
@@ -145,6 +144,13 @@
         <!-- ===== MAIN JS ===== -->
         <script src="../assets/js/main.js"></script>
         <script src="../assets/js/scripts.js"></script>
+
+        <!-- Toastify CSS -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+        <!-- Toastify JS -->
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
     </body>
 
     <script>
@@ -156,7 +162,8 @@
             try {
                 const resposta = await fetch(`${baseUrl}/buscar-todos-produtos`);
                 if (!resposta.ok) {
-                    throw new Error(`Erro ao acessar API: ${resposta.status}`);
+                    console.error(`Erro ao acessar API: ${resposta.status}`);
+                    toast("error", "Erro de requisição");
                 }
                 const produtos = await resposta.json();
                 const tbody = document.querySelector('#produtos-container')
@@ -183,25 +190,10 @@
                 }
             } catch (error){
                 console.error('Ocorreu um problema na sua requisição',error)
+                toast("error", "Erro de requisição");
             }
         }
             document.addEventListener('DOMContentLoaded', ListaProduto)
-
-                // Exibir os produtos
-            //    const lista = document.getElementById('lista-produtos');
-        //         lista.innerHTML = ''; // Limpar lista antes de preencher
-
-        //         produtos.forEach(produto => {
-        //             const item = document.createElement('tr');
-        //             item.textContent = ` ${produto.idProduto} ${produto.nomeProduto} - R$ ${produto.valor.toFixed(2)} ${produto.descricao}`;
-        //             lista.appendChild(item);
-        //         });
-        //     } catch (erro) {
-        //         console.error('Erro ao carregar produtos:', erro);
-        //         document.getElementById('lista-produtos').textContent = 'Erro ao carregar produtos.';
-        //     }
-        // }
-
 
         // Função para buscar produtos pelo ID ou nome
         async function pesquisarProduto() {
@@ -234,7 +226,8 @@
             try {
                 const resposta = await fetch(url);
                 if (!resposta.ok) {
-                    throw new Error(`Erro ao acessar API: ${resposta.status}`);
+                    console.error(`Erro ao acessar API: ${resposta.status}`);
+                    toast("error", "Erro de requisição");
                 }
 
                 const produtos = await resposta.json();
@@ -308,21 +301,22 @@
 async function editarProduto(element) {
 
 let id = element.getAttribute('data-id');
-// Abre o modal para editar o usuário
+
 const modal = document.getElementById('editarProdutoModal');
 const nomeProdutoInput = document.getElementById('nomeProduto');
 const ValorInput = document.getElementById('Valor');
 const descricaoInput = document.getElementById('descricaoProduto');
 
-// Mostra o modal
+
 modal.style.display = 'block';
 
-// Preenche os campos com os dados do usuário selecionado
+
 try {
     const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Produto/buscar-produto-por-id/${id}`);
     if (!response.ok) {
         const errorMessage = await response.text();
-        throw new Error(`Erro ao buscar Produto: ${response.status} - ${errorMessage}`);
+        console.error(`Erro ao buscar Produto: ${response.status} - ${errorMessage}`);
+        toast("error", "Erro ao buscar Produto");
     }
 
     const produto = await response.json();
@@ -332,23 +326,18 @@ try {
 
 } catch (error) {
     console.error('Erro ao buscar Produto:', error);
-    alert('Erro ao buscar os dados do Produto. Tente novamente.');
+    toast("error", "Erro ao buscar os dados do Produto. Tente novamente");
     modal.style.display = 'none';
     return;
 }
 
-// Remove event listener duplicado antes de adicionar novamente
+
 const salvarEdicaoButton = document.getElementById('salvarEdicao');
 salvarEdicaoButton.onclick = async () => {
     const nomeProduto = nomeProdutoInput.value.trim();
     const Valor = ValorInput.value.trim();
     const descricaoProduto = descricaoInput.value.trim();
 
-    // Valida os campos antes de enviar
-    // if (!nomeProduto || !login) {
-    //     alert('Por favor, preencha todos os campos.');
-    //     return;
-    // }
 
     try {
         const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Produto/atualizar-produto`, {
@@ -366,16 +355,17 @@ salvarEdicaoButton.onclick = async () => {
 
         if (!response.ok) {
             const errorMessage = await response.text();
-            throw new Error(`Erro ao editar produto: ${response.status} - ${errorMessage}`);
+            console.error(`Erro ao editar produto: ${response.status} - ${errorMessage}`);
+            toast("error", "Erro ao editar produto");
         }
 
-        alert('produto editado com sucesso!');
+        toast("success", "produto editado com sucesso!");
         ListaProduto(); // Atualiza a lista de usuários
         modal.style.display = 'none'; // Fecha o modal após sucesso
 
     } catch (error) {
         console.error('Erro ao editar o produto:', error);
-        alert('Você precisa alterar todos os dados para editar o produto.');
+        toast("error", "Erro ao editar o produto:");
     }
 };
 
@@ -388,32 +378,63 @@ salvarEdicaoButton.onclick = async () => {
 async function excluirProduto(element) {
     let id = element.getAttribute('data-id');
 
-    // Confirmação antes de excluir o usuário
+    
     const confirmacao = confirm("Tem certeza que deseja excluir este produto?");
     if (!confirmacao) {
         return;
     }
 
     try {
-        // Realiza a requisição DELETE para a API
+        
         const response = await fetch(`https://vendas-comercialize-a0fqhjhne5cagkc5.brazilsouth-01.azurewebsites.net/Produto/remover-produto/${id}`, {
             method: 'DELETE',
         });
 
         if (!response.ok) {
             const errorMessage = await response.text();
-            throw new Error(`Erro ao excluir produto: ${response.status} - ${errorMessage}`);
+            console.error(`Erro ao excluir produto: ${response.status} - ${errorMessage}`);
+            toast("error", "Erro ao excluir produto:");
         }
 
-        alert('produto excluído com sucesso!');
+        toast("success", "produto excluído com sucesso!");
         ListaProduto(); // Atualiza a lista de usuários na interface
 
     } catch (error) {
         console.error('Erro ao excluir produto:', error);
-        alert('Erro ao excluir o produto. Tente novamente.');
+        toast("error", "Erro ao excluir o produto. Tente novamente.");
     }
 
     
+}
+
+
+        // /===== TOAST  =====/
+        function toast(tipoToast, mensagem) {
+  switch (tipoToast) {
+    case "success":
+
+      Toastify({
+        text: mensagem,
+        className: "success",
+        style: {
+          background: "linear-gradient(to right,  #711e92, #5b087c)",
+        }
+      }).showToast();
+
+      break;
+    case "error":
+
+      Toastify({
+        text: mensagem,
+        className: "error",
+        style: {
+          background: "linear-gradient(to right, #ff0000, #b30000, #800000)"
+        }
+      }).showToast();
+
+      break;
+  }
+
 }
 
         
