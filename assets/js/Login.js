@@ -12,7 +12,7 @@ function validaLogin() {
         if (response.ok) {
             window.location.href = "index.html";
         } else {
-            alert("Usuário ou senha inválidos.");
+            toast("error","Usuário ou senha inválidos.");
             usuarioInput.value = "";
             senhaInput.value = ""; 
             usuarioInput.focus(); 
@@ -21,8 +21,37 @@ function validaLogin() {
     })
     .catch(error => {
         console.error("Erro:", error);
-        alert("Ocorreu um erro ao tentar realizar o login.");
+        toast('error',"Ocorreu um erro ao tentar realizar o login.");
      });
    
+
+}
+
+/===== TOAST  =====/
+function toast(tipoToast, mensagem) {
+  switch (tipoToast) {
+    case "success":
+
+      Toastify({
+        text: mensagem,
+        className: "success",
+        style: {
+          background: "linear-gradient(to right,  #711e92, #5b087c)",
+        }
+      }).showToast();
+
+      break;
+    case "error":
+
+      Toastify({
+        text: mensagem,
+        className: "error",
+        style: {
+          background: "linear-gradient(to right, #ff0000, #b30000, #800000)"
+        }
+      }).showToast();
+
+      break;
+  }
 
 }
